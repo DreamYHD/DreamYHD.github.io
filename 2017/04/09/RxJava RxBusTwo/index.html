@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="dreamY" />
+
+
+
+<meta name="description" content="感谢yokey 本文只是摘要笔记 在使用之前写的RxBus的时候会出现一些问题 需要RxBus支持Sticky功能 在对每个事件的处理时候发生异常，后续的的事件都接受不了">
+<meta name="keywords" content="RxJava,Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava RxBus进阶(Sticky事件,异常拦截）">
+<meta property="og:url" content="http://lovehaodong.cn/2017/04/09/RxJava RxBusTwo/index.html">
+<meta property="og:site_name" content="DreamY Blog">
+<meta property="og:description" content="感谢yokey 本文只是摘要笔记 在使用之前写的RxBus的时候会出现一些问题 需要RxBus支持Sticky功能 在对每个事件的处理时候发生异常，后续的的事件都接受不了">
+<meta property="og:updated_time" content="2017-04-23T06:27:25.939Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava RxBus进阶(Sticky事件,异常拦截）">
+<meta name="twitter:description" content="感谢yokey 本文只是摘要笔记 在使用之前写的RxBus的时候会出现一些问题 需要RxBus支持Sticky功能 在对每个事件的处理时候发生异常，后续的的事件都接受不了">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DreamY Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>RxJava RxBus进阶(Sticky事件,异常拦截） | DreamY Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/dojocat.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">dreamY</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Annotation/">Annotation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reflect/">Reflect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxJava/">RxJava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/android-nuc">NUC-Android-Lab</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">just do IT!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">dreamY</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/dojocat.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">dreamY</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-RxJava RxBusTwo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/09/RxJava RxBusTwo/" class="article-date">
+      <time datetime="2017-04-09T07:41:27.000Z" itemprop="datePublished">2017-04-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RxJava RxBus进阶(Sticky事件,异常拦截）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>感谢<a href="http://www.jianshu.com/p/71ab00a2677b" target="_blank" rel="external">yokey</a> 本文只是摘要笔记</p>
+<h3 id="在使用之前写的RxBus的时候会出现一些问题"><a href="#在使用之前写的RxBus的时候会出现一些问题" class="headerlink" title="在使用之前写的RxBus的时候会出现一些问题"></a>在使用之前写的RxBus的时候会出现一些问题</h3><ul>
+<li>需要RxBus支持Sticky功能</li>
+<li>在对每个事件的处理时候发生异常，后续的的事件都接受不了<a id="more"></a>
+</li>
+</ul>
+<h3 id="什么是Sticky事件"><a href="#什么是Sticky事件" class="headerlink" title="什么是Sticky事件"></a>什么是Sticky事件</h3><p>在Android开发中，Sticky事件只指事件消费者在事件发布之后才注册的也能接收到该事件的特殊类型。Android中就有这样的实例，也就是Sticky Broadcast，即粘性广播。正常情况下如果发送者发送了某个广播，而接收者在这个广播发送后才注册自己的Receiver，这时接收者便无法接收到刚才的广播，为此Android引入了StickyBroadcast，在广播发送结束后会保存刚刚发送的广播（Intent），这样当接收者注册完Receiver后就可以接收到刚才已经发布的广播。这就使得我们可以预先处理一些事件，让有消费者时再把这些事件投递给消费者</p>
+<p><br><br>比如说之前的RxBus，我想在Activity1中post一条消息，希望在Activity3中去处理它，然而我们的订阅事件发生在Activity3中，他只能处理订阅关系发生之后的Observer，这个时候就不能体现它像EventBus一样的事件总线的作用<br><br></p>
+<h3 id="使用Map实现Sticky"><a href="#使用Map实现Sticky" class="headerlink" title="使用Map实现Sticky"></a>使用Map实现Sticky</h3><h4 id="Map初始化"><a href="#Map初始化" class="headerlink" title="Map初始化"></a>Map初始化</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;Class&lt;?&gt;, Object&gt; mStickyEventMap;</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">private</span> <span class="title">RxBus</span><span class="params">()</span> </span>&#123;</div><div class="line">     mBus = <span class="keyword">new</span> SerializedSubject&lt;&gt;(PublishSubject.create());</div><div class="line">     mStickyEventMap = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h4 id="在我们postSticky-Event-时，存入Map中"><a href="#在我们postSticky-Event-时，存入Map中" class="headerlink" title="在我们postSticky(Event)时，存入Map中"></a>在我们postSticky(Event)时，存入Map中</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postSticky</span><span class="params">(Object event)</span> </span>&#123;</div><div class="line">   <span class="keyword">synchronized</span> (mStickyEventMap) &#123;</div><div class="line">       mStickyEventMap.put(event.getClass(), event);</div><div class="line">   &#125;</div><div class="line">   post(event);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="订阅时toObservableSticky-Class-eventType-，先从Map中寻找是否包含该类型的事件，如果没有，则说明没有Sticky事件要发送，直接订阅Subject（此时作为被观察者Observable）；如果有，则说明有Sticky事件需要发送，订阅merge（Subject-和-Sticky事件）。"><a href="#订阅时toObservableSticky-Class-eventType-，先从Map中寻找是否包含该类型的事件，如果没有，则说明没有Sticky事件要发送，直接订阅Subject（此时作为被观察者Observable）；如果有，则说明有Sticky事件需要发送，订阅merge（Subject-和-Sticky事件）。" class="headerlink" title="订阅时toObservableSticky(Class eventType)，先从Map中寻找是否包含该类型的事件，如果没有，则说明没有Sticky事件要发送，直接订阅Subject（此时作为被观察者Observable）；如果有，则说明有Sticky事件需要发送，订阅merge（Subject 和 Sticky事件）。"></a>订阅时toObservableSticky(Class<t> eventType)，先从Map中寻找是否包含该类型的事件，如果没有，则说明没有Sticky事件要发送，直接订阅Subject（此时作为被观察者Observable）；如果有，则说明有Sticky事件需要发送，订阅merge（Subject 和 Sticky事件）。</t></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">Observable&lt;T&gt; <span class="title">toObservableSticky</span><span class="params">(<span class="keyword">final</span> Class&lt;T&gt; eventType)</span> </span>&#123;</div><div class="line">      <span class="keyword">synchronized</span> (mStickyEventMap) &#123;</div><div class="line">          Observable&lt;T&gt; observable = mBus.ofType(eventType);</div><div class="line">          <span class="keyword">final</span> Object event = mStickyEventMap.get(eventType);</div><div class="line"></div><div class="line">          <span class="keyword">if</span> (event != <span class="keyword">null</span>) &#123;</div><div class="line">              <span class="keyword">return</span> observable.mergeWith(Observable.create(<span class="keyword">new</span> Observable.OnSubscribe&lt;T&gt;() &#123;</div><div class="line">                  <span class="meta">@Override</span></div><div class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> T&gt; subscriber)</span> </span>&#123;</div><div class="line">                      subscriber.onNext(eventType.cast(event));</div><div class="line">                  &#125;</div><div class="line">              &#125;));</div><div class="line">          &#125; <span class="keyword">else</span> &#123;</div><div class="line">              <span class="keyword">return</span> observable;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>在使用Sticky特性时，在不需要某Sticky事件时， 通过removeStickyEvent(Class<t> eventType)移除它，最保险的做法是：在主Activity的onDestroy里removeAllStickyEvents()。<br>因为我们的RxBus是个单例静态对象，再正常退出app时，该对象依然会存在于JVM，除非进程被杀死，这样的话导致StickyMap里的数据依然存在，为了避免该问题，需要在app退出时，清理StickyMap。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 主Activity（一般是栈底Activity）</span></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onDestroy();</div><div class="line">    <span class="comment">// 移除所有Sticky事件</span></div><div class="line">    RxBus.getDefault().removeAllStickyEvents();</div><div class="line">&#125;</div></pre></td></tr></table></figure></t></p>
+<h4 id="总的代码RxBus"><a href="#总的代码RxBus" class="headerlink" title="总的代码RxBus"></a>总的代码RxBus</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RxBus</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Subject&lt;Object, Object&gt; _bus;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;Class&lt;?&gt;, Object&gt; mStickyEventMap;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">RxBus</span><span class="params">()</span> </span>&#123;</div><div class="line">        _bus = <span class="keyword">new</span> SerializedSubject&lt;&gt;(PublishSubject.create());</div><div class="line"></div><div class="line">        mStickyEventMap = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">RxBusHolder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> RxBus INSTANCE = <span class="keyword">new</span> RxBus();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RxBus <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> RxBusHolder.INSTANCE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">post</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">        _bus.onNext(o);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> eventType</div><div class="line">     * <span class="doctag">@param</span> &lt;T&gt;根据传递的 eventType 类型返回特定类型(eventType)的 被观察者</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">Observable&lt;T&gt; <span class="title">toObserverable</span><span class="params">(Class&lt;T&gt; eventType)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> _bus.ofType(eventType);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 发送一个新Sticky事件</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postSticky</span><span class="params">(Object event)</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span> (mStickyEventMap) &#123;</div><div class="line">            mStickyEventMap.put(event.getClass(), event);</div><div class="line">        &#125;</div><div class="line">        post(event);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据传递的 eventType 类型返回特定类型(eventType)的 被观察者</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">Observable&lt;T&gt; <span class="title">toObservableSticky</span><span class="params">(<span class="keyword">final</span> Class&lt;T&gt; eventType)</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span> (mStickyEventMap) &#123;</div><div class="line">            Observable&lt;T&gt; observable = _bus.ofType(eventType);</div><div class="line">            <span class="keyword">final</span> Object event = mStickyEventMap.get(eventType);</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (event != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="comment">//如果之前发生了postSticky事件，则会在订阅事件发生后，发送这个事件</span></div><div class="line">                <span class="keyword">return</span> observable.mergeWith(Observable.create(<span class="keyword">new</span> Observable.OnSubscribe&lt;T&gt;() &#123;</div><div class="line">                   <span class="comment">//这里是一个冷热结合的Observable</span></div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> T&gt; subscriber)</span> </span>&#123;</div><div class="line">                        subscriber.onNext(eventType.cast(event));</div><div class="line"></div><div class="line">                    &#125;</div><div class="line">                &#125;));</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="comment">//如果之前并没有post事件的发生,和普通toObservable一样</span></div><div class="line">                <span class="keyword">return</span> observable;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据eventType获取Sticky事件</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">getStickyEvent</span><span class="params">(Class&lt;T&gt; eventType)</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span> (mStickyEventMap) &#123;</div><div class="line">            <span class="keyword">return</span> eventType.cast(mStickyEventMap.get(eventType));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 移除指定eventType的Sticky事件</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">removeStickyEvent</span><span class="params">(Class&lt;T&gt; eventType)</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span> (mStickyEventMap) &#123;</div><div class="line">            <span class="keyword">return</span> eventType.cast(mStickyEventMap.remove(eventType));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 移除所有的Sticky事件</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeAllStickyEvents</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span> (mStickyEventMap) &#123;</div><div class="line">            mStickyEventMap.clear();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>在使用RxBus过程中，你会发现你订阅了某个事件后，在后续接收到该事件时，如果处理的过程中发生了异常，你会发现后续的事件再也接收不到了，除非你重新订阅！</p>
+<p>原因在于RxJava的事件序列机制，一个订阅事件是以onCompleted()或者onError()作为结束的，即：一旦订阅者的onCompleted()或onError()被调用，订阅者和被订阅者的订阅关系就解除了。</p>
+<p>这里说下RxJava的异常传递机制：onError()在Observable序列传递过程中出现任何异常时被调用，然后终止Observable事件序列的传递，以此通知所有的订阅者发生了一个不可恢复的错误，即：异常总会传递到订阅者。</p>
+<p>这本是RxJava的一个优点，反而在事件总线的场景下，成了让人头疼的问题！</p>
+<p>所以我们的RxBus的订阅者在处理订阅事件时，一旦发生了异常，而又没Catch，那么最终都会调用到onError()，而一旦走到onError()，就意味着这个订阅者和该Subject解除了订阅关系，因此再也收不到后续发出的事件了～ 囧</p>
+<h3 id="我们用最传统的方式解决-–捕捉异常"><a href="#我们用最传统的方式解决-–捕捉异常" class="headerlink" title="我们用最传统的方式解决 –捕捉异常"></a>我们用最传统的方式解决 –捕捉异常</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">xBus.getDefault().toObservableSticky(EventSticky.class)        <span class="comment">// 建议在Sticky时,在操作符内主动try,catch</span></div><div class="line">        .map(<span class="keyword">new</span> Func1&lt;EventSticky, EventSticky&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> EventSticky <span class="title">call</span><span class="params">(EventSticky eventSticky)</span> </span>&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    <span class="comment">// 变换操作</span></div><div class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">return</span> eventSticky;</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">        .subscribe(<span class="keyword">new</span> Action1&lt;EventSticky&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(EventSticky eventSticky)</span> </span>&#123;</div><div class="line">                 <span class="keyword">try</span> &#123;</div><div class="line">                      <span class="comment">// 处理接收的事件</span></div><div class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/04/09/RxJava RxBusTwo/">RxJava RxBus进阶(Sticky事件,异常拦截）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">dreamY</a></p>
+        <p><span>发布时间:</span>2017-04-09, 15:41:27</p>
+        <p><span>最后更新:</span>2017-04-23, 14:27:25</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/09/RxJava RxBusTwo/" title="RxJava RxBus进阶(Sticky事件,异常拦截）">http://lovehaodong.cn/2017/04/09/RxJava RxBusTwo/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://lovehaodong.cn/2017/04/09/RxJava RxBusTwo/　　作者: dreamY" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/04/03/自定义View之MotionEvent/">
+                    自定义View之MotionEvent
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/04/12/Android 架构/">
+                    MVP + Retrofit + RxJava 优雅的实现
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#在使用之前写的RxBus的时候会出现一些问题"><span class="toc-number">1.</span> <span class="toc-text">在使用之前写的RxBus的时候会出现一些问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Sticky事件"><span class="toc-number">2.</span> <span class="toc-text">什么是Sticky事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Map实现Sticky"><span class="toc-number">3.</span> <span class="toc-text">使用Map实现Sticky</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Map初始化"><span class="toc-number">3.1.</span> <span class="toc-text">Map初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在我们postSticky-Event-时，存入Map中"><span class="toc-number">3.2.</span> <span class="toc-text">在我们postSticky(Event)时，存入Map中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#订阅时toObservableSticky-Class-eventType-，先从Map中寻找是否包含该类型的事件，如果没有，则说明没有Sticky事件要发送，直接订阅Subject（此时作为被观察者Observable）；如果有，则说明有Sticky事件需要发送，订阅merge（Subject-和-Sticky事件）。"><span class="toc-number">3.3.</span> <span class="toc-text">订阅时toObservableSticky(Class eventType)，先从Map中寻找是否包含该类型的事件，如果没有，则说明没有Sticky事件要发送，直接订阅Subject（此时作为被观察者Observable）；如果有，则说明有Sticky事件需要发送，订阅merge（Subject 和 Sticky事件）。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注意"><span class="toc-number">3.4.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总的代码RxBus"><span class="toc-number">3.5.</span> <span class="toc-text">总的代码RxBus</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常处理"><span class="toc-number">4.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我们用最传统的方式解决-–捕捉异常"><span class="toc-number">5.</span> <span class="toc-text">我们用最传统的方式解决 –捕捉异常</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"RxJava RxBus进阶(Sticky事件,异常拦截）　| DreamY Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2131806';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/04/03/自定义View之MotionEvent/" title="上一篇: 自定义View之MotionEvent">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/04/12/Android 架构/" title="下一篇: MVP + Retrofit + RxJava 优雅的实现">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/23/Java 反射/">Java反射</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/22/Java 注解/">Java注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Android 架构/">MVP + Retrofit + RxJava 优雅的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/09/RxJava RxBusTwo/">RxJava RxBus进阶(Sticky事件,异常拦截）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/03/自定义View之MotionEvent/">自定义View之MotionEvent</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/26/自定义View 网状分布图/">自定义View之网状分布图</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/19/RxJava RxJava/">RxJava RxJava基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/RxJava RxPermissions/">RxJava RxPermissions基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/14/RxJava RxLifecycle/">RxJava RxLifecycle基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/RxJava RxBus/">RxJava RxBus基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava RxBinding/">RxJava RxBinding基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/Java 并发/">Java线程安全问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava 家族/">RxJava 系列成员</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/我的2016/">我的2016总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 dreamY
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="dreamY" />
+
+
+
+<meta name="description" content="开源项目RxPermissions地址：https://github.com/tbruyelle/RxPermissions build.gradle1234567repositories &amp;#123;    jcenter() // If not already there&amp;#125;dependencies &amp;#123;    compile &apos;com.tbruyelle.rxpermissi">
+<meta name="keywords" content="RxJava,Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava RxPermissions基础">
+<meta property="og:url" content="http://lovehaodong.cn/2017/03/16/RxJava RxPermissions/index.html">
+<meta property="og:site_name" content="DreamY Blog">
+<meta property="og:description" content="开源项目RxPermissions地址：https://github.com/tbruyelle/RxPermissions build.gradle1234567repositories &amp;#123;    jcenter() // If not already there&amp;#125;dependencies &amp;#123;    compile &apos;com.tbruyelle.rxpermissi">
+<meta property="og:updated_time" content="2017-04-25T03:51:21.805Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava RxPermissions基础">
+<meta name="twitter:description" content="开源项目RxPermissions地址：https://github.com/tbruyelle/RxPermissions build.gradle1234567repositories &amp;#123;    jcenter() // If not already there&amp;#125;dependencies &amp;#123;    compile &apos;com.tbruyelle.rxpermissi">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DreamY Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>RxJava RxPermissions基础 | DreamY Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/dojocat.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">dreamY</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Annotation/">Annotation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reflect/">Reflect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxJava/">RxJava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/android-nuc">NUC-Android-Lab</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">just do IT!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">dreamY</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/dojocat.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">dreamY</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-RxJava RxPermissions" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/16/RxJava RxPermissions/" class="article-date">
+      <time datetime="2017-03-16T13:38:27.000Z" itemprop="datePublished">2017-03-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RxJava RxPermissions基础
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h3><p>RxPermissions地址：<a href="https://github.com/tbruyelle/RxPermissions" target="_blank" rel="external">https://github.com/tbruyelle/RxPermissions</a></p>
+<h3 id="build-gradle"><a href="#build-gradle" class="headerlink" title="build.gradle"></a>build.gradle</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">    jcenter() <span class="comment">// If not already there</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    compile <span class="string">'com.tbruyelle.rxpermissions:rxpermissions:0.9.3@aar'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>不了解6.0权限问题的可以观看<br><a href="http://gudong.name/%E6%8A%80%E6%9C%AF/2015/11/10/android_m_permission.html" target="_blank" rel="external">咕咚大神的博客</a><br>先看官方的Sample(看完下面的再看这个会更清晰哦~)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">RxView.clicks(mBtnPermission)</div><div class="line">        <span class="comment">// Ask for permissions when button is clicked</span></div><div class="line">        .compose(rxPermissions.ensureEach(Manifest.permission.CAMERA))</div><div class="line">        .subscribe(<span class="keyword">new</span> Action1&lt;Permission&gt;() &#123;</div><div class="line">                       <span class="meta">@Override</span></div><div class="line">                       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Permission permission)</span> </span>&#123;</div><div class="line">                           Log.i(TAG, <span class="string">"Permission result "</span> + permission);</div><div class="line">                           <span class="keyword">if</span> (permission.granted) &#123;</div><div class="line">                               releaseCamera();</div><div class="line">                               camera = Camera.open(<span class="number">0</span>);</div><div class="line">                               <span class="keyword">try</span> &#123;</div><div class="line">                                   camera.setPreviewDisplay(mSurfaceView.getHolder());</div><div class="line">                                   camera.startPreview();</div><div class="line">                               &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                                   Log.e(TAG, <span class="string">"Error while trying to display the camera preview"</span>, e);</div><div class="line">                               &#125;</div><div class="line">                           &#125; <span class="keyword">else</span> <span class="keyword">if</span> (permission.shouldShowRequestPermissionRationale) &#123;</div><div class="line">                               <span class="comment">// Denied permission without ask never again</span></div><div class="line">                               Toast.makeText(getApplicationContext(),</div><div class="line">                                       <span class="string">"Denied permission without ask never again"</span>,</div><div class="line">                                       Toast.LENGTH_SHORT).show();</div><div class="line">                           &#125; <span class="keyword">else</span> &#123;</div><div class="line">                               <span class="comment">// Denied permission with ask never again</span></div><div class="line">                               <span class="comment">// Need to go to the settings</span></div><div class="line">                               Toast.makeText(getApplicationContext(),</div><div class="line">                                       <span class="string">"Permission denied, can't enable the camera"</span>,</div><div class="line">                                       Toast.LENGTH_SHORT).show();</div><div class="line">                           &#125;</div><div class="line">                       &#125;</div><div class="line">                   &#125;,</div><div class="line">                <span class="keyword">new</span> Action1&lt;Throwable&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Throwable t)</span> </span>&#123;</div><div class="line">                        Log.e(TAG, <span class="string">"onError"</span>, t);</div><div class="line">                    &#125;</div><div class="line">                &#125;,</div><div class="line">                <span class="keyword">new</span> Action0() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span> </span>&#123;</div><div class="line">                        Log.i(TAG, <span class="string">"OnComplete"</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p>如果你使用的是0.9版本之前，可以直接获取单例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">RxPermissions.getInstance（<span class="keyword">this</span>）</div></pre></td></tr></table></figure></p>
+<p>之后的版本，创建RxPermission实例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">RxPermissions rxPermission = <span class="keyword">new</span> RxPermissions(<span class="keyword">this</span>);</div></pre></td></tr></table></figure></p>
+<h4 id="一共有四种方式获取权限-我们来获取-CAMERA-permission和-VIBRATE-permission"><a href="#一共有四种方式获取权限-我们来获取-CAMERA-permission和-VIBRATE-permission" class="headerlink" title="一共有四种方式获取权限( 我们来获取 CAMERA permission和 VIBRATE permission)"></a>一共有四种方式获取权限( 我们来获取 CAMERA permission和 VIBRATE permission)</h4><ul>
+<li><p>Observable.compose(rxPermissions.ensure())</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">RxView.clicks(mBtnPermission)</div><div class="line">                .compose(rxPermissions.ensure(Manifest.permission.CAMERA,Manifest.permission.VIBRATE))</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Boolean&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Boolean aBoolean)</span> </span>&#123;</div><div class="line">                    <span class="keyword">if</span> (aBoolean) &#123;</div><div class="line">                        Log.i(<span class="string">"RxPermissions:"</span>,<span class="string">"all permissions get success"</span>);</div><div class="line">                    &#125;<span class="keyword">else</span> &#123;</div><div class="line">                        Log.i(<span class="string">"RxPermissions:"</span>,<span class="string">"must has one ore more permissions get failed"</span>);</div><div class="line">                    &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Observable.compose(rxPermissions.ensureEach())</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">RxView.clicks(mBtnPermission)</div><div class="line">               .compose(rxPermissions.ensureEach(Manifest.permission.CAMERA,Manifest.permission.VIBRATE))</div><div class="line">               .subscribe(<span class="keyword">new</span> Action1&lt;Permission&gt;() &#123;</div><div class="line">                   <span class="meta">@Override</span></div><div class="line">                   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Permission permission)</span> </span>&#123;</div><div class="line">                   <span class="keyword">if</span> (permission.granted)&#123;</div><div class="line">                        Log.i(<span class="string">"RxPermissions:"</span>,permission.name+<span class="string">"this permission get success"</span>);</div><div class="line">                    &#125;<span class="keyword">else</span>&#123;</div><div class="line">                        Log.i(<span class="string">"RxPermissions:"</span>,permission.name+<span class="string">"this permission get failed"</span>);</div><div class="line">                    &#125;</div><div class="line">                   &#125;</div><div class="line">               &#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>new RxPermissions(this).request(permissions)</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">rxPermissions.request(Manifest.permission.CAMERA)</div><div class="line">             .subscribe(<span class="keyword">new</span> Action1&lt;Boolean&gt;() &#123;</div><div class="line">                 <span class="meta">@Override</span></div><div class="line">                 <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Boolean aBoolean)</span> </span>&#123;</div><div class="line"></div><div class="line">                     <span class="keyword">if</span> (aBoolean) &#123;</div><div class="line">                         Log.i(<span class="string">"RxPermissions:"</span>,<span class="string">"all permissions get success"</span>);</div><div class="line">                     &#125;<span class="keyword">else</span> &#123;</div><div class="line">                         Log.i(<span class="string">"RxPermissions:"</span>,<span class="string">"must has one ore more permissions get failed"</span>);</div><div class="line">                     &#125;</div><div class="line">                 &#125;</div><div class="line">             &#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>new RxPermissions(this).requestEach(permissions)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">rxPermissions.requestEach(Manifest.permission.CAMERA)</div><div class="line">             .subscribe(<span class="keyword">new</span> Action1&lt;Permission&gt;() &#123;</div><div class="line">                 <span class="meta">@Override</span></div><div class="line">                 <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Permission permission)</span> </span>&#123;</div><div class="line">                 <span class="keyword">if</span> (permission.granted)&#123;</div><div class="line">                      Log.i(<span class="string">"RxPermissions:"</span>,permission.name+<span class="string">"this permission get success"</span>);</div><div class="line">                  &#125;<span class="keyword">else</span>&#123;</div><div class="line">                      Log.i(<span class="string">"RxPermissions:"</span>,permission.name+<span class="string">"this permission get failed"</span>);</div><div class="line">                  &#125;</div><div class="line">                 &#125;</div><div class="line">             &#125;);</div></pre></td></tr></table></figure>
+<p>我们来看看request和ensure的源码你就会明白所以然了<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * Request permissions immediately, &lt;b&gt;must be invoked during initialization phase</div><div class="line">     * of your application&lt;/b&gt;.</div><div class="line">     */</div><div class="line">    <span class="meta">@SuppressWarnings</span>(&#123;<span class="string">"WeakerAccess"</span>, <span class="string">"unused"</span>&#125;)</div><div class="line">    <span class="function"><span class="keyword">public</span> Observable&lt;Boolean&gt; <span class="title">request</span><span class="params">(<span class="keyword">final</span> String... permissions)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Observable.just(<span class="keyword">null</span>).compose(ensure(permissions));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Map emitted items from the source observable into &#123;<span class="doctag">@code</span> true&#125; if permissions in parameters</div><div class="line">     * are granted, or &#123;<span class="doctag">@code</span> false&#125; if not.</div><div class="line">     * &lt;p&gt;</div><div class="line">     * If one or several permissions have never been requested, invoke the related framework method</div><div class="line">     * to ask the user if he allows the permissions.</div><div class="line">     */</div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"WeakerAccess"</span>)</div><div class="line">    <span class="keyword">public</span> Observable.<span class="function">Transformer&lt;Object, Boolean&gt; <span class="title">ensure</span><span class="params">(<span class="keyword">final</span> String... permissions)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Observable.Transformer&lt;Object, Boolean&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> Observable&lt;Boolean&gt; <span class="title">call</span><span class="params">(Observable&lt;Object&gt; o)</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> request(o, permissions)</div><div class="line">                        <span class="comment">// Transform Observable&lt;Permission&gt; to Observable&lt;Boolean&gt;</span></div><div class="line">                        .buffer(permissions.length)</div><div class="line">                        .flatMap(<span class="keyword">new</span> Func1&lt;List&lt;Permission&gt;, Observable&lt;Boolean&gt;&gt;() &#123;</div><div class="line">                            <span class="meta">@Override</span></div><div class="line">                            <span class="function"><span class="keyword">public</span> Observable&lt;Boolean&gt; <span class="title">call</span><span class="params">(List&lt;Permission&gt; permissions)</span> </span>&#123;</div><div class="line">                                <span class="keyword">if</span> (permissions.isEmpty()) &#123;</div><div class="line">                                    <span class="comment">// Occurs during orientation change, when the subject receives onComplete.</span></div><div class="line">                                    <span class="comment">// In that case we don't want to propagate that empty list to the</span></div><div class="line">                                    <span class="comment">// subscriber, only the onComplete.</span></div><div class="line">                                    <span class="keyword">return</span> Observable.empty();</div><div class="line">                                &#125;</div><div class="line">                                <span class="comment">// Return true if all permissions are granted.</span></div><div class="line">                                <span class="keyword">for</span> (Permission p : permissions) &#123;</div><div class="line">                                    <span class="keyword">if</span> (!p.granted) &#123;</div><div class="line">                                        <span class="keyword">return</span> Observable.just(<span class="keyword">false</span>);</div><div class="line">                                    &#125;</div><div class="line">                                &#125;</div><div class="line">                                <span class="keyword">return</span> Observable.just(<span class="keyword">true</span>);</div><div class="line">                            &#125;</div><div class="line">                        &#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>request请求一般放在程序初始化的时候比如onCreat()中，而且它的内部也是一个ensure(permissions)，经过compose(ensure())最终返回值是一个存放boolean值的Observable如果返回true表示请求中的所有权限的已经成功获取，如果返回false表示至少有一个权限没有获取成功。所以不好分别处理,如果选择分别处理的话我们还是用requestEach去分别处理这个源码大家自己去看一看很简单的，内部使用的是ensureEach(permissions),返回的是被处理过的permission，通过它的状态我们可以判断是否获取权限,以上的方法在6.0之前的手机中，会默认认为你已经处理过权限也就是响应地方返回true。</p>
+<h3 id="总结（建议）"><a href="#总结（建议）" class="headerlink" title="总结（建议）"></a>总结（建议）</h3><ul>
+<li>在初始程序的时候请求一个权限： new RxPermissions(this).request(permissions) or new RxPermissions(this).requestEach(permissions)</li>
+<li>在初始程序的时候请求多个权限： new RxPermissions(this).requestEach(permissions)</li>
+<li>在指定的位置，时机请求一个权限：Observable.compose(rxPermissions.ensure()) or Observable.compose(rxPermissions.ensureEach())</li>
+<li>在指定的位置，时机请求多个权限：Observable.compose(rxPermissions.ensureEach())</li>
+</ul>
+<p>很简单的教程，目的是让大家直到有这种方式去解决权限问题，更多的还是要靠大家多看多写。see you~</p>
+<h1 id="重要的事情说一遍“多看源码”"><a href="#重要的事情说一遍“多看源码”" class="headerlink" title="重要的事情说一遍“多看源码”"></a>重要的事情说一遍“多看源码”</h1>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/03/16/RxJava RxPermissions/">RxJava RxPermissions基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">dreamY</a></p>
+        <p><span>发布时间:</span>2017-03-16, 21:38:27</p>
+        <p><span>最后更新:</span>2017-04-25, 11:51:21</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/16/RxJava RxPermissions/" title="RxJava RxPermissions基础">http://lovehaodong.cn/2017/03/16/RxJava RxPermissions/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://lovehaodong.cn/2017/03/16/RxJava RxPermissions/　　作者: dreamY" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/03/14/RxJava RxLifecycle/">
+                    RxJava RxLifecycle基础
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/19/RxJava RxJava/">
+                    RxJava RxJava基础
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#开源项目"><span class="toc-number">1.</span> <span class="toc-text">开源项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#build-gradle"><span class="toc-number">2.</span> <span class="toc-text">build.gradle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用法"><span class="toc-number">3.</span> <span class="toc-text">用法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一共有四种方式获取权限-我们来获取-CAMERA-permission和-VIBRATE-permission"><span class="toc-number">3.1.</span> <span class="toc-text">一共有四种方式获取权限( 我们来获取 CAMERA permission和 VIBRATE permission)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结（建议）"><span class="toc-number">4.</span> <span class="toc-text">总结（建议）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#重要的事情说一遍“多看源码”"><span class="toc-number"></span> <span class="toc-text">重要的事情说一遍“多看源码”</span></a>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"RxJava RxPermissions基础　| DreamY Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2131806';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/03/14/RxJava RxLifecycle/" title="上一篇: RxJava RxLifecycle基础">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/19/RxJava RxJava/" title="下一篇: RxJava RxJava基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/23/Java 反射/">Java反射</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/22/Java 注解/">Java注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Android 架构/">MVP + Retrofit + RxJava 优雅的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/09/RxJava RxBusTwo/">RxJava RxBus进阶(Sticky事件,异常拦截）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/03/自定义View之MotionEvent/">自定义View之MotionEvent</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/26/自定义View 网状分布图/">自定义View之网状分布图</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/19/RxJava RxJava/">RxJava RxJava基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/RxJava RxPermissions/">RxJava RxPermissions基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/14/RxJava RxLifecycle/">RxJava RxLifecycle基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/RxJava RxBus/">RxJava RxBus基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava RxBinding/">RxJava RxBinding基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/Java 并发/">Java线程安全问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava 家族/">RxJava 系列成员</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/我的2016/">我的2016总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 dreamY
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

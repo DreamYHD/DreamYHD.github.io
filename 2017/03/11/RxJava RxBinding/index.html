@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="dreamY" />
+
+
+
+<meta name="description" content="RxBinding是什么把 Android 中各种 UI 控件的事件转换为 RxJava 中的数据流。这样就可以把 UI 控件的事件当做 RxJava 中的数据流来使用了。 比如 View 的 onClick 事件，使用 RxView.clicks(view) 即可获取到一个 Observable 对象，每当用户点击这个 View 的时候，该 Observable 对象就发射一个事件（onNext">
+<meta name="keywords" content="RxJava,Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava RxBinding基础">
+<meta property="og:url" content="http://lovehaodong.cn/2017/03/11/RxJava RxBinding/index.html">
+<meta property="og:site_name" content="DreamY Blog">
+<meta property="og:description" content="RxBinding是什么把 Android 中各种 UI 控件的事件转换为 RxJava 中的数据流。这样就可以把 UI 控件的事件当做 RxJava 中的数据流来使用了。 比如 View 的 onClick 事件，使用 RxView.clicks(view) 即可获取到一个 Observable 对象，每当用户点击这个 View 的时候，该 Observable 对象就发射一个事件（onNext">
+<meta property="og:updated_time" content="2017-04-23T06:27:25.954Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava RxBinding基础">
+<meta name="twitter:description" content="RxBinding是什么把 Android 中各种 UI 控件的事件转换为 RxJava 中的数据流。这样就可以把 UI 控件的事件当做 RxJava 中的数据流来使用了。 比如 View 的 onClick 事件，使用 RxView.clicks(view) 即可获取到一个 Observable 对象，每当用户点击这个 View 的时候，该 Observable 对象就发射一个事件（onNext">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DreamY Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>RxJava RxBinding基础 | DreamY Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/dojocat.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">dreamY</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Annotation/">Annotation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reflect/">Reflect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxJava/">RxJava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/android-nuc">NUC-Android-Lab</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">just do IT!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">dreamY</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/dojocat.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">dreamY</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-RxJava RxBinding" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/11/RxJava RxBinding/" class="article-date">
+      <time datetime="2017-03-11T13:27:27.000Z" itemprop="datePublished">2017-03-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RxJava RxBinding基础
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="RxBinding是什么"><a href="#RxBinding是什么" class="headerlink" title="RxBinding是什么"></a>RxBinding是什么</h2><p>把 Android 中各种 UI 控件的事件转换为 RxJava 中的数据流。这样就可以把 UI 控件的事件当做 RxJava 中的数据流来使用了。 比如 View 的 onClick 事件，使用 RxView.clicks(view) 即可获取到一个 Observable 对象，每当用户点击这个 View 的时候，该 Observable 对象就发射一个事件（onNext 被调用）， Observable 的 Observer 订阅者就可以通过 onNext 回调知道用户点击了 View。</p>
+<h3 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h3><p>RxBinding 地址：<a href="https://github.com/JakeWharton/RxBinding" target="_blank" rel="external">https://github.com/JakeWharton/RxBinding</a></p>
+<h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/ RxBinding</div><div class="line">compile <span class="string">'com.jakewharton.rxbinding:rxbinding:0.3.0'</span></div><div class="line">compile <span class="string">'com.jakewharton.rxbinding:rxbinding-support-v4:0.3.0'</span></div><div class="line">compile <span class="string">'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.3.0'</span></div><div class="line">compile <span class="string">'com.jakewharton.rxbinding:rxbinding-design:0.3.0'</span></div><div class="line">compile <span class="string">'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.3.0'</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><h4 id="button点击事件"><a href="#button点击事件" class="headerlink" title="button点击事件"></a>button点击事件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Button b = (Button)findViewById(R.id.button);</div><div class="line">Subscription buttonSub =</div><div class="line">                RxView.clicks(b).subscribe(<span class="keyword">new</span> Action1&lt;Void&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Void aVoid)</span> </span>&#123;</div><div class="line">                        <span class="comment">// do some work here</span></div><div class="line">                    &#125;</div><div class="line">                &#125;);</div></pre></td></tr></table></figure>
+<h4 id="EditText添加文本改变事件"><a href="#EditText添加文本改变事件" class="headerlink" title="EditText添加文本改变事件"></a>EditText添加文本改变事件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> EditText name = (EditText) v.findViewById(R.id.name);</div><div class="line">Subscription editTextSub =</div><div class="line">    RxTextView.textChanges(name)</div><div class="line">            .subscribe(<span class="keyword">new</span> Action1&lt;String&gt;() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(String value)</span> </span>&#123;</div><div class="line">                    <span class="comment">// do some work with the updated text</span></div><div class="line">                &#125;</div><div class="line">            &#125;);</div></pre></td></tr></table></figure>
+<p>看到这里你可能会说，这个没什么太大的变化呀，也没有什么太优势的地方。大佬别着急。<br><br>RxBinding最好的运用场景是在定时操作，循环操作。还有对重复点击事件的处理上</p>
+<h4 id="设置Button防止抖动"><a href="#设置Button防止抖动" class="headerlink" title="设置Button防止抖动"></a>设置Button防止抖动</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">RxView.clicks(button).throttleFirst(<span class="number">2</span>, TimeUnit.SECONDS).subscribe(<span class="keyword">new</span> Action1&lt;Void&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Void aVoid)</span> </span>&#123;</div><div class="line">         <span class="comment">//两秒钟之内只取一个点击事件，防抖操作</span></div><div class="line">        <span class="comment">// do some work with the updated text</span></div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="考虑在搜索框中输入相应的内容，当内容的长度至少三个字符长度的时候开始触发响应事件（设置100ms延迟），使用RxJava实现（debounce-在一定的时间内没有操作就会发送事件）"><a href="#考虑在搜索框中输入相应的内容，当内容的长度至少三个字符长度的时候开始触发响应事件（设置100ms延迟），使用RxJava实现（debounce-在一定的时间内没有操作就会发送事件）" class="headerlink" title="考虑在搜索框中输入相应的内容，当内容的长度至少三个字符长度的时候开始触发响应事件（设置100ms延迟），使用RxJava实现（debounce()在一定的时间内没有操作就会发送事件）"></a>考虑在搜索框中输入相应的内容，当内容的长度至少三个字符长度的时候开始触发响应事件（设置100ms延迟），使用RxJava实现（debounce()在一定的时间内没有操作就会发送事件）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">RxTextView.textChanges(searchTextView)</div><div class="line">	.filter(<span class="keyword">new</span> Func1&lt;String, Boolean&gt; ()&#123;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> Boolean <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">			<span class="keyword">return</span> s.length() &gt; <span class="number">2</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;)</div><div class="line">	.debounce(<span class="number">100</span>, TimeUnit.MILLISECONDS)</div><div class="line">	.switchMap(<span class="keyword">new</span> Func1&lt;String, Observable&lt;List&lt;Result&gt;&gt;&gt;() &#123;</div><div class="line">		makeApiCall(s);</div><div class="line">	&#125;)</div><div class="line">	.subscribeOn(Schedulers.io())</div><div class="line">	.observeOn(AndroidSchedulers.mainThread())</div><div class="line">	.subscribe(<span class="comment">/* attach observer */</span>);</div></pre></td></tr></table></figure>
+<h4 id="CheckBox相关的操作"><a href="#CheckBox相关的操作" class="headerlink" title="CheckBox相关的操作"></a>CheckBox相关的操作</h4><p>在用户登录界面时，如果用户未勾选同意用户协议，不允许登录<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">RxCompoundButton.checkedChanges(checkBox2)</div><div class="line">        .subscribe(<span class="keyword">new</span> Action1&lt;Boolean&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Boolean aBoolean)</span> </span>&#123;</div><div class="line">                btn_login.setClickable(aBoolean);</div><div class="line">                btn_login.setBackgroundResource(aBoolean ? R.color.can_login : R.color.not_login);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure></p>
+<h4 id="监听RecyclerView的滚动事件以及数据更改事件"><a href="#监听RecyclerView的滚动事件以及数据更改事件" class="headerlink" title="监听RecyclerView的滚动事件以及数据更改事件"></a>监听RecyclerView的滚动事件以及数据更改事件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">RxRecyclerView.scrollStateChanges(mRxBindingRecycler)</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Integer&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Integer integer)</span> </span>&#123;</div><div class="line">                        Log.d(<span class="string">"TAG"</span>, <span class="string">"change"</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">RxRecyclerViewAdapter.dataChanges(mAdapter)</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;MyAdapter&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(MyAdapter myAdapter)</span> </span>&#123;</div><div class="line">                        Log.e(<span class="string">"TAG"</span>, <span class="string">"DATA CHANGED"</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">mAdapter.notifyDataSetChanged();</div></pre></td></tr></table></figure>
+<p>因为RxRecyclerView和RecyclerView一样并没有提供直接的item点击事件，所以参考以前RecyclerView写了一个点击事件这里用到了RxBus处理数据的传递，我们并没有在RecyclerView内部直接去处理事件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="keyword">public</span> MyAdapter.<span class="function">ViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="keyword">int</span> viewType)</span> </span>&#123;</div><div class="line">       <span class="keyword">final</span> View view = LayoutInflater.from(mContext).inflate(R.layout.binding_item, <span class="keyword">null</span>);</div><div class="line">       <span class="keyword">final</span> ViewHolder viewHolder = <span class="keyword">new</span> ViewHolder(view);</div><div class="line">       RxView.clicks(view)</div><div class="line">               .subscribe(<span class="keyword">new</span> Action1&lt;Void&gt;() &#123;</div><div class="line">                   <span class="meta">@Override</span></div><div class="line">                   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Void aVoid)</span> </span>&#123;</div><div class="line">                       RxBus.getInstance().send(<span class="keyword">new</span> UserBean(<span class="string">""</span>,viewHolder.getAdapterPosition()+<span class="string">""</span>));</div><div class="line">                       Log.i(<span class="string">"TGA"</span>,viewHolder.getAdapterPosition()+<span class="string">""</span>);</div><div class="line">                   &#125;</div><div class="line">               &#125;);</div><div class="line">       <span class="keyword">return</span> viewHolder;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>在我们处理数据的地方获取该事件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">RxBus.getInstance()</div><div class="line">        .toObserverable(UserBean.class)</div><div class="line">        .subscribe(<span class="keyword">new</span> Action1&lt;UserBean&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(UserBean userBean)</span> </span>&#123;</div><div class="line">                <span class="comment">// <span class="doctag">TODO:</span> 2017/3/13</span></div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure></p>
+<p>当然上面的只是一些简单的案例，具体的内容请观看大神的<a href="https://github.com/JakeWharton/RxBinding" target="_blank" rel="external">RxBinding</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/03/11/RxJava RxBinding/">RxJava RxBinding基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">dreamY</a></p>
+        <p><span>发布时间:</span>2017-03-11, 21:27:27</p>
+        <p><span>最后更新:</span>2017-04-23, 14:27:25</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/11/RxJava RxBinding/" title="RxJava RxBinding基础">http://lovehaodong.cn/2017/03/11/RxJava RxBinding/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://lovehaodong.cn/2017/03/11/RxJava RxBinding/　　作者: dreamY" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/03/11/Java 并发/">
+                    Java线程安全问题
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/13/RxJava RxBus/">
+                    RxJava RxBus基础
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RxBinding是什么"><span class="toc-number">1.</span> <span class="toc-text">RxBinding是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开源项目"><span class="toc-number">1.1.</span> <span class="toc-text">开源项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加依赖"><span class="toc-number">1.2.</span> <span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单使用"><span class="toc-number">1.3.</span> <span class="toc-text">简单使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#button点击事件"><span class="toc-number">1.3.1.</span> <span class="toc-text">button点击事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EditText添加文本改变事件"><span class="toc-number">1.3.2.</span> <span class="toc-text">EditText添加文本改变事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置Button防止抖动"><span class="toc-number">1.3.3.</span> <span class="toc-text">设置Button防止抖动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#考虑在搜索框中输入相应的内容，当内容的长度至少三个字符长度的时候开始触发响应事件（设置100ms延迟），使用RxJava实现（debounce-在一定的时间内没有操作就会发送事件）"><span class="toc-number">1.3.4.</span> <span class="toc-text">考虑在搜索框中输入相应的内容，当内容的长度至少三个字符长度的时候开始触发响应事件（设置100ms延迟），使用RxJava实现（debounce()在一定的时间内没有操作就会发送事件）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CheckBox相关的操作"><span class="toc-number">1.3.5.</span> <span class="toc-text">CheckBox相关的操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#监听RecyclerView的滚动事件以及数据更改事件"><span class="toc-number">1.3.6.</span> <span class="toc-text">监听RecyclerView的滚动事件以及数据更改事件</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"RxJava RxBinding基础　| DreamY Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2131806';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/03/11/Java 并发/" title="上一篇: Java线程安全问题">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/13/RxJava RxBus/" title="下一篇: RxJava RxBus基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/23/Java 反射/">Java反射</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/22/Java 注解/">Java注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Android 架构/">MVP + Retrofit + RxJava 优雅的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/09/RxJava RxBusTwo/">RxJava RxBus进阶(Sticky事件,异常拦截）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/03/自定义View之MotionEvent/">自定义View之MotionEvent</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/26/自定义View 网状分布图/">自定义View之网状分布图</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/19/RxJava RxJava/">RxJava RxJava基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/RxJava RxPermissions/">RxJava RxPermissions基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/14/RxJava RxLifecycle/">RxJava RxLifecycle基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/RxJava RxBus/">RxJava RxBus基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava RxBinding/">RxJava RxBinding基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/Java 并发/">Java线程安全问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava 家族/">RxJava 系列成员</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/我的2016/">我的2016总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 dreamY
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

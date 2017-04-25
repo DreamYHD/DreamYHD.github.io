@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="dreamY" />
+
+
+
+<meta name="description" content="推荐大家先看下一个学长的google mvp解读网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,传送门">
+<meta name="keywords" content="RxJava,Android,Retrofit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MVP + Retrofit + RxJava 优雅的实现">
+<meta property="og:url" content="http://lovehaodong.cn/2017/04/12/Android 架构/index.html">
+<meta property="og:site_name" content="DreamY Blog">
+<meta property="og:description" content="推荐大家先看下一个学长的google mvp解读网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,传送门">
+<meta property="og:image" content="http://i1.piimg.com/567571/517bbf6120edbf81.png">
+<meta property="og:image" content="http://i1.piimg.com/567571/34aaca1d951aa6d5.jpg">
+<meta property="og:updated_time" content="2017-04-25T03:24:39.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MVP + Retrofit + RxJava 优雅的实现">
+<meta name="twitter:description" content="推荐大家先看下一个学长的google mvp解读网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,传送门">
+<meta name="twitter:image" content="http://i1.piimg.com/567571/517bbf6120edbf81.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DreamY Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>MVP + Retrofit + RxJava 优雅的实现 | DreamY Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/dojocat.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">dreamY</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Annotation/">Annotation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reflect/">Reflect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxJava/">RxJava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/android-nuc">NUC-Android-Lab</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">just do IT!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">dreamY</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/dojocat.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">dreamY</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Android 架构" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/12/Android 架构/" class="article-date">
+      <time datetime="2017-04-12T10:58:27.000Z" itemprop="datePublished">2017-04-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MVP + Retrofit + RxJava 优雅的实现
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>推荐大家先看下一个学长的<a href="http://songning.me/2016/11/03/google-rxjava-mvp/" target="_blank" rel="external">google mvp解读</a><br>网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,<a href="https://github.com/DreamYHD/DaggerMvpDemo/tree/master/app/src/main/java/com/androidlab/daggermvpdemo" target="_blank" rel="external">传送门</a><br><a id="more"></a></p>
+<h3 id="看看分包"><a href="#看看分包" class="headerlink" title="看看分包"></a>看看分包</h3><p><img src="http://i1.piimg.com/567571/517bbf6120edbf81.png" alt=""><br>其实是按照功能分包，大家可以按照自己的习惯来</p>
+<h3 id="Base类"><a href="#Base类" class="headerlink" title="Base类"></a>Base类</h3><h4 id="BaseView"><a href="#BaseView" class="headerlink" title="BaseView"></a>BaseView</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseView</span></span>&#123;</div><div class="line"> <span class="comment">//可以按照自己的需求添加</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="BaseModel"><a href="#BaseModel" class="headerlink" title="BaseModel"></a>BaseModel</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseModel</span> </span>&#123;</div><div class="line"><span class="comment">//可以按照自己的需求添加</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="BasePresenter"><a href="#BasePresenter" class="headerlink" title="BasePresenter"></a>BasePresenter</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BasePresenter</span>&lt;<span class="title">V</span> <span class="keyword">extends</span> <span class="title">BaseView</span> ,<span class="title">M</span> <span class="keyword">extends</span> <span class="title">BaseModel</span>&gt;</span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"BasePresenter"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span>  V mView;</div><div class="line">    <span class="keyword">protected</span>  M mModel;</div><div class="line">    <span class="keyword">private</span> CompositeSubscription mSubscription;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(V mView,M mModel)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.mView==<span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">this</span>.mView=mView;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.mModel==<span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">this</span>.mModel=mModel;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">addSubscribe</span><span class="params">(Subscription subscription)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mSubscription == <span class="keyword">null</span>) &#123;</div><div class="line">            mSubscription = <span class="keyword">new</span> CompositeSubscription();</div><div class="line">        &#125;</div><div class="line">        mSubscription.add(subscription);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">deatch</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mView!=<span class="keyword">null</span>)&#123;</div><div class="line">            mView=<span class="keyword">null</span>;</div><div class="line">            Log.e(TAG, <span class="string">"unSubscribe: view null"</span> );</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mSubscription != <span class="keyword">null</span> &amp;&amp; mSubscription.hasSubscriptions()) &#123;</div><div class="line">            mSubscription.clear();</div><div class="line">            Log.e(TAG, <span class="string">"unSubscribe: mSubscription null"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为Presenter中要有View和Model的引用，我们直接在BasePresenter中进行添加，可以减少子类的代码，CompositeSubscription来管理RxJava的订阅事件，便于及时的解除订阅，防止内存泄漏。</p>
+<h4 id="BaseFragment"><a href="#BaseFragment" class="headerlink" title="BaseFragment"></a>BaseFragment</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">public abstract class BaseMvpFragment&lt;P extends BasePresenter,M extends BaseModel&gt;extends Fragment implements BaseView &#123;</div><div class="line"></div><div class="line">    protected P mPresenter;</div><div class="line"></div><div class="line">    private M mModel;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) &#123;</div><div class="line"></div><div class="line">        View view=inflater.inflate(getLayoutId(),container,false);</div><div class="line">        initChildView(view,savedInstanceState );</div><div class="line">        fragmentLogic();</div><div class="line">        return view;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //逻辑处理</div><div class="line">    protected abstract void fragmentLogic();</div><div class="line"></div><div class="line">    //初始化View</div><div class="line">    protected abstract void initChildView(View mView,Bundle b);</div><div class="line"></div><div class="line">    //获取布局</div><div class="line">    protected abstract int getLayoutId();</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    public void onResume() &#123;</div><div class="line">        super.onResume();</div><div class="line">        if (mPresenter == null) &#123;</div><div class="line">            mPresenter.attach(this,mModel);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public void onDestroy() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        if (mPresenter!=null)&#123;</div><div class="line">            mPresenter.deatch();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在View中我们要持有一个Presenter，在初始化Presenter的时候，我们要用到Model，所以就有了这样的BaseFragment，在Resume中进行初始化，在Destroy中进行数据的清除，防止内存泄漏</p>
+<h3 id="Contract-契约类"><a href="#Contract-契约类" class="headerlink" title="Contract(契约类)"></a>Contract(契约类)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GankContract</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">View</span> <span class="keyword">extends</span> <span class="title">BaseView</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">showGank</span><span class="params">(GankPictureBean mGank)</span></span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">showBigImage</span><span class="params">(String url)</span></span>;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">Model</span> <span class="keyword">extends</span> <span class="title">BaseModel</span></span>&#123;</div><div class="line">        Observable &lt;GankPictureBean&gt;getGank( );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Presenter</span> <span class="keyword">extends</span> <span class="title">BasePresenter</span>&lt;<span class="title">View</span>,<span class="title">Model</span>&gt;</span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">getGank</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们为每一个功能添加一个具体的Contract契约类来管理Model,View,Presenter，因为数据的处理一般是在io线程，所以这个时候我们选择用RxJava讲Model进行封装，方便之后的直接用RxJava进行异步操作</p>
+<h3 id="封装网络请求"><a href="#封装网络请求" class="headerlink" title="封装网络请求"></a>封装网络请求</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GankApiService</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Retrofit mRetrofit;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BASE_URL=<span class="string">"http://gank.io/api/random/data/福利/"</span>;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">GankApiService</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">        OkHttpClient.Builder mBuilder=<span class="keyword">new</span> OkHttpClient.Builder()</div><div class="line">                .writeTimeout(<span class="number">5</span>, TimeUnit.SECONDS);</div><div class="line"></div><div class="line">        mRetrofit=<span class="keyword">new</span> Retrofit.Builder()</div><div class="line">                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</div><div class="line">                .addConverterFactory(GsonConverterFactory.create())</div><div class="line">                .baseUrl(BASE_URL)</div><div class="line">                .client(mBuilder.build())</div><div class="line">                .build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GankApiService <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> SingleInstance.INSTANVE;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleInstance</span></span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> GankApiService INSTANVE=<span class="keyword">new</span> GankApiService();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> GankApi <span class="title">getGankApi</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span>  mRetrofit.create(GankApi.class);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Retrofit不了解的可以看<a href="http://gank.io/post/56e80c2c677659311bed9841" target="_blank" rel="external">Retrofit + RxJava</a> <a href="https://inthecheesefactory.com/blog/retrofit-2.0/en" target="_blank" rel="external">Retrofit 2.0</a></p>
+<h3 id="实现类"><a href="#实现类" class="headerlink" title="实现类"></a>实现类</h3><h4 id="ModelImp"><a href="#ModelImp" class="headerlink" title="ModelImp"></a>ModelImp</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GankModel</span> <span class="keyword">implements</span> <span class="title">GankContract</span>.<span class="title">Model</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Observable&lt;GankPictureBean&gt; <span class="title">getGank</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span>  GankApiService.getInstance()</div><div class="line">                .getGankApi()</div><div class="line">                .getGank(<span class="number">20</span>)</div><div class="line">                .subscribeOn(SchedulerProvider.getInstance().io())</div><div class="line">                .unsubscribeOn(SchedulerProvider.getInstance().io())</div><div class="line">                .observeOn(SchedulerProvider.getInstance().ui());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的实现是和网络请求的封装结合到一块的。</p>
+<h4 id="PresenterImp"><a href="#PresenterImp" class="headerlink" title="PresenterImp"></a>PresenterImp</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span>  <span class="class"><span class="keyword">class</span> <span class="title">GankPresenter</span> <span class="keyword">extends</span> <span class="title">GankContract</span>.<span class="title">Presenter</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"GankPresenter"</span>;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getGank</span><span class="params">()</span> </span>&#123;</div><div class="line">        Subscription subscription = mModel.getGank()</div><div class="line">                .subscribe(<span class="keyword">new</span> Observer&lt;GankPictureBean&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</div><div class="line">                        Log.i(TAG, <span class="string">"onCompleted: success "</span> );</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line">                        Log.i(TAG, <span class="string">"onError: something wrong"</span>);</div><div class="line"></div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(GankPictureBean gank)</span> </span>&#123;</div><div class="line">                        mView.showGank(gank);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">        addSubscribe(subscription);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为Base中帮我们做了很好的封装，所以代码中只需要处理逻辑事件，当有订阅事件的时候直接调用addSubscribe方法，便于及时解除订阅</p>
+<h4 id="FragmentImp"><a href="#FragmentImp" class="headerlink" title="FragmentImp"></a>FragmentImp</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GankFragment</span> <span class="keyword">extends</span> <span class="title">BaseMvpFragment</span>&lt;<span class="title">GankPresenter</span>,<span class="title">GankModel</span>&gt; <span class="keyword">implements</span> <span class="title">GankContract</span>.<span class="title">View</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> RecyclerView mRecyclerView;</div><div class="line">    <span class="keyword">private</span> GankAdapter mGankAdapter;</div><div class="line">    <span class="keyword">private</span> List&lt;GankPictureBean.ResultsBean&gt;mGankList;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GankFragment <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> GankFragment();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">fragmentLogic</span><span class="params">()</span> </span>&#123;</div><div class="line">        mGankAdapter.setOnRecyclerViewItemClickListener(<span class="keyword">new</span> GankAdapter.OnRecyclerViewItemClickListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clickItem</span><span class="params">(View view, <span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">                showBigImage(mGankList.get(position).getUrl());</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        mRecyclerView.addOnScrollListener(<span class="keyword">new</span> RecyclerView.OnScrollListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrollStateChanged</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> newState)</span> </span>&#123;</div><div class="line">                <span class="keyword">super</span>.onScrollStateChanged(recyclerView, newState);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrolled</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> dx, <span class="keyword">int</span> dy)</span> </span>&#123;</div><div class="line">                <span class="keyword">super</span>.onScrolled(recyclerView, dx, dy);</div><div class="line">                <span class="keyword">if</span> (!ViewCompat.canScrollVertically(recyclerView, <span class="number">1</span>)) &#123;</div><div class="line">                    mPresenter.getGank();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChildView</span><span class="params">(View mView, Bundle b)</span> </span>&#123;</div><div class="line">        mGankList=<span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        mRecyclerView= (RecyclerView) mView.findViewById(R.id.recyclerView);</div><div class="line">        mRecyclerView.setLayoutManager(<span class="keyword">new</span> StaggeredGridLayoutManager(<span class="number">2</span>,StaggeredGridLayoutManager.VERTICAL));</div><div class="line">        mGankAdapter=<span class="keyword">new</span> GankAdapter(mGankList,getContext());</div><div class="line">        mRecyclerView.setAdapter(mGankAdapter);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">getLayoutId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> R.layout.activity_dagger;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showGank</span><span class="params">(GankPictureBean mGank)</span> </span>&#123;</div><div class="line">        mGankList.addAll(mGank.getResults());</div><div class="line">        mGankAdapter.notifyDataSetChanged();</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showBigImage</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">        BigImageDialog bigImageDialog=<span class="keyword">new</span> BigImageDialog(getContext(),R.style.Dialog,url);</div><div class="line">        bigImageDialog.show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="http://i1.piimg.com/567571/34aaca1d951aa6d5.jpg" alt=""></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/04/12/Android 架构/">MVP + Retrofit + RxJava 优雅的实现</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">dreamY</a></p>
+        <p><span>发布时间:</span>2017-04-12, 18:58:27</p>
+        <p><span>最后更新:</span>2017-04-25, 11:24:39</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/12/Android 架构/" title="MVP + Retrofit + RxJava 优雅的实现">http://lovehaodong.cn/2017/04/12/Android 架构/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://lovehaodong.cn/2017/04/12/Android 架构/　　作者: dreamY" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/04/09/RxJava RxBusTwo/">
+                    RxJava RxBus进阶(Sticky事件,异常拦截）
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/04/22/Java 注解/">
+                    Java注解
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#看看分包"><span class="toc-number">1.</span> <span class="toc-text">看看分包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Base类"><span class="toc-number">2.</span> <span class="toc-text">Base类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BaseView"><span class="toc-number">2.1.</span> <span class="toc-text">BaseView</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BaseModel"><span class="toc-number">2.2.</span> <span class="toc-text">BaseModel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BasePresenter"><span class="toc-number">2.3.</span> <span class="toc-text">BasePresenter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BaseFragment"><span class="toc-number">2.4.</span> <span class="toc-text">BaseFragment</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Contract-契约类"><span class="toc-number">3.</span> <span class="toc-text">Contract(契约类)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装网络请求"><span class="toc-number">4.</span> <span class="toc-text">封装网络请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现类"><span class="toc-number">5.</span> <span class="toc-text">实现类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ModelImp"><span class="toc-number">5.1.</span> <span class="toc-text">ModelImp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PresenterImp"><span class="toc-number">5.2.</span> <span class="toc-text">PresenterImp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FragmentImp"><span class="toc-number">5.3.</span> <span class="toc-text">FragmentImp</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#效果图"><span class="toc-number">6.</span> <span class="toc-text">效果图</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"MVP + Retrofit + RxJava 优雅的实现　| DreamY Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2131806';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/04/09/RxJava RxBusTwo/" title="上一篇: RxJava RxBus进阶(Sticky事件,异常拦截）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/04/22/Java 注解/" title="下一篇: Java注解">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/23/Java 反射/">Java反射</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/22/Java 注解/">Java注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Android 架构/">MVP + Retrofit + RxJava 优雅的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/09/RxJava RxBusTwo/">RxJava RxBus进阶(Sticky事件,异常拦截）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/03/自定义View之MotionEvent/">自定义View之MotionEvent</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/26/自定义View 网状分布图/">自定义View之网状分布图</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/19/RxJava RxJava/">RxJava RxJava基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/RxJava RxPermissions/">RxJava RxPermissions基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/14/RxJava RxLifecycle/">RxJava RxLifecycle基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/RxJava RxBus/">RxJava RxBus基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava RxBinding/">RxJava RxBinding基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/Java 并发/">Java线程安全问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava 家族/">RxJava 系列成员</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/我的2016/">我的2016总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 dreamY
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

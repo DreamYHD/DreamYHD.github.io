@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="dreamY" />
+
+
+
+<meta name="description" content="多线程的安全问题123456789101112class Ticket implements Runnable&amp;#123; private int ticket =100; public void run()&amp;#123;   while(true)&amp;#123;     if(ticket&amp;gt;0)&amp;#123;       System.out.System.out.println(ticket-">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java线程安全问题">
+<meta property="og:url" content="http://lovehaodong.cn/2017/03/11/Java 并发/index.html">
+<meta property="og:site_name" content="DreamY Blog">
+<meta property="og:description" content="多线程的安全问题123456789101112class Ticket implements Runnable&amp;#123; private int ticket =100; public void run()&amp;#123;   while(true)&amp;#123;     if(ticket&amp;gt;0)&amp;#123;       System.out.System.out.println(ticket-">
+<meta property="og:updated_time" content="2017-04-23T09:58:58.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java线程安全问题">
+<meta name="twitter:description" content="多线程的安全问题123456789101112class Ticket implements Runnable&amp;#123; private int ticket =100; public void run()&amp;#123;   while(true)&amp;#123;     if(ticket&amp;gt;0)&amp;#123;       System.out.System.out.println(ticket-">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DreamY Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Java线程安全问题 | DreamY Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/dojocat.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">dreamY</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Annotation/">Annotation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reflect/">Reflect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxJava/">RxJava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/android-nuc">NUC-Android-Lab</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">just do IT!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">dreamY</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/dojocat.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">dreamY</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Java 并发" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/11/Java 并发/" class="article-date">
+      <time datetime="2017-03-11T10:58:27.000Z" itemprop="datePublished">2017-03-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java线程安全问题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="多线程的安全问题"><a href="#多线程的安全问题" class="headerlink" title="多线程的安全问题"></a>多线程的安全问题</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ticket</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"> <span class="keyword">private</span> <span class="keyword">int</span> ticket =<span class="number">100</span>;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">   <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">     <span class="keyword">if</span>(ticket&gt;<span class="number">0</span>)&#123;</div><div class="line">       System.out.System.out.println(ticket--);</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="问题的原因"><a href="#问题的原因" class="headerlink" title="问题的原因"></a>问题的原因</h4><p>当多个线程同时获取获取cpu执行权的时候，都会执行ticket–;多条语句在操作同一个线程的时候，一个线程堆多条语句只执行了一部分，还没有执行完，另一个线程参与进来，导致共享数据</p>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>对于多条操作共享的数据的时候，只能让一个线程执行完，其他线程不可以参加执行</p>
+<h4 id="java对于多线程的安全问题提供了解决方案"><a href="#java对于多线程的安全问题提供了解决方案" class="headerlink" title="java对于多线程的安全问题提供了解决方案"></a>java对于多线程的安全问题提供了解决方案</h4><p>就是同步代码块<br>synchronized(对象){<br>  需要被同步的代码<br>}</p>
+<h4 id="对象-监视器，锁"><a href="#对象-监视器，锁" class="headerlink" title="对象(监视器，锁)"></a>对象(监视器，锁)</h4><p>判断的条件，当线程获得执行权之后执行同步代码，进入之后讲对象关闭。直到上一个线程执行完同步代码。对象打开，这个时候各个线程又开始争取执行权。eg:厕所的门把手；改之后的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ticket</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"> <span class="keyword">private</span> <span class="keyword">int</span> ticket =<span class="number">100</span>;</div><div class="line"> Object obj=<span class="keyword">new</span> Object();</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">   <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">     <span class="keyword">synchronized</span> (obj) &#123;</div><div class="line">       <span class="keyword">if</span>(ticket&gt;<span class="number">0</span>)&#123;</div><div class="line">         System.out.System.out.println(ticket--);</div><div class="line">       &#125;</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="同步的前提："><a href="#同步的前提：" class="headerlink" title="同步的前提："></a>同步的前提：</h4><ul>
+<li>必须要有两个或者两个以上的线程</li>
+<li>必须多个线程使用同一个锁</li>
+<li>必须保证同步中有一个线程在运行</li>
+</ul>
+<h4 id="好处-解决多线程同步问题"><a href="#好处-解决多线程同步问题" class="headerlink" title="好处 :解决多线程同步问题"></a>好处 :解决多线程同步问题</h4><h4 id="弊端-每次都在判定锁-消耗了资源"><a href="#弊端-每次都在判定锁-消耗了资源" class="headerlink" title="弊端 :每次都在判定锁,消耗了资源"></a>弊端 :每次都在判定锁,消耗了资源</h4>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/03/11/Java 并发/">Java线程安全问题</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">dreamY</a></p>
+        <p><span>发布时间:</span>2017-03-11, 18:58:27</p>
+        <p><span>最后更新:</span>2017-04-23, 17:58:58</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/11/Java 并发/" title="Java线程安全问题">http://lovehaodong.cn/2017/03/11/Java 并发/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://lovehaodong.cn/2017/03/11/Java 并发/　　作者: dreamY" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/03/11/RxJava 家族/">
+                    RxJava 系列成员
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/11/RxJava RxBinding/">
+                    RxJava RxBinding基础
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程的安全问题"><span class="toc-number">1.</span> <span class="toc-text">多线程的安全问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#问题的原因"><span class="toc-number">1.0.1.</span> <span class="toc-text">问题的原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决办法"><span class="toc-number">1.0.2.</span> <span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#java对于多线程的安全问题提供了解决方案"><span class="toc-number">1.0.3.</span> <span class="toc-text">java对于多线程的安全问题提供了解决方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对象-监视器，锁"><span class="toc-number">1.0.4.</span> <span class="toc-text">对象(监视器，锁)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步的前提："><span class="toc-number">1.0.5.</span> <span class="toc-text">同步的前提：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#好处-解决多线程同步问题"><span class="toc-number">1.0.6.</span> <span class="toc-text">好处 :解决多线程同步问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#弊端-每次都在判定锁-消耗了资源"><span class="toc-number">1.0.7.</span> <span class="toc-text">弊端 :每次都在判定锁,消耗了资源</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Java线程安全问题　| DreamY Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2131806';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/03/11/RxJava 家族/" title="上一篇: RxJava 系列成员">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/11/RxJava RxBinding/" title="下一篇: RxJava RxBinding基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/23/Java 反射/">Java反射</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/22/Java 注解/">Java注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Android 架构/">MVP + Retrofit + RxJava 优雅的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/09/RxJava RxBusTwo/">RxJava RxBus进阶(Sticky事件,异常拦截）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/03/自定义View之MotionEvent/">自定义View之MotionEvent</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/26/自定义View 网状分布图/">自定义View之网状分布图</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/19/RxJava RxJava/">RxJava RxJava基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/RxJava RxPermissions/">RxJava RxPermissions基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/14/RxJava RxLifecycle/">RxJava RxLifecycle基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/RxJava RxBus/">RxJava RxBus基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava RxBinding/">RxJava RxBinding基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/Java 并发/">Java线程安全问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava 家族/">RxJava 系列成员</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/我的2016/">我的2016总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 dreamY
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

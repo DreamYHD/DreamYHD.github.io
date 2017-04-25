@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="dreamY" />
+
+
+
+<meta name="description" content="整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。     寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了出来，其实现在也知道这也是这些控件的底层原理，一个没有数据结构，只用逻辑思维的简陋计算器就这么写完了，还是有">
+<meta name="keywords" content="随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的2016总结">
+<meta property="og:url" content="http://lovehaodong.cn/2017/01/01/我的2016/index.html">
+<meta property="og:site_name" content="DreamY Blog">
+<meta property="og:description" content="整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。     寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了出来，其实现在也知道这也是这些控件的底层原理，一个没有数据结构，只用逻辑思维的简陋计算器就这么写完了，还是有">
+<meta property="og:updated_time" content="2017-04-12T06:52:53.140Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的2016总结">
+<meta name="twitter:description" content="整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。     寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了出来，其实现在也知道这也是这些控件的底层原理，一个没有数据结构，只用逻辑思维的简陋计算器就这么写完了，还是有">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DreamY Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>我的2016总结 | DreamY Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/dojocat.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">dreamY</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Annotation/">Annotation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reflect/">Reflect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxJava/">RxJava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/android-nuc">NUC-Android-Lab</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">just do IT!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">dreamY</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/dojocat.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">dreamY</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:478214853@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/DreamYHD" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-我的2016" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/01/我的2016/" class="article-date">
+      <time datetime="2017-01-01T09:27:27.000Z" itemprop="datePublished">2017-01-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      我的2016总结
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/随笔/">随笔</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>   整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。<br>   <br>  寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了出来，其实现在也知道这也是这些控件的底层原理，一个没有数据结构，只用逻辑思维的简陋计算器就这么写完了，还是有很多的bug，开学之后开始《第一行代码》《Android“字典”》跟着上面一直写，也不知道自己在学什么，想要学好，但是一直没有脱坑。四月初的一个电话把我从迷茫中敲醒，学长让我给院里做一个关于四进四信的app，知道这个任务的时候一脸懵逼。因为感觉自己真的什么也不会，于是开始慢慢构思。在半个与之后，一个很简单，只有页面跳转，listview，scrollview和一写简单控件的app写了出来，自己现在想起来也是笑笑傻傻的自己。自己第一个“丑陋”的app。<br>   <br>之后就是实验室的分组首先是为了参加之后的大学生创业项目，于是乎五个可爱的人组在一起，也就是后来的知行小组，我们也没有什么想法，也就随便想了想，但是被老师给b掉了，当时几个人也是有点沮丧，因为同时大一的两外两个组都通过了。后来也就是暑假时候的我们为了准备华北五省比赛吧，暑假期间选择了回家先待一段时间，后来回学校学习，本来准备一天写一篇github的东西，但是发现好难，一方面自己没有办法全部掌握，另一方面没有办法坚持下来，可能是自己太懒惰了吧。快开学的时候也是开始跟着写比赛的东西，还记得刚刚来实验室，看到学长做出地图觉得好厉害，然后。。。。。。嘻嘻<br><br>之后的校赛答辩可以说是很幸运，也可能是秦老师自己的项目吧，我们以最后一名的身份参加省赛，也是暂时性的松了一口气，国庆假期，在实验室和小组一起写没有完成的功能，那些日子真的感觉自己快死了，一天一顿饭。不过好在写了出来。之后的模拟答辩更是惨不忍睹，至今记得秦老师站起来批评的样子，老师也是很希望我们表现更好的，于是有了我们的三次模拟答辩。省赛我们表现的很好，和一等奖只差一点点，不过也是圆了我们可以一起去北京的愿望吧，之间还有一个大一新生的面试，看着他们进来我们好像看到了曾经的自己，也是那么的稚嫩，但是却掩盖不住他们的自信，他们每一个都想成为最好的，也很努力。之后他们也表现的很好，可以说，比我们那届要好得多。希望他们明年会有很好的表现，把android实验室更好的推广出去。<br><br>去了北京之后，一方面很开心，另一方面很紧张。也许我们真的是朝着二等奖去的吧，答辩我们做得很好，对了还有我们一起去吃了好多好吃的，几个大一的小伙伴和乔神，文慧姐，阿哲学长的火锅，还有斌哥的夜宵（可以说是大学里的亲哥哥），还有实验室所有人的聚餐。最后的一等奖可以说出乎所有人意料，有点不相信，毕竟学长们都那么优秀，但也是对我们一起努力的回报吧。很开心。我们一起去了鸟巢，之前是跟着爸爸一起去的，都很开心。回来的火车上觉得过得好快，早早睡了，也是不舍得一直以来的自己突然闲下来吧。很感谢创新和小黑，我们的组长，还有小黑真的很感谢，两个一年没有回家的人，大一就这么努力我真的发自内心的佩服。可以说不是小黑，我现在挂了好几科了吧。他们都是很优秀的人很幸运，遇到了他们。每个人的方向都不一样却在android实验室相遇，都是孩子，还有对我们很好的学长学姐。为什么都是实验室的内容，我也不知道。<br>   <br>也许花了太多的时间懒惰，后半年自己没学到什么东西，只是没事的时候看看一些技术博客，但是动手实践很少，这里真的想吐槽，什么电路，大物，概率真的不想学，还有实验，我的天。在学长的推荐下自己开始去看《开发艺术探索》，在imooc上买了《android网络编程》没事的时候也是开始学习一写深入点的东西，真心觉得android基础没意思。只有涉及到源码层才是interesting。当然网络也是android学习中一个特别有意思的东西。了解了一点点前端的东西，自己的博客也把架子搭建好，嗯，这个以后放一写好干货吧。嗯，还有在网络学习的过程中避免不了的要搭服务器，每一次尝试都是新领域的打开，java设计模式，rxjava，rxAndroid，自己慢慢学习的也只有这些了，还有好多想学，真的来不及了，虽然自己现在是真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，我的2016为什么这么的快？在2016快结束的时候在“诺诺”的交流中我发现python真的好神奇啊，于是开始python的“玩耍”，当然知识基础语法现在会一点点，因为自己很心疼钱，所以把一写钱投资在imooc中，是为了提醒自己不能浪费，这些东西都要学习。还有就是自己买了一个手机嗯，原来的r7也不错，准备回家给妈妈。<br>  <br>嗯，寒假来了，在外面的孩子都可以回家了。这次回家自己不想像以前那样一直玩了，大家都长大了，那些发小很想他们，一年我们没有在一块好好玩了吧，不知道会不会聚齐。</p>
+<p>寒假的任务：<br><br>            !好好陪爸爸妈妈！<br>            1：乔神那个项目<br>            2：网络编程视频imooc<br>            3：动画视频imooc<br>            4：python基础学习<br>            5：java设计模式（android设计模式那本书）<br>            6：至少一遍开发艺术探索<br>            7：自己写一个项目<br><br>虽然理想很美好，但是现实毕竟很残酷。。。。。。。以上至少完成一半（flag：不完成直播吃屎，自己也忘了欠了多少了）<br>   <br>感谢2016遇到的每一个人，同时也感谢那些匆匆教会我东西离去的人，现实教会了我很多，也不再是那个喜欢念旧的人，现在的自己更喜欢未来的自己，爱自己，爱家人。自己还很渺小，有些承诺也只是之后的笑柄，2017我会加倍珍惜自己身边的每个人。<br>    <br>还是有些伤感，一年就这么结束，2017又会有怎样的改变呢？？？？？？？？？？？？？？？？？？？？？？？？？？？</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/01/01/我的2016/">我的2016总结</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">dreamY</a></p>
+        <p><span>发布时间:</span>2017-01-01, 17:27:27</p>
+        <p><span>最后更新:</span>2017-04-12, 14:52:53</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/01/我的2016/" title="我的2016总结">http://lovehaodong.cn/2017/01/01/我的2016/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://lovehaodong.cn/2017/01/01/我的2016/　　作者: dreamY" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/11/RxJava 家族/">
+                    RxJava 系列成员
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"我的2016总结　| DreamY Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2131806';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/11/RxJava 家族/" title="下一篇: RxJava 系列成员">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/23/Java 反射/">Java反射</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/22/Java 注解/">Java注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Android 架构/">MVP + Retrofit + RxJava 优雅的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/09/RxJava RxBusTwo/">RxJava RxBus进阶(Sticky事件,异常拦截）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/03/自定义View之MotionEvent/">自定义View之MotionEvent</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/26/自定义View 网状分布图/">自定义View之网状分布图</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/19/RxJava RxJava/">RxJava RxJava基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/RxJava RxPermissions/">RxJava RxPermissions基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/14/RxJava RxLifecycle/">RxJava RxLifecycle基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/RxJava RxBus/">RxJava RxBus基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava RxBinding/">RxJava RxBinding基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/Java 并发/">Java线程安全问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/RxJava 家族/">RxJava 系列成员</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/我的2016/">我的2016总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 dreamY
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
