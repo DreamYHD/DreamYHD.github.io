@@ -98,13 +98,13 @@
 <meta property="og:site_name" content="DreamY Blog">
 <meta property="og:description" content="开源项目https://github.com/ReactiveX/RxJava https://github.com/ReactiveX/RxAndroid 导入依赖12compile &apos;io.reactivex:rxjava:1.0.14&apos;compile &apos;io.reactivex:rxandroid:1.0.1&apos;">
 <meta property="og:image" content="http://ww3.sinaimg.cn/mw1024/52eb2279jw1f2rx46dspqj20gn04qaad.jpg">
-<meta property="og:image" content="http://p1.bqimg.com/519918/a6852ae6bec21a0e.png">
-<meta property="og:image" content="http://p1.bpimg.com/519918/154b65d79c2bbd46.png">
-<meta property="og:image" content="http://p1.bqimg.com/519918/980ff3652b29127c.png">
+<meta property="og:image" content="http://onf44qqgp.bkt.clouddn.com/17-10-30/88678203.jpg">
+<meta property="og:image" content="http://onf44qqgp.bkt.clouddn.com/17-10-30/23689914.jpg">
+<meta property="og:image" content="http://onf44qqgp.bkt.clouddn.com/17-10-30/23689914.jpg">
 <meta property="og:image" content="http://i4.buimg.com/567571/a8810a8dbcab85be.png">
 <meta property="og:image" content="http://i1.piimg.com/567571/72e86040616ce738.png">
-<meta property="og:image" content="http://i1.piimg.com/519918/0b350c8350142aff.png">
-<meta property="og:updated_time" content="2017-04-25T03:51:21.795Z">
+<meta property="og:image" content="http://onf44qqgp.bkt.clouddn.com/17-10-30/7627440.jpg">
+<meta property="og:updated_time" content="2017-10-30T10:36:28.400Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RxJava RxJava基础">
 <meta name="twitter:description" content="开源项目https://github.com/ReactiveX/RxJava https://github.com/ReactiveX/RxAndroid 导入依赖12compile &apos;io.reactivex:rxjava:1.0.14&apos;compile &apos;io.reactivex:rxandroid:1.0.1&apos;">
@@ -462,12 +462,12 @@
 <h4 id="变换操作符"><a href="#变换操作符" class="headerlink" title="变换操作符"></a>变换操作符</h4><ul>
 <li>map( )        —    对序列的每一项都应用一个函数来变换Observable发射的数据序列,把内容更新之后包装成新的Observable。</li>
 </ul>
-<p><img src="http://p1.bqimg.com/519918/a6852ae6bec21a0e.png" alt=""></p>
+<p><img src="http://onf44qqgp.bkt.clouddn.com/17-10-30/88678203.jpg" alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">    Observable.just(<span class="string">"hello"</span>,<span class="string">"android"</span>,<span class="string">"lab"</span>)</div><div class="line">              .map(<span class="keyword">new</span> Func1&lt;String, String&gt;() &#123;</div><div class="line">                  <span class="meta">@Override</span></div><div class="line">                  <span class="function"><span class="keyword">public</span> String  <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">                      <span class="keyword">return</span> s+<span class="string">" world"</span>;</div><div class="line">                  &#125;</div><div class="line">              &#125;)</div><div class="line">              .subscribe(<span class="keyword">new</span> Action1&lt;String&gt;() &#123;</div><div class="line">                  <span class="meta">@Override</span></div><div class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(String string)</span> </span>&#123;</div><div class="line">                   System.out.println(string+<span class="string">""</span>);</div><div class="line">                  &#125;</div><div class="line">              &#125;);</div><div class="line"><span class="string">"C:\Program Files\Java\jdk1.8.0_65\bin\java"</span></div><div class="line">hello world</div><div class="line">android world</div><div class="line">lab world</div><div class="line"></div><div class="line">Process finished with exit code <span class="number">0</span></div></pre></td></tr></table></figure>
 <ul>
 <li>flatMap() ——将一个发射数据的Observable变换为多个Observables，然后将它们发射的数据合并 后放进一个单独的Observable</li>
 </ul>
-<p><img src="http://p1.bpimg.com/519918/154b65d79c2bbd46.png" alt=""></p>
+<p><img src="http://onf44qqgp.bkt.clouddn.com/17-10-30/23689914.jpg" alt=""></p>
 <p>我们假设Android创新实验室分成了几个小组(groupList)，我们现在要获取每个组的每个成员名字(memberName)，我们先不使用转换操作fu来完成</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Observable.from(groupList)</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Group&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Group group)</span> </span>&#123;</div><div class="line">                        <span class="keyword">for</span> (Member member:group.getMembers()) &#123;</div><div class="line">                           Log.i(<span class="string">"RxJavaTest"</span>,member.getMemberName())</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div></pre></td></tr></table></figure>
 <p>因为map只能完成一对一的转化，我们也不希望在RxJava的流式操作中看到for循环，所以我们使用flatmap()来完成一对多的转换</p>
@@ -476,7 +476,7 @@
 <ul>
 <li>cast() ——它将源Observable中的每一项数据都转换为新的类型，把它变成了不同的Class。</li>
 </ul>
-<p><img src="http://p1.bqimg.com/519918/980ff3652b29127c.png" alt=""></p>
+<p><img src="http://onf44qqgp.bkt.clouddn.com/17-10-30/23689914.jpg" alt=""></p>
 <p>说一个和RxBus有关的东西，ofType的源码我们来看一下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> &lt;R&gt; <span class="function">Observable&lt;R&gt; <span class="title">ofType</span><span class="params">(<span class="keyword">final</span> Class&lt;R&gt; klass)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> filter(<span class="keyword">new</span> Func1&lt;T, Boolean&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Boolean <span class="title">call</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> klass.isInstance(t);</div><div class="line">            &#125;</div><div class="line">        &#125;).cast(klass);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <p>就是用filter，和cast组成的，所以给我们提供了一个自定义操作符的思路，大家也可以试试，反正我没试过~</p>
 <h4 id="组合操作符"><a href="#组合操作符" class="headerlink" title="组合操作符"></a>组合操作符</h4><ul>
@@ -495,7 +495,7 @@
 </li>
 </ul>
 <h3 id="线程调度器Scheduler"><a href="#线程调度器Scheduler" class="headerlink" title="线程调度器Scheduler"></a>线程调度器Scheduler</h3><p>“一直说RxJava是异步操作，你到现在都还没告诉我们怎么切换线程，你几个意思呀。”<br><br>“咳咳，大佬别着急，我们慢慢看”</p>
-<h4 id="先看看RxJava中可用的调度器种类"><a href="#先看看RxJava中可用的调度器种类" class="headerlink" title="先看看RxJava中可用的调度器种类"></a>先看看RxJava中可用的调度器种类</h4><p><img src="http://i1.piimg.com/519918/0b350c8350142aff.png" alt=""></p>
+<h4 id="先看看RxJava中可用的调度器种类"><a href="#先看看RxJava中可用的调度器种类" class="headerlink" title="先看看RxJava中可用的调度器种类"></a>先看看RxJava中可用的调度器种类</h4><p><img src="http://onf44qqgp.bkt.clouddn.com/17-10-30/7627440.jpg" alt=""></p>
 <p>RxAndroid中给我们添加了专用的AndroidSchedulers.mainThread()，它指定的操作将在 Android 主线程运行，也就是我们的UI线程。</p>
 <h4 id="使用ObserverOn和SubScribeOn操作符"><a href="#使用ObserverOn和SubScribeOn操作符" class="headerlink" title="使用ObserverOn和SubScribeOn操作符"></a>使用ObserverOn和SubScribeOn操作符</h4><ul>
 <li>ObserveOn：指定回调发生的线程，事件消费的线程，可以执行多次！</li>
