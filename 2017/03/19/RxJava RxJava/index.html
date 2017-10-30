@@ -99,12 +99,12 @@
 <meta property="og:description" content="开源项目https://github.com/ReactiveX/RxJava https://github.com/ReactiveX/RxAndroid 导入依赖12compile &apos;io.reactivex:rxjava:1.0.14&apos;compile &apos;io.reactivex:rxandroid:1.0.1&apos;">
 <meta property="og:image" content="http://ww3.sinaimg.cn/mw1024/52eb2279jw1f2rx46dspqj20gn04qaad.jpg">
 <meta property="og:image" content="http://onf44qqgp.bkt.clouddn.com/17-10-30/88678203.jpg">
-<meta property="og:image" content="http://onf44qqgp.bkt.clouddn.com/17-10-30/23689914.jpg">
+<meta property="og:image" content="http://onf44qqgp.bkt.clouddn.com/17-10-30/82048371.jpg">
 <meta property="og:image" content="http://onf44qqgp.bkt.clouddn.com/17-10-30/23689914.jpg">
 <meta property="og:image" content="http://i4.buimg.com/567571/a8810a8dbcab85be.png">
 <meta property="og:image" content="http://i1.piimg.com/567571/72e86040616ce738.png">
 <meta property="og:image" content="http://onf44qqgp.bkt.clouddn.com/17-10-30/7627440.jpg">
-<meta property="og:updated_time" content="2017-10-30T10:36:28.400Z">
+<meta property="og:updated_time" content="2017-10-30T12:54:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RxJava RxJava基础">
 <meta name="twitter:description" content="开源项目https://github.com/ReactiveX/RxJava https://github.com/ReactiveX/RxAndroid 导入依赖12compile &apos;io.reactivex:rxjava:1.0.14&apos;compile &apos;io.reactivex:rxandroid:1.0.1&apos;">
@@ -467,7 +467,7 @@
 <ul>
 <li>flatMap() ——将一个发射数据的Observable变换为多个Observables，然后将它们发射的数据合并 后放进一个单独的Observable</li>
 </ul>
-<p><img src="http://onf44qqgp.bkt.clouddn.com/17-10-30/23689914.jpg" alt=""></p>
+<p><img src="http://onf44qqgp.bkt.clouddn.com/17-10-30/82048371.jpg" alt=""></p>
 <p>我们假设Android创新实验室分成了几个小组(groupList)，我们现在要获取每个组的每个成员名字(memberName)，我们先不使用转换操作fu来完成</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Observable.from(groupList)</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Group&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Group group)</span> </span>&#123;</div><div class="line">                        <span class="keyword">for</span> (Member member:group.getMembers()) &#123;</div><div class="line">                           Log.i(<span class="string">"RxJavaTest"</span>,member.getMemberName())</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div></pre></td></tr></table></figure>
 <p>因为map只能完成一对一的转化，我们也不希望在RxJava的流式操作中看到for循环，所以我们使用flatmap()来完成一对多的转换</p>
