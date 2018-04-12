@@ -1,0 +1,964 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java，Android面试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="异常类Java中处理异常的两种方式 捕获异常：就地解决，并使程序继续执行 //积极的处理方式 当Java运行时系统得到一个异常对象时，他将会沿着方法的调用栈逐层回溯，寻找处理这一异常的代码。找到能够处理这种类型的异常的方法后，运行时系统把当前的异常对象交给这个异常方法后，这一过程称为捕获(catch)异常。如果Java运行时系统找不到可以捕获异常的方法，则运行时系统中将终止，相应的Java程序也">
+<meta name="keywords" content="Java，Android面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java异常机制">
+<meta property="og:url" content="http://lovehaodong.cn/2018/04/11/Java异常/index.html">
+<meta property="og:site_name" content="DreamY Blog">
+<meta property="og:description" content="异常类Java中处理异常的两种方式 捕获异常：就地解决，并使程序继续执行 //积极的处理方式 当Java运行时系统得到一个异常对象时，他将会沿着方法的调用栈逐层回溯，寻找处理这一异常的代码。找到能够处理这种类型的异常的方法后，运行时系统把当前的异常对象交给这个异常方法后，这一过程称为捕获(catch)异常。如果Java运行时系统找不到可以捕获异常的方法，则运行时系统中将终止，相应的Java程序也">
+<meta property="og:image" content="http://img.blog.csdn.net/20170323190427885?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSm9raTIzMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170323211705302?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSm9raTIzMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-04-12T09:07:02.469Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java异常机制">
+<meta name="twitter:description" content="异常类Java中处理异常的两种方式 捕获异常：就地解决，并使程序继续执行 //积极的处理方式 当Java运行时系统得到一个异常对象时，他将会沿着方法的调用栈逐层回溯，寻找处理这一异常的代码。找到能够处理这种类型的异常的方法后，运行时系统把当前的异常对象交给这个异常方法后，这一过程称为捕获(catch)异常。如果Java运行时系统找不到可以捕获异常的方法，则运行时系统中将终止，相应的Java程序也">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170323190427885?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSm9raTIzMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lovehaodong.cn/2018/04/11/Java异常/"/>
+
+
+
+
+
+  <title>Java异常机制 | DreamY Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DreamY Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lovehaodong.cn/2018/04/11/Java异常/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dreamY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DreamY Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java异常机制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T18:58:27+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/11/Java异常/" class="leancloud_visitors" data-flag-title="Java异常机制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h1 id="异常类"><a href="#异常类" class="headerlink" title="异常类"></a>异常类</h1><h2 id="Java中处理异常的两种方式"><a href="#Java中处理异常的两种方式" class="headerlink" title="Java中处理异常的两种方式"></a>Java中处理异常的两种方式</h2><ul>
+<li>捕获异常：就地解决，并使程序继续执行 <code>//积极的处理方式</code><blockquote>
+<p>当Java运行时系统得到一个异常对象时，他将会沿着方法的<code>调用栈</code>逐层回溯，寻找处理这一异常的代码。找到能够处理这种类型的异常的方法后，运行时系统把当前的异常对象交给这个异常方法后，这一过程称为捕获(catch)异常。如果Java运行时系统找不到可以捕获异常的方法，则运行时系统中将终止，相应的Java程序也将退出。</p>
+</blockquote>
+</li>
+<li>声明抛弃异常：将异常抛出方法之外，由调用该方法的环境去处理 <code>//消极的处理方式</code><blockquote>
+<p>如果在一个方法中生成了一个异常，但是这一方法并不确切地知道该如何对这一异常事件进行处理，这时，一个方法就应该声明抛弃异常，使得异常对象可以从调用栈向后传播，直到有合适的方法捕获它为止。</p>
+<!-- more -->
+<h2 id="Java中预定义的异常类"><a href="#Java中预定义的异常类" class="headerlink" title="Java中预定义的异常类"></a>Java中预定义的异常类</h2><p><img src="http://img.blog.csdn.net/20170323190427885?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSm9raTIzMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="预定义的异常类"></p>
+<h3 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h3><p>Error标识不可能或难以恢复的严重问题，例如内存不足，程序一般不处理这类情况。</p>
+<h3 id="RuntimeException"><a href="#RuntimeException" class="headerlink" title="RuntimeException"></a>RuntimeException</h3><p>RuntimeException指示设计或实现上的问题，如果程序正确运行，这样的情况是不应该出现的。</p>
+<h4 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h4></blockquote>
+</li>
+<li>NullPointException–空指针异常</li>
+<li>ArrayIndexOutOfBoundsException–数据越界异常</li>
+<li>NegativeArraySizeException–数组负下标异常</li>
+<li>ArithmeticException–算数异常类</li>
+<li>ClassCastException–算数运算异常</li>
+<li>IllegalArgumentException–传递非法参数异常</li>
+<li>ArrayStoreException–向数组中存放与数组类型不符元素异常</li>
+<li>NumberFormatException–数字格式异常</li>
+<li>SecurityException–安全异常</li>
+<li>UnsupportedOperationException–不支持的操作异常<h3 id="try-catch语句"><a href="#try-catch语句" class="headerlink" title="try-catch语句"></a>try-catch语句</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">        <span class="comment">//打开文件</span></div><div class="line">        <span class="comment">//判断大小</span></div><div class="line">        <span class="comment">//分配内存</span></div><div class="line">        <span class="comment">//读入内存</span></div><div class="line">        <span class="comment">//关掉文件</span></div><div class="line">    &#125;<span class="keyword">catch</span>(<span class="comment">/*文件打开失败*/</span>)&#123;</div><div class="line">        <span class="comment">//处理代码</span></div><div class="line">    &#125;<span class="keyword">catch</span>(<span class="comment">/*大小取值失败*/</span>)&#123;</div><div class="line">        <span class="comment">//处理代码</span></div><div class="line">    &#125;<span class="keyword">catch</span>(<span class="comment">/*内存分配失败*/</span>)&#123;</div><div class="line">        <span class="comment">//处理代码</span></div><div class="line">    &#125;<span class="keyword">catch</span>(<span class="comment">/*读取失败*/</span>)&#123;</div><div class="line">        <span class="comment">//处理代码</span></div><div class="line">    &#125;<span class="keyword">catch</span>(<span class="comment">/*关闭文件失败*/</span>)&#123;</div><div class="line">        <span class="comment">//处理代码</span></div><div class="line">    &#125;<span class="keyword">finally</span>&#123;</div><div class="line">    <span class="comment">//总是执行的代码,即使碰到return也执行finally后才return,除非遇到System.exit()，程序会立刻退出  </span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="throw-throws抛出异常"><a href="#throw-throws抛出异常" class="headerlink" title="throw/throws抛出异常"></a>throw/throws抛出异常</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//抛出的对象必须是Throwable的子类</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">read</span> <span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">                ......</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> <span class="keyword">throws</span> IOException, IndexOutOfBoundsException </span>&#123;</div><div class="line">                ······</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="堆栈调用机制"><a href="#堆栈调用机制" class="headerlink" title="堆栈调用机制"></a>堆栈调用机制</h3><ul>
+<li>如果一个try-catch块中没有处理，那么将会抛向此方法的调用者</li>
+<li>如果一个异常回到main方法，而且也没有处理，那么程序终将终止<br><img src="http://img.blog.csdn.net/20170323211705302?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSm9raTIzMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="堆栈处理机制"><h2 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a>自定义异常类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MydateException</span> <span class="keyword">extends</span> <span class="title">Exception</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> String reason;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MydateException</span><span class="params">(String r)</span></span>&#123;</div><div class="line">        reason = r;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getReason</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> reason;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mydate</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> year,month,day;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setDate</span><span class="params">(<span class="keyword">int</span> year,<span class="keyword">int</span> month,<span class="keyword">int</span> day)</span> <span class="keyword">throws</span> MydateException</span>&#123;</div><div class="line">        <span class="keyword">if</span>(day&gt;<span class="number">31</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> MydateException(<span class="string">"day too big"</span>);</div><div class="line">        <span class="keyword">this</span>.year = year;</div><div class="line">        <span class="keyword">this</span>.month = month;</div><div class="line">        <span class="keyword">this</span>.day = day;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        Mydate t = <span class="keyword">new</span> Mydate();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            t.setDate(<span class="number">2001</span>,<span class="number">1</span>,<span class="number">100</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (MydateException e)&#123;</div><div class="line">            System.out.println(e.getReason());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="问答题-："><a href="#问答题-：" class="headerlink" title="问答题 ："></a>问答题 ：</h3><p>问：请简单描述下面方法的执行流程和最终返回值是多少？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;<span class="keyword">finally</span> &#123;</div><div class="line">        ret = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">int</span> a = <span class="number">5</span> / <span class="number">0</span> ;</div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;<span class="keyword">finally</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">int</span> a = <span class="number">5</span> / <span class="number">0</span>;</div><div class="line">    &#125;<span class="keyword">finally</span> &#123;</div><div class="line"></div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"hello"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>答：本题旨在考察 try-catch-finally 块的用法踩坑经验，具体解析如下。<br></p>
+<p>test1 方法运行返回 0，因为执行到 try 的 return ret; 语句前会先将返回值 ret 保存在一个临时变量中，然后才执行 finally 语句，最后 try 再返回那个临时变量，finally 中对 ret 的修改不会被返回。<br></p>
+<p>test2 方法运行返回 2，因为 5/0 会触发 ArithmeticException 异常，但是 finally 中有 return 语句，finally 中 return 不仅会覆盖 try 和 catch 内的返回值且还会掩盖 try 和 catch 内的异常，就像异常没有发生一样（特别注意，当 finally 中没有 return 时该方法运行会抛出 ArithmeticException 异常），所以这个方法就会返回 2，而且不再向上传递异常了。<br></p>
+<p>test3 方法运行抛出 hello 异常，因为如果 finally 中抛出了异常，则原异常就会被掩盖。<br></p>
+<p>因此为避免代码逻辑混淆，我们应该避免在 finally 中使用 return 语句或者抛出异常，如果调用的其他代码可能抛出异常，则应该捕获异常并进行处理。<br></p>
+<p>问：如果执行 finally 代码块之前方法返回了结果或者 JVM 退出了，这时 finally 块中的代码还会执行吗？<br></p>
+<p>答：只有在 try 里面通过 System.exit(0) 来退出 JVM 的情况下 finally 块中的代码才不会执行，其他 return 等情况都会调用，所以在不终止 JVM 的情况下 finally 中的代码一定会执行。<br></p>
+<p>问：java 中 finally 块一定会执行吗？<br></p>
+<p>答：不一定，分情况。因为首先想要执行 finally 块的前提是必须执行到了 try 块，当在 try 块或者 catch 块中有 System.exit(0); 这样的语句存在时 finally 块就不会被执行到了，因为程序被结束了。此外当在 try 块或者 catch 块里 return 时 finally 会被执行；而且 finally 块里 return 语句会把 try 块或者 catch 块里的 return 语句效果给覆盖掉且吞掉了异常。<br></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/wechat.png" alt="dreamY wechat" style="width: 200px; max-width: 100%;"/>
+    <div>可以的话加我好友一起学习~</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java，Android面试/" rel="tag"># Java，Android面试</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/10/HashMap/" rel="prev" title="HashMap面试">
+                HashMap面试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="dreamY" />
+          <p class="site-author-name" itemprop="name">dreamY</p>
+           
+              <p class="site-description motion-element" itemprop="description">It'is not a bug,it's a feature.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/android-nuc" target="_blank" title="AndroidLab">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  AndroidLab
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DreamYHD" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5686028898?refer_flag=1001030201_" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异常类"><span class="nav-number">1.</span> <span class="nav-text">异常类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java中处理异常的两种方式"><span class="nav-number">1.1.</span> <span class="nav-text">Java中处理异常的两种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java中预定义的异常类"><span class="nav-number">1.2.</span> <span class="nav-text">Java中预定义的异常类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Error"><span class="nav-number">1.2.1.</span> <span class="nav-text">Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RuntimeException"><span class="nav-number">1.2.2.</span> <span class="nav-text">RuntimeException</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见异常"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">常见异常</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#try-catch语句"><span class="nav-number">1.2.3.</span> <span class="nav-text">try-catch语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#throw-throws抛出异常"><span class="nav-number">1.2.4.</span> <span class="nav-text">throw/throws抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆栈调用机制"><span class="nav-number">1.2.5.</span> <span class="nav-text">堆栈调用机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义异常类"><span class="nav-number">1.3.</span> <span class="nav-text">自定义异常类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问答题-："><span class="nav-number">1.3.1.</span> <span class="nav-text">问答题 ：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dreamY</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+</span>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131806"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("5EcbaBq9sSEPHouiPc8oaHJU-gzGzoHsz", "pNtWgPPY3l03ih9qCrJr3VSN");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
