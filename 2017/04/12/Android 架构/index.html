@@ -90,19 +90,19 @@
 
 
 
-<meta name="description" content="推荐大家先看下一个学长的google mvp解读网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,传送门">
+<meta name="description" content="推荐大家先看下一个学长的google mvp解读网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,传送门 看看分包其实是按照功能分包，大家可以按照自己的习惯来">
 <meta name="keywords" content="RxJava,Android,Retrofit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MVP + Retrofit + RxJava 优雅的实现">
 <meta property="og:url" content="http://lovehaodong.cn/2017/04/12/Android 架构/index.html">
 <meta property="og:site_name" content="Einsame Blog">
-<meta property="og:description" content="推荐大家先看下一个学长的google mvp解读网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,传送门">
+<meta property="og:description" content="推荐大家先看下一个学长的google mvp解读网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,传送门 看看分包其实是按照功能分包，大家可以按照自己的习惯来">
 <meta property="og:image" content="http://i1.piimg.com/567571/517bbf6120edbf81.png">
 <meta property="og:image" content="http://i1.piimg.com/567571/34aaca1d951aa6d5.jpg">
-<meta property="og:updated_time" content="2017-05-20T14:28:25.710Z">
+<meta property="og:updated_time" content="2018-04-13T04:03:57.088Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVP + Retrofit + RxJava 优雅的实现">
-<meta name="twitter:description" content="推荐大家先看下一个学长的google mvp解读网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,传送门">
+<meta name="twitter:description" content="推荐大家先看下一个学长的google mvp解读网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,传送门 看看分包其实是按照功能分包，大家可以按照自己的习惯来">
 <meta name="twitter:image" content="http://i1.piimg.com/567571/517bbf6120edbf81.png">
 
 
@@ -385,8 +385,8 @@
       
 
       
-        <p>推荐大家先看下一个学长的<a href="http://songning.me/2016/11/03/google-rxjava-mvp/" target="_blank" rel="external">google mvp解读</a><br>网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,<a href="https://github.com/DreamYHD/DaggerMvpDemo/tree/master/app/src/main/java/com/androidlab/daggermvpdemo" target="_blank" rel="external">传送门</a><br><a id="more"></a></p>
-<h3 id="看看分包"><a href="#看看分包" class="headerlink" title="看看分包"></a>看看分包</h3><p><img src="http://i1.piimg.com/567571/517bbf6120edbf81.png" alt=""><br>其实是按照功能分包，大家可以按照自己的习惯来</p>
+        <p>推荐大家先看下一个学长的<a href="http://songning.me/2016/11/03/google-rxjava-mvp/" target="_blank" rel="external">google mvp解读</a><br>网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,<a href="https://github.com/DreamYHD/DaggerMvpDemo/tree/master/app/src/main/java/com/androidlab/daggermvpdemo" target="_blank" rel="external">传送门</a></p>
+<h3 id="看看分包"><a href="#看看分包" class="headerlink" title="看看分包"></a>看看分包</h3><p><img src="http://i1.piimg.com/567571/517bbf6120edbf81.png" alt=""><br>其实是按照功能分包，大家可以按照自己的习惯来<br><a id="more"></a></p>
 <h3 id="Base类"><a href="#Base类" class="headerlink" title="Base类"></a>Base类</h3><h4 id="BaseView"><a href="#BaseView" class="headerlink" title="BaseView"></a>BaseView</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseView</span></span>&#123;</div><div class="line"> <span class="comment">//可以按照自己的需求添加</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="BaseModel"><a href="#BaseModel" class="headerlink" title="BaseModel"></a>BaseModel</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseModel</span> </span>&#123;</div><div class="line"><span class="comment">//可以按照自己的需求添加</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="BasePresenter"><a href="#BasePresenter" class="headerlink" title="BasePresenter"></a>BasePresenter</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BasePresenter</span>&lt;<span class="title">V</span> <span class="keyword">extends</span> <span class="title">BaseView</span> ,<span class="title">M</span> <span class="keyword">extends</span> <span class="title">BaseModel</span>&gt;</span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"BasePresenter"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span>  V mView;</div><div class="line">    <span class="keyword">protected</span>  M mModel;</div><div class="line">    <span class="keyword">private</span> CompositeSubscription mSubscription;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(V mView,M mModel)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.mView==<span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">this</span>.mView=mView;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.mModel==<span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">this</span>.mModel=mModel;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">addSubscribe</span><span class="params">(Subscription subscription)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mSubscription == <span class="keyword">null</span>) &#123;</div><div class="line">            mSubscription = <span class="keyword">new</span> CompositeSubscription();</div><div class="line">        &#125;</div><div class="line">        mSubscription.add(subscription);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">deatch</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mView!=<span class="keyword">null</span>)&#123;</div><div class="line">            mView=<span class="keyword">null</span>;</div><div class="line">            Log.e(TAG, <span class="string">"unSubscribe: view null"</span> );</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mSubscription != <span class="keyword">null</span> &amp;&amp; mSubscription.hasSubscriptions()) &#123;</div><div class="line">            mSubscription.clear();</div><div class="line">            Log.e(TAG, <span class="string">"unSubscribe: mSubscription null"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -540,7 +540,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -562,7 +562,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

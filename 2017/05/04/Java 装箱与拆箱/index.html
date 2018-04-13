@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="Java拆箱和装箱使用包装器类和装箱包装器类的主要用途为基本类型提供分类功能，这些功能中的大多数与各种转换相关：如在基本类型之间与String对象进行转换。">
+<meta name="description" content="Java拆箱和装箱使用包装器类和装箱包装器类的主要用途为基本类型提供分类功能，这些功能中的大多数与各种转换相关：如在基本类型之间与String对象进行转换。 创建包装器对象除了Character之外，所有的包装器都提供两个构造函数一个是基本类型，另一个就是字符串，如：">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java装箱与拆箱">
 <meta property="og:url" content="http://lovehaodong.cn/2017/05/04/Java 装箱与拆箱/index.html">
 <meta property="og:site_name" content="Einsame Blog">
-<meta property="og:description" content="Java拆箱和装箱使用包装器类和装箱包装器类的主要用途为基本类型提供分类功能，这些功能中的大多数与各种转换相关：如在基本类型之间与String对象进行转换。">
-<meta property="og:updated_time" content="2017-05-04T14:01:55.465Z">
+<meta property="og:description" content="Java拆箱和装箱使用包装器类和装箱包装器类的主要用途为基本类型提供分类功能，这些功能中的大多数与各种转换相关：如在基本类型之间与String对象进行转换。 创建包装器对象除了Character之外，所有的包装器都提供两个构造函数一个是基本类型，另一个就是字符串，如：">
+<meta property="og:updated_time" content="2018-04-13T04:03:57.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java装箱与拆箱">
-<meta name="twitter:description" content="Java拆箱和装箱使用包装器类和装箱包装器类的主要用途为基本类型提供分类功能，这些功能中的大多数与各种转换相关：如在基本类型之间与String对象进行转换。">
+<meta name="twitter:description" content="Java拆箱和装箱使用包装器类和装箱包装器类的主要用途为基本类型提供分类功能，这些功能中的大多数与各种转换相关：如在基本类型之间与String对象进行转换。 创建包装器对象除了Character之外，所有的包装器都提供两个构造函数一个是基本类型，另一个就是字符串，如：">
 
 
 
@@ -382,8 +382,8 @@
       
 
       
-        <h2 id="Java拆箱和装箱"><a href="#Java拆箱和装箱" class="headerlink" title="Java拆箱和装箱"></a>Java拆箱和装箱</h2><h3 id="使用包装器类和装箱"><a href="#使用包装器类和装箱" class="headerlink" title="使用包装器类和装箱"></a>使用包装器类和装箱</h3><h4 id="包装器类的主要用途"><a href="#包装器类的主要用途" class="headerlink" title="包装器类的主要用途"></a>包装器类的主要用途</h4><p>为基本类型提供分类功能，这些功能中的大多数与各种转换相关：如在基本类型之间与String对象进行转换。<br><a id="more"></a></p>
-<h4 id="创建包装器对象"><a href="#创建包装器对象" class="headerlink" title="创建包装器对象"></a>创建包装器对象</h4><p>除了Character之外，所有的包装器都提供两个构造函数<br>一个是基本类型，另一个就是字符串，如：</p>
+        <h2 id="Java拆箱和装箱"><a href="#Java拆箱和装箱" class="headerlink" title="Java拆箱和装箱"></a>Java拆箱和装箱</h2><h3 id="使用包装器类和装箱"><a href="#使用包装器类和装箱" class="headerlink" title="使用包装器类和装箱"></a>使用包装器类和装箱</h3><h4 id="包装器类的主要用途"><a href="#包装器类的主要用途" class="headerlink" title="包装器类的主要用途"></a>包装器类的主要用途</h4><p>为基本类型提供分类功能，这些功能中的大多数与各种转换相关：如在基本类型之间与String对象进行转换。</p>
+<h4 id="创建包装器对象"><a href="#创建包装器对象" class="headerlink" title="创建包装器对象"></a>创建包装器对象</h4><p>除了Character之外，所有的包装器都提供两个构造函数<br>一个是基本类型，另一个就是字符串，如：<br><a id="more"></a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Integer i1 = <span class="keyword">new</span> Integer(<span class="number">10</span>);</div><div class="line">Integer i2 = <span class="keyword">new</span> Integer(<span class="string">"10"</span>);</div><div class="line">Character类只提供一种构造函数</div><div class="line">Character c1 = <span class="keyword">new</span> Character(<span class="string">'a'</span>);</div></pre></td></tr></table></figure>
 <p>Boolean包装器的构造函数可以是带有bollean值true或false，或者一个不区分大小写”true”或是“false”但是需要注意的一点是如下代码:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Bollean flag = <span class="keyword">new</span> Bollean(<span class="string">"true"</span>);</div><div class="line">        <span class="keyword">if</span>(flag)</div><div class="line">       &#123;</div><div class="line">       &#125;</div></pre></td></tr></table></figure>
@@ -457,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/15/resume/" rel="next" title="个人简历">
-                <i class="fa fa-chevron-left"></i> 个人简历
+              <a href="/2018/04/10/HashMap/" rel="next" title="HashMap面试">
+                <i class="fa fa-chevron-left"></i> HashMap面试
               </a>
             
           </div>
@@ -543,7 +543,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -565,7 +565,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
