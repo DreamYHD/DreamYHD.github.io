@@ -157,6 +157,7 @@
       url: 'https://api.github.com/users/dreamyhd/repos',
       success: function (data) {
         var repos = data.sort(function(a, b) {
+          return (b.description.startwith("项目"))
         }).slice(0, 6)
         var cardHtml = repos.map(function(item) {
           var description = item.description || ""
