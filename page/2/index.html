@@ -1,1974 +1,406 @@
-<!doctype html>
-
-
-
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="It&#39;is not a bug,it&#39;s a feature.">
+  <meta name="keyword" content="hexo-theme, vuejs">
   
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <link rel="shortcut icon" href="/css/images/logo.png">
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
+  <title>
     
+      Einsame Blog
     
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
   
 
-  
 
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="It&apos;is not a bug,it&apos;s a feature.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Einsame Blog">
-<meta property="og:url" content="http://dreamyhd.github.io/page/2/index.html">
-<meta property="og:site_name" content="Einsame Blog">
-<meta property="og:description" content="It&apos;is not a bug,it&apos;s a feature.">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Einsame Blog">
-<meta name="twitter:description" content="It&apos;is not a bug,it&apos;s a feature.">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://dreamyhd.github.io/page/2/"/>
-
-
-
-
-
-  <title>Einsame Blog</title>
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-   page-home 
- ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Einsame Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
 </div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Einsame Blog</span>
+    </a>
+    <ul class="right-list">
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
         </li>
       
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
         </li>
       
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
         </li>
       
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
         </li>
-      
-
       
     </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/03/26/自定义View 网状分布图/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Einsame">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Einsame Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
         
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
         
-          <h1 class="post-title" itemprop="name headline">
+          <li class="menu-item">
             
+              <a href="/tags/" class="menu-link">Tags</a>
             
-              
-                
-                <a class="post-title-link" href="/2017/03/26/自定义View 网状分布图/" itemprop="url">
-                  自定义View之网状分布图
-                </a>
-              
-            
-          </h1>
+          </li>
         
-
-        <div class="post-meta">
-          <span class="post-time">
+          <li class="menu-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T18:40:27+08:00">
-                2017-03-26
-              </time>
+              <a href="/archives/" class="menu-link">Archives</a>
             
-
+          </li>
+        
+          <li class="menu-item">
             
-
+              <a href="/project/" class="menu-link">Projects</a>
             
-          </span>
-
-          
-            <span class="post-category" >
+          </li>
+        
+          <li class="menu-item">
             
-              <span class="post-meta-divider">|</span>
+              <a href="/about/" class="menu-link">About</a>
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
 
-                
-                
-              
-            </span>
-          
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/03/26/自定义View 网状分布图/">自定义View之网状分布图</a>
+      </h2>
+      <p class="article-date">March 26, 2017</p>
+      
+        
+  <a href="/tags#Android" >
+    <span class="tag-code">Android</span>
+  </a>
 
-          
-            
-          
-
-          
-          
-             <span id="/2017/03/26/自定义View 网状分布图/" class="leancloud_visitors" data-flag-title="自定义View之网状分布图">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
+  <a href="/tags#自定义View" >
+    <span class="tag-code">自定义View</span>
+  </a>
 
       
-      
-
-      
+      <div class="article-summary">
         
           <p><img src="http://onf44qqgp.bkt.clouddn.com/17-3-26/97790552-file_1490525273963_ac3c.png" alt=""><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/26/自定义View 网状分布图/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
+      </div>
+      <a class="more" href="/2017/03/26/自定义View 网状分布图/">Read more</a>
+    </article>
   
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/03/19/RxJava RxJava/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Einsame">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Einsame Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/03/19/RxJava RxJava/">RxJava RxJava基础</a>
+      </h2>
+      <p class="article-date">March 19, 2017</p>
+      
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/19/RxJava RxJava/" itemprop="url">
-                  RxJava RxJava基础
-                </a>
-              
-            
-          </h1>
-        
+  <a href="/tags#RxJava" >
+    <span class="tag-code">RxJava</span>
+  </a>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-19T21:44:27+08:00">
-                2017-03-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/03/19/RxJava RxJava/" class="leancloud_visitors" data-flag-title="RxJava RxJava基础">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
+  <a href="/tags#Android" >
+    <span class="tag-code">Android</span>
+  </a>
 
       
-      
-
-      
+      <div class="article-summary">
         
           <h3 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h3><p><a href="https://github.com/ReactiveX/RxJava">https://github.com/ReactiveX/RxJava</a></p>
 <p><a href="https://github.com/ReactiveX/RxAndroid">https://github.com/ReactiveX/RxAndroid</a></p>
 <h3 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'io.reactivex:rxjava:1.0.14'</span></div><div class="line">compile <span class="string">'io.reactivex:rxandroid:1.0.1'</span></div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/19/RxJava RxJava/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
+      </div>
+      <a class="more" href="/2017/03/19/RxJava RxJava/">Read more</a>
+    </article>
   
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/03/16/RxJava RxPermissions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Einsame">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Einsame Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/03/16/RxJava RxPermissions/">RxJava RxPermissions基础</a>
+      </h2>
+      <p class="article-date">March 16, 2017</p>
+      
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/16/RxJava RxPermissions/" itemprop="url">
-                  RxJava RxPermissions基础
-                </a>
-              
-            
-          </h1>
-        
+  <a href="/tags#RxJava" >
+    <span class="tag-code">RxJava</span>
+  </a>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-16T21:38:27+08:00">
-                2017-03-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/03/16/RxJava RxPermissions/" class="leancloud_visitors" data-flag-title="RxJava RxPermissions基础">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
+  <a href="/tags#Android" >
+    <span class="tag-code">Android</span>
+  </a>
 
       
-      
-
-      
+      <div class="article-summary">
         
           <h3 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h3><p>RxPermissions地址：<a href="https://github.com/tbruyelle/RxPermissions">https://github.com/tbruyelle/RxPermissions</a></p>
 <h3 id="build-gradle"><a href="#build-gradle" class="headerlink" title="build.gradle"></a>build.gradle</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">    jcenter() <span class="comment">// If not already there</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    compile <span class="string">'com.tbruyelle.rxpermissions:rxpermissions:0.9.3@aar'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>不了解6.0权限问题可以参考</p>
 <p><a href="http://gudong.name/%E6%8A%80%E6%9C%AF/2015/11/10/android_m_permission.html">咕咚大神的博客</a><br>先看官方的Sample(看完下面的再看这个会更清晰哦~)<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/16/RxJava RxPermissions/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
+      </div>
+      <a class="more" href="/2017/03/16/RxJava RxPermissions/">Read more</a>
+    </article>
   
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/03/14/RxJava RxLifecycle/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Einsame">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Einsame Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/03/14/RxJava RxLifecycle/">RxJava RxLifecycle基础</a>
+      </h2>
+      <p class="article-date">March 14, 2017</p>
+      
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/14/RxJava RxLifecycle/" itemprop="url">
-                  RxJava RxLifecycle基础
-                </a>
-              
-            
-          </h1>
-        
+  <a href="/tags#RxJava" >
+    <span class="tag-code">RxJava</span>
+  </a>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-14T21:44:27+08:00">
-                2017-03-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/03/14/RxJava RxLifecycle/" class="leancloud_visitors" data-flag-title="RxJava RxLifecycle基础">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
+  <a href="/tags#Android" >
+    <span class="tag-code">Android</span>
+  </a>
 
       
-      
-
-      
+      <div class="article-summary">
         
           <h4 id="在前面的文章中我们没有处理过解除订阅的问题，因此会导致大量的内存泄漏，我也没有提到，因为这篇文章要说的东西帮助我们很好的解决了这个问题"><a href="#在前面的文章中我们没有处理过解除订阅的问题，因此会导致大量的内存泄漏，我也没有提到，因为这篇文章要说的东西帮助我们很好的解决了这个问题" class="headerlink" title="在前面的文章中我们没有处理过解除订阅的问题，因此会导致大量的内存泄漏，我也没有提到，因为这篇文章要说的东西帮助我们很好的解决了这个问题"></a>在前面的文章中我们没有处理过解除订阅的问题，因此会导致大量的内存泄漏，我也没有提到，因为这篇文章要说的东西帮助我们很好的解决了这个问题</h4><h4 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h4><p>RxLifecycle 地址：<a href="https://github.com/trello/RxLifecycle">https://github.com/trello/RxLifecycle</a></p>
 <h4 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.trello:rxlifecycle:0.3.1'</span></div><div class="line">compile <span class="string">'com.trello:rxlifecycle-components:0.3.1'</span></div></pre></td></tr></table></figure>
 <p>RxLifecycle为我们提供了可以直接继承的RxAppCompatActivity，RxActivity，RxFragment,RxDialogFragment等等，可以很方便的让组件生命周期和Rx生命周期绑定。</p>
 <h4 id="我们直接观看官方的demo"><a href="#我们直接观看官方的demo" class="headerlink" title="我们直接观看官方的demo"></a>我们直接观看官方的demo</h4>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/14/RxJava RxLifecycle/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
+      </div>
+      <a class="more" href="/2017/03/14/RxJava RxLifecycle/">Read more</a>
+    </article>
   
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/03/13/RxJava RxBus/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Einsame">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Einsame Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/03/13/RxJava RxBus/">RxJava RxBus基础</a>
+      </h2>
+      <p class="article-date">March 13, 2017</p>
+      
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/13/RxJava RxBus/" itemprop="url">
-                  RxJava RxBus基础
-                </a>
-              
-            
-          </h1>
-        
+  <a href="/tags#RxJava" >
+    <span class="tag-code">RxJava</span>
+  </a>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-13T15:41:27+08:00">
-                2017-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/03/13/RxJava RxBus/" class="leancloud_visitors" data-flag-title="RxJava RxBus基础">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
+  <a href="/tags#Android" >
+    <span class="tag-code">Android</span>
+  </a>
 
       
-      
-
-      
+      <div class="article-summary">
         
           <h3 id="RxBus是什么"><a href="#RxBus是什么" class="headerlink" title="RxBus是什么?"></a>RxBus是什么?</h3><p>一个基于RxJava的事件总线，我们可以使用它来进行组件,模块之间的“复杂”通信，线程之间的数据传递，减少广播的使用和接口的回调。</p>
 <h3 id="为什么要使用"><a href="#为什么要使用" class="headerlink" title="为什么要使用?"></a>为什么要使用?</h3><p>代码量的精干简练<br><br><a href="https://www.zhihu.com/question/32179258">关于RxBus和EventBus的讨论</a><br>其实EventBus用起来还是很得心应手的，但是项目中都是用的RxJava，不用继续导入依赖，基本上可以达到相同的效果,何乐而不为。<br><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/13/RxJava RxBus/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
+      </div>
+      <a class="more" href="/2017/03/13/RxJava RxBus/">Read more</a>
+    </article>
   
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/03/11/RxJava RxBinding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Einsame">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Einsame Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/03/11/RxJava RxBinding/">RxJava RxBinding基础</a>
+      </h2>
+      <p class="article-date">March 11, 2017</p>
+      
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/11/RxJava RxBinding/" itemprop="url">
-                  RxJava RxBinding基础
-                </a>
-              
-            
-          </h1>
-        
+  <a href="/tags#RxJava" >
+    <span class="tag-code">RxJava</span>
+  </a>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-11T21:27:27+08:00">
-                2017-03-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/03/11/RxJava RxBinding/" class="leancloud_visitors" data-flag-title="RxJava RxBinding基础">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
+  <a href="/tags#Android" >
+    <span class="tag-code">Android</span>
+  </a>
 
       
-      
-
-      
+      <div class="article-summary">
         
           <h2 id="RxBinding是什么"><a href="#RxBinding是什么" class="headerlink" title="RxBinding是什么"></a>RxBinding是什么</h2><p>把 Android 中各种 UI 控件的事件转换为 RxJava 中的数据流。这样就可以把 UI 控件的事件当做 RxJava 中的数据流来使用了。 比如 View 的 onClick 事件，使用 RxView.clicks(view) 即可获取到一个 Observable 对象，每当用户点击这个 View 的时候，该 Observable 对象就发射一个事件（onNext 被调用）， Observable 的 Observer 订阅者就可以通过 onNext 回调知道用户点击了 View。</p>
 <h3 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h3><p>RxBinding 地址：<a href="https://github.com/JakeWharton/RxBinding">https://github.com/JakeWharton/RxBinding</a></p>
 <h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/ RxBinding</div><div class="line">compile <span class="string">'com.jakewharton.rxbinding:rxbinding:0.3.0'</span></div><div class="line">compile <span class="string">'com.jakewharton.rxbinding:rxbinding-support-v4:0.3.0'</span></div><div class="line">compile <span class="string">'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.3.0'</span></div><div class="line">compile <span class="string">'com.jakewharton.rxbinding:rxbinding-design:0.3.0'</span></div><div class="line">compile <span class="string">'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.3.0'</span></div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/11/RxJava RxBinding/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/03/11/RxJava 家族/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Einsame">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Einsame Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/11/RxJava 家族/" itemprop="url">
-                  RxJava 系列成员
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-11T17:27:27+08:00">
-                2017-03-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/03/11/RxJava 家族/" class="leancloud_visitors" data-flag-title="RxJava 系列成员">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="感谢扔物线大神给-Android-开发者的-RxJava-详解"><a href="#感谢扔物线大神给-Android-开发者的-RxJava-详解" class="headerlink" title="感谢扔物线大神给 Android 开发者的 RxJava 详解"></a>感谢扔物线大神<a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a></h2><h2 id="Rx家族"><a href="#Rx家族" class="headerlink" title="Rx家族"></a>Rx家族</h2><h3 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h3><p><a href="http://lovehaodong.cn/2017/03/19/RxJava%20RxJava/" target="_blank" rel="external">具体介绍点这里</a></p>
-<h3 id="RxAndroid"><a href="#RxAndroid" class="headerlink" title="RxAndroid"></a>RxAndroid</h3><p>Android开发的必须元素，里面知识提供了两个简单的功能，AndroidSchedulers.mainThread() <br> AndroidSchedulers.handlerThread(handler)，Android开发最核心的功能。</p>
-<h3 id="RxBinding"><a href="#RxBinding" class="headerlink" title="RxBinding"></a>RxBinding</h3><p>RxBinding 是把 Android 中各种 UI 控件的事件转换为 RxJava 中的数据流。这样就可以把 UI 控件的事件当做 RxJava 中的数据流来使用了。 比如 View 的 onClick 事件，使用 RxView.clicks(view) 即可获取到一个 Observable 对象，每当用户点击这个 View 的时候，该 Observable 对象就发射一个事件（onNext 被调用）， Observable 的 Observer 订阅者就可以通过 onNext 回调知道用户点击了 View。</p>
-<p><a href="http://lovehaodong.cn/2017/03/11/RxJava%20RxBinding/" target="_blank" rel="external">具体介绍点这里</a></p>
-<h3 id="RxLifecyle"><a href="#RxLifecyle" class="headerlink" title="RxLifecyle"></a>RxLifecyle</h3><p>RxLifecycle 配合 Activity/Fragment 生命周期来管理订阅的。 由于 RxJava Observable 订阅后（调用 subscribe 函数），一般会在后台线程执行一些操作（比如访问网络请求数据），当后台操作返回后，调用 Observer 的 onNext 等函数，然后在 更新 UI 状态。 但是后台线程请求是需要时间的，如果用户点击刷新按钮请求新的微博信息，在刷新还没有完成的时候，用户退出了当前界面返回前面的界面，这个时候刷新的 Observable 如果不取消订阅，则会导致之前的 Activity 无法被 JVM 回收导致内存泄露。 这就是 Android 里面的生命周期管理需要注意的地方，RxLifecycle 就是用来干这事的。比如下面的示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myObservable</div><div class="line">    .compose(RxLifecycle.bindUntilEvent(lifecycle, ActivityEvent.DESTROY))</div><div class="line">    .subscribe();</div></pre></td></tr></table></figure></p>
-<p>这样Activity在destroy的时候就会自动取消这个observer</p>
-<p><a href="http://lovehaodong.cn/2017/03/14/RxJava%20RxLifecycle/" target="_blank" rel="external">具体介绍点这里</a></p>
-<h3 id="RxBus"><a href="#RxBus" class="headerlink" title="RxBus"></a>RxBus</h3><p>RxBus并不是一个库，而是一种模式。相信大多数开发者都使用过EventBus，作为事件总线通信库，如果你的项目已经加入RxJava和EventBus，不妨用RxBus代替EventBus，以减少库的依赖。<br><br>还是推荐大家使用系统自带的广播吧<br><a href="http://lovehaodong.cn/2017/03/13/RxJava%20RxBus/" target="_blank" rel="external">具体介绍点这里</a></p>
-<h3 id="RxPermission"><a href="#RxPermission" class="headerlink" title="RxPermission"></a>RxPermission</h3><p>是基于RxJava开发的用于帮助在Android 6.0中处理运行时权限检测的框架。在Android 6.0中，系统新增了部分权限的运行时动态获取。而不再是在以前的版本中安装的时候授予权限。</p>
-<p><a href="http://lovehaodong.cn/2017/03/16/RxJava%20RxPermissions/" target="_blank" rel="external">具体介绍点这里</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/01/01/我的2016/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Einsame">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Einsame Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/01/我的2016/" itemprop="url">
-                  我的2016总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-01T17:27:27+08:00">
-                2017-01-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/01/01/我的2016/" class="leancloud_visitors" data-flag-title="我的2016总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>   整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。<br>   <br>  寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了出来，其实现在也知道这也是这些控件的底层原理，一个没有数据结构，只用逻辑思维的简陋计算器就这么写完了，还是有很多的bug，开学之后开始《第一行代码》《Android“字典”》跟着上面一直写，也不知道自己在学什么，想要学好，但是一直没有脱坑。四月初的一个电话把我从迷茫中敲醒，学长让我给院里做一个关于四进四信的app，知道这个任务的时候一脸懵逼。因为感觉自己真的什么也不会，于是开始慢慢构思。在半个与之后，一个很简单，只有页面跳转，listview，scrollview和一写简单控件的app写了出来，自己现在想起来也是笑笑傻傻的自己。自己第一个“丑陋”的app。<br>   <br>之后就是实验室的分组首先是为了参加之后的大学生创业项目，于是乎五个可爱的人组在一起，也就是后来的知行小组，我们也没有什么想法，也就随便想了想，但是被老师给b掉了，当时几个人也是有点沮丧，因为同时大一的两外两个组都通过了。后来也就是暑假时候的我们为了准备华北五省比赛吧，暑假期间选择了回家先待一段时间，后来回学校学习，本来准备一天写一篇github的东西，但是发现好难，一方面自己没有办法全部掌握，另一方面没有办法坚持下来，可能是自己太懒惰了吧。快开学的时候也是开始跟着写比赛的东西，还记得刚刚来实验室，看到学长做出地图觉得好厉害，然后。。。。。。嘻嘻<br><br>之后的校赛答辩可以说是很幸运，也可能是秦老师自己的项目吧，我们以最后一名的身份参加省赛，也是暂时性的松了一口气，国庆假期，在实验室和小组一起写没有完成的功能，那些日子真的感觉自己快死了，一天一顿饭。不过好在写了出来。之后的模拟答辩更是惨不忍睹，至今记得秦老师站起来批评的样子，老师也是很希望我们表现更好的，于是有了我们的三次模拟答辩。省赛我们表现的很好，和一等奖只差一点点，不过也是圆了我们可以一起去北京的愿望吧，之间还有一个大一新生的面试，看着他们进来我们好像看到了曾经的自己，也是那么的稚嫩，但是却掩盖不住他们的自信，他们每一个都想成为最好的，也很努力。之后他们也表现的很好，可以说，比我们那届要好得多。希望他们明年会有很好的表现，把android实验室更好的推广出去。<br><br>去了北京之后，一方面很开心，另一方面很紧张。也许我们真的是朝着二等奖去的吧，答辩我们做得很好，对了还有我们一起去吃了好多好吃的，几个大一的小伙伴和乔神，文慧姐，阿哲学长的火锅，还有斌哥的夜宵（可以说是大学里的亲哥哥），还有实验室所有人的聚餐。最后的一等奖可以说出乎所有人意料，有点不相信，毕竟学长们都那么优秀，但也是对我们一起努力的回报吧。很开心。我们一起去了鸟巢，之前是跟着爸爸一起去的，都很开心。回来的火车上觉得过得好快，早早睡了，也是不舍得一直以来的自己突然闲下来吧。很感谢创新和小黑，我们的组长，还有小黑真的很感谢，两个一年没有回家的人，大一就这么努力我真的发自内心的佩服。可以说不是小黑，我现在挂了好几科了吧。他们都是很优秀的人很幸运，遇到了他们。每个人的方向都不一样却在android实验室相遇，都是孩子，还有对我们很好的学长学姐。为什么都是实验室的内容，我也不知道。<br>   <br>也许花了太多的时间懒惰，后半年自己没学到什么东西，只是没事的时候看看一些技术博客，但是动手实践很少，这里真的想吐槽，什么电路，大物，概率真的不想学，还有实验，我的天。在学长的推荐下自己开始去看《开发艺术探索》，在imooc上买了《android网络编程》没事的时候也是开始学习一写深入点的东西，真心觉得android基础没意思。只有涉及到源码层才是interesting。当然网络也是android学习中一个特别有意思的东西。了解了一点点前端的东西，自己的博客也把架子搭建好，嗯，这个以后放一写好干货吧。嗯，还有在网络学习的过程中避免不了的要搭服务器，每一次尝试都是新领域的打开，java设计模式，rxjava，rxAndroid，自己慢慢学习的也只有这些了，还有好多想学，真的来不及了，虽然自己现在是真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，我的2016为什么这么的快？在2016快结束的时候在“诺诺”的交流中我发现python真的好神奇啊，于是开始python的“玩耍”，当然知识基础语法现在会一点点，因为自己很心疼钱，所以把一写钱投资在imooc中，是为了提醒自己不能浪费，这些东西都要学习。还有就是自己买了一个手机嗯，原来的r7也不错，准备回家给妈妈。<br>  <br>嗯，寒假来了，在外面的孩子都可以回家了。这次回家自己不想像以前那样一直玩了，大家都长大了，那些发小很想他们，一年我们没有在一块好好玩了吧，不知道会不会聚齐。</p>
-<p>寒假的任务：<br><br>            !好好陪爸爸妈妈！<br>            1：乔神那个项目<br>            2：网络编程视频imooc<br>            3：动画视频imooc<br>            4：python基础学习<br>            5：java设计模式（android设计模式那本书）<br>            6：至少一遍开发艺术探索<br>            7：自己写一个项目<br><br>虽然理想很美好，但是现实毕竟很残酷。。。。。。。以上至少完成一半（flag：不完成直播吃屎，自己也忘了欠了多少了）<br>   <br>感谢2016遇到的每一个人，同时也感谢那些匆匆教会我东西离去的人，现实教会了我很多，也不再是那个喜欢念旧的人，现在的自己更喜欢未来的自己，爱自己，爱家人。自己还很渺小，有些承诺也只是之后的笑柄，2017我会加倍珍惜自己身边的每个人。<br>    <br>还是有些伤感，一年就这么结束，2017又会有怎样的改变呢？？？？？？？？？？？？？？？？？？？？？？？？？？？</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
-
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="Einsame" />
-          <p class="site-author-name" itemprop="name">Einsame</p>
-           
-              <p class="site-description motion-element" itemprop="description">It'is not a bug,it's a feature.</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">18</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">10</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/android-nuc" target="_blank" title="AndroidLab">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  AndroidLab
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/DreamYHD" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/u/5686028898?refer_flag=1001030201_" target="_blank" title="Weibo">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  Weibo
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
         
       </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<div class="copyright" >
+      <a class="more" href="/2017/03/11/RxJava RxBinding/">Read more</a>
+    </article>
   
-  &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Einsame</span>
-</div>
-//pv的方式，单个用户连续点击n篇文章，记录n次访问量
-<span id="busuanzi_container_site_pv">
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
-
-//uv的方式，单个用户连续点击n篇文章，只记录1次访客数
-<span id="busuanzi_container_site_uv">
-  本站总访问量<span id="busuanzi_value_site_uv"></span>次
-</span>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/03/11/RxJava 家族/">RxJava 系列成员</a>
+      </h2>
+      <p class="article-date">March 11, 2017</p>
+      
+        
+  <a href="/tags#RxJava" >
+    <span class="tag-code">RxJava</span>
   </a>
-</div>
-</span>
 
+  <a href="/tags#Android" >
+    <span class="tag-code">Android</span>
+  </a>
 
-        
-<div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人数
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
       
-    </span>
+      <div class="article-summary">
+        
+          感谢扔物线大神给 Android 开发者的 RxJava 详解Rx家族RxJava具体介绍点这里
+RxAndroidAndroid开发的必须元素，里面知识提供了两个简单的功能，AndroidSchedulers.mainThread()  AndroidSchedulers.handlerT ...
+        
+      </div>
+      <a class="more" href="/2017/03/11/RxJava 家族/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/01/01/我的2016/">我的2016总结</a>
+      </h2>
+      <p class="article-date">January 1, 2017</p>
+      
+        
+  <a href="/tags#随笔" >
+    <span class="tag-code">随笔</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+             整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。     寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了 ...
+        
+      </div>
+      <a class="more" href="/2017/01/01/我的2016/">Read more</a>
+    </article>
   
 
   
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 访问总量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
+    <div class="guide-pager">
+  
+    <a href="/"><span class="page-arrow">← </span>Prev</a>
+  
+  
+    <a class="unvisible" href="/">Next <span class="page-arrow">→</span></a>
   
 </div>
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-  </div>
-
   
+</main>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
   }
 </script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-    
-
-    
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("5EcbaBq9sSEPHouiPc8oaHJU-gzGzoHsz", "pNtWgPPY3l03ih9qCrJr3VSN");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
       }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
     });
-  </script>
+  })
+</script>
+<!-- Baidu Tongji -->
 
-
-
-  
-
-  
-
-  
-
-  
-
-</body>
+<script src="/js/script.js"></script>
+  </body>
 </html>

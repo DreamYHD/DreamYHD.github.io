@@ -1,904 +1,377 @@
-<!doctype html>
-
-
-
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="It&#39;is not a bug,it&#39;s a feature.">
+  <meta name="keyword" content="hexo-theme, vuejs">
   
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <link rel="shortcut icon" href="/css/images/logo.png">
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
+  <title>
     
+      我的2016总结 | Einsame Blog
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="随笔," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。     寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了出来，其实现在也知道这也是这些控件的底层原理，一个没有数据结构，只用逻辑思维的简陋计算器就这么写完了，还是有">
-<meta name="keywords" content="随笔">
-<meta property="og:type" content="article">
-<meta property="og:title" content="我的2016总结">
-<meta property="og:url" content="http://dreamyhd.github.io/2017/01/01/我的2016/index.html">
-<meta property="og:site_name" content="Einsame Blog">
-<meta property="og:description" content="整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。     寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了出来，其实现在也知道这也是这些控件的底层原理，一个没有数据结构，只用逻辑思维的简陋计算器就这么写完了，还是有">
-<meta property="og:updated_time" content="2017-04-12T06:52:53.140Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的2016总结">
-<meta name="twitter:description" content="整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。     寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了出来，其实现在也知道这也是这些控件的底层原理，一个没有数据结构，只用逻辑思维的简陋计算器就这么写完了，还是有">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://dreamyhd.github.io/2017/01/01/我的2016/"/>
-
-
-
-
-
-  <title>我的2016总结 | Einsame Blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
   
   
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Einsame Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/01/01/我的2016/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Einsame">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Einsame Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                我的2016总结
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-01T17:27:27+08:00">
-                2017-01-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/01/01/我的2016/" class="leancloud_visitors" data-flag-title="我的2016总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>   整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。<br>   <br>  寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了出来，其实现在也知道这也是这些控件的底层原理，一个没有数据结构，只用逻辑思维的简陋计算器就这么写完了，还是有很多的bug，开学之后开始《第一行代码》《Android“字典”》跟着上面一直写，也不知道自己在学什么，想要学好，但是一直没有脱坑。四月初的一个电话把我从迷茫中敲醒，学长让我给院里做一个关于四进四信的app，知道这个任务的时候一脸懵逼。因为感觉自己真的什么也不会，于是开始慢慢构思。在半个与之后，一个很简单，只有页面跳转，listview，scrollview和一写简单控件的app写了出来，自己现在想起来也是笑笑傻傻的自己。自己第一个“丑陋”的app。<br>   <br>之后就是实验室的分组首先是为了参加之后的大学生创业项目，于是乎五个可爱的人组在一起，也就是后来的知行小组，我们也没有什么想法，也就随便想了想，但是被老师给b掉了，当时几个人也是有点沮丧，因为同时大一的两外两个组都通过了。后来也就是暑假时候的我们为了准备华北五省比赛吧，暑假期间选择了回家先待一段时间，后来回学校学习，本来准备一天写一篇github的东西，但是发现好难，一方面自己没有办法全部掌握，另一方面没有办法坚持下来，可能是自己太懒惰了吧。快开学的时候也是开始跟着写比赛的东西，还记得刚刚来实验室，看到学长做出地图觉得好厉害，然后。。。。。。嘻嘻<br><br>之后的校赛答辩可以说是很幸运，也可能是秦老师自己的项目吧，我们以最后一名的身份参加省赛，也是暂时性的松了一口气，国庆假期，在实验室和小组一起写没有完成的功能，那些日子真的感觉自己快死了，一天一顿饭。不过好在写了出来。之后的模拟答辩更是惨不忍睹，至今记得秦老师站起来批评的样子，老师也是很希望我们表现更好的，于是有了我们的三次模拟答辩。省赛我们表现的很好，和一等奖只差一点点，不过也是圆了我们可以一起去北京的愿望吧，之间还有一个大一新生的面试，看着他们进来我们好像看到了曾经的自己，也是那么的稚嫩，但是却掩盖不住他们的自信，他们每一个都想成为最好的，也很努力。之后他们也表现的很好，可以说，比我们那届要好得多。希望他们明年会有很好的表现，把android实验室更好的推广出去。<br><br>去了北京之后，一方面很开心，另一方面很紧张。也许我们真的是朝着二等奖去的吧，答辩我们做得很好，对了还有我们一起去吃了好多好吃的，几个大一的小伙伴和乔神，文慧姐，阿哲学长的火锅，还有斌哥的夜宵（可以说是大学里的亲哥哥），还有实验室所有人的聚餐。最后的一等奖可以说出乎所有人意料，有点不相信，毕竟学长们都那么优秀，但也是对我们一起努力的回报吧。很开心。我们一起去了鸟巢，之前是跟着爸爸一起去的，都很开心。回来的火车上觉得过得好快，早早睡了，也是不舍得一直以来的自己突然闲下来吧。很感谢创新和小黑，我们的组长，还有小黑真的很感谢，两个一年没有回家的人，大一就这么努力我真的发自内心的佩服。可以说不是小黑，我现在挂了好几科了吧。他们都是很优秀的人很幸运，遇到了他们。每个人的方向都不一样却在android实验室相遇，都是孩子，还有对我们很好的学长学姐。为什么都是实验室的内容，我也不知道。<br>   <br>也许花了太多的时间懒惰，后半年自己没学到什么东西，只是没事的时候看看一些技术博客，但是动手实践很少，这里真的想吐槽，什么电路，大物，概率真的不想学，还有实验，我的天。在学长的推荐下自己开始去看《开发艺术探索》，在imooc上买了《android网络编程》没事的时候也是开始学习一写深入点的东西，真心觉得android基础没意思。只有涉及到源码层才是interesting。当然网络也是android学习中一个特别有意思的东西。了解了一点点前端的东西，自己的博客也把架子搭建好，嗯，这个以后放一写好干货吧。嗯，还有在网络学习的过程中避免不了的要搭服务器，每一次尝试都是新领域的打开，java设计模式，rxjava，rxAndroid，自己慢慢学习的也只有这些了，还有好多想学，真的来不及了，虽然自己现在是真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，我的2016为什么这么的快？在2016快结束的时候在“诺诺”的交流中我发现python真的好神奇啊，于是开始python的“玩耍”，当然知识基础语法现在会一点点，因为自己很心疼钱，所以把一写钱投资在imooc中，是为了提醒自己不能浪费，这些东西都要学习。还有就是自己买了一个手机嗯，原来的r7也不错，准备回家给妈妈。<br>  <br>嗯，寒假来了，在外面的孩子都可以回家了。这次回家自己不想像以前那样一直玩了，大家都长大了，那些发小很想他们，一年我们没有在一块好好玩了吧，不知道会不会聚齐。</p>
-<p>寒假的任务：<br><br>            !好好陪爸爸妈妈！<br>            1：乔神那个项目<br>            2：网络编程视频imooc<br>            3：动画视频imooc<br>            4：python基础学习<br>            5：java设计模式（android设计模式那本书）<br>            6：至少一遍开发艺术探索<br>            7：自己写一个项目<br><br>虽然理想很美好，但是现实毕竟很残酷。。。。。。。以上至少完成一半（flag：不完成直播吃屎，自己也忘了欠了多少了）<br>   <br>感谢2016遇到的每一个人，同时也感谢那些匆匆教会我东西离去的人，现实教会了我很多，也不再是那个喜欢念旧的人，现在的自己更喜欢未来的自己，爱自己，爱家人。自己还很渺小，有些承诺也只是之后的笑柄，2017我会加倍珍惜自己身边的每个人。<br>    <br>还是有些伤感，一年就这么结束，2017又会有怎样的改变呢？？？？？？？？？？？？？？？？？？？？？？？？？？？</p>
-
-      
-    </div>
-
-    <div>
-      
-        
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="/wechat.png" alt="Einsame wechat" style="width: 200px; max-width: 100%;"/>
-    <div>可以的话加我好友一起学习~</div>
-</div>
-
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/随笔/" rel="tag"># 随笔</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/03/11/RxJava 家族/" rel="next" title="RxJava 系列成员">
-                <i class="fa fa-chevron-left"></i> RxJava 系列成员
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="uyan_frame"></div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="Einsame" />
-          <p class="site-author-name" itemprop="name">Einsame</p>
-           
-              <p class="site-description motion-element" itemprop="description">It'is not a bug,it's a feature.</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">18</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">10</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/android-nuc" target="_blank" title="AndroidLab">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  AndroidLab
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/DreamYHD" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/u/5686028898?refer_flag=1001030201_" target="_blank" title="Weibo">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  Weibo
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<div class="copyright" >
-  
-  &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Einsame</span>
-</div>
-//pv的方式，单个用户连续点击n篇文章，记录n次访问量
-<span id="busuanzi_container_site_pv">
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
-
-//uv的方式，单个用户连续点击n篇文章，只记录1次访客数
-<span id="busuanzi_container_site_uv">
-  本站总访问量<span id="busuanzi_value_site_uv"></span>次
-</span>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-</span>
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人数
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 访问总量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-    
-
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131806"></script>
-      <!-- UY END -->
-    
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("5EcbaBq9sSEPHouiPc8oaHJU-gzGzoHsz", "pNtWgPPY3l03ih9qCrJr3VSN");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
       });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Einsame Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>我的2016总结</h2>
+  <p class="post-date">2017-01-01</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>   整整一年我也只是在最后一段时间才找到了自己的方向有了自己的目标，才知道自己该做什么。<br>   <br>  寒假期间，完成实验室布置的寒假作业，一个很简单的计算器，很好笑的是那个时候连button都用不好，控件什么的更是一塌糊涂，于是用了寒假培训时候的surfaceView把每一个控件都可以说是画了出来，其实现在也知道这也是这些控件的底层原理，一个没有数据结构，只用逻辑思维的简陋计算器就这么写完了，还是有很多的bug，开学之后开始《第一行代码》《Android“字典”》跟着上面一直写，也不知道自己在学什么，想要学好，但是一直没有脱坑。四月初的一个电话把我从迷茫中敲醒，学长让我给院里做一个关于四进四信的app，知道这个任务的时候一脸懵逼。因为感觉自己真的什么也不会，于是开始慢慢构思。在半个与之后，一个很简单，只有页面跳转，listview，scrollview和一写简单控件的app写了出来，自己现在想起来也是笑笑傻傻的自己。自己第一个“丑陋”的app。<br>   <br>之后就是实验室的分组首先是为了参加之后的大学生创业项目，于是乎五个可爱的人组在一起，也就是后来的知行小组，我们也没有什么想法，也就随便想了想，但是被老师给b掉了，当时几个人也是有点沮丧，因为同时大一的两外两个组都通过了。后来也就是暑假时候的我们为了准备华北五省比赛吧，暑假期间选择了回家先待一段时间，后来回学校学习，本来准备一天写一篇github的东西，但是发现好难，一方面自己没有办法全部掌握，另一方面没有办法坚持下来，可能是自己太懒惰了吧。快开学的时候也是开始跟着写比赛的东西，还记得刚刚来实验室，看到学长做出地图觉得好厉害，然后。。。。。。嘻嘻<br><br>之后的校赛答辩可以说是很幸运，也可能是秦老师自己的项目吧，我们以最后一名的身份参加省赛，也是暂时性的松了一口气，国庆假期，在实验室和小组一起写没有完成的功能，那些日子真的感觉自己快死了，一天一顿饭。不过好在写了出来。之后的模拟答辩更是惨不忍睹，至今记得秦老师站起来批评的样子，老师也是很希望我们表现更好的，于是有了我们的三次模拟答辩。省赛我们表现的很好，和一等奖只差一点点，不过也是圆了我们可以一起去北京的愿望吧，之间还有一个大一新生的面试，看着他们进来我们好像看到了曾经的自己，也是那么的稚嫩，但是却掩盖不住他们的自信，他们每一个都想成为最好的，也很努力。之后他们也表现的很好，可以说，比我们那届要好得多。希望他们明年会有很好的表现，把android实验室更好的推广出去。<br><br>去了北京之后，一方面很开心，另一方面很紧张。也许我们真的是朝着二等奖去的吧，答辩我们做得很好，对了还有我们一起去吃了好多好吃的，几个大一的小伙伴和乔神，文慧姐，阿哲学长的火锅，还有斌哥的夜宵（可以说是大学里的亲哥哥），还有实验室所有人的聚餐。最后的一等奖可以说出乎所有人意料，有点不相信，毕竟学长们都那么优秀，但也是对我们一起努力的回报吧。很开心。我们一起去了鸟巢，之前是跟着爸爸一起去的，都很开心。回来的火车上觉得过得好快，早早睡了，也是不舍得一直以来的自己突然闲下来吧。很感谢创新和小黑，我们的组长，还有小黑真的很感谢，两个一年没有回家的人，大一就这么努力我真的发自内心的佩服。可以说不是小黑，我现在挂了好几科了吧。他们都是很优秀的人很幸运，遇到了他们。每个人的方向都不一样却在android实验室相遇，都是孩子，还有对我们很好的学长学姐。为什么都是实验室的内容，我也不知道。<br>   <br>也许花了太多的时间懒惰，后半年自己没学到什么东西，只是没事的时候看看一些技术博客，但是动手实践很少，这里真的想吐槽，什么电路，大物，概率真的不想学，还有实验，我的天。在学长的推荐下自己开始去看《开发艺术探索》，在imooc上买了《android网络编程》没事的时候也是开始学习一写深入点的东西，真心觉得android基础没意思。只有涉及到源码层才是interesting。当然网络也是android学习中一个特别有意思的东西。了解了一点点前端的东西，自己的博客也把架子搭建好，嗯，这个以后放一写好干货吧。嗯，还有在网络学习的过程中避免不了的要搭服务器，每一次尝试都是新领域的打开，java设计模式，rxjava，rxAndroid，自己慢慢学习的也只有这些了，还有好多想学，真的来不及了，虽然自己现在是真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，真的菜，我的2016为什么这么的快？在2016快结束的时候在“诺诺”的交流中我发现python真的好神奇啊，于是开始python的“玩耍”，当然知识基础语法现在会一点点，因为自己很心疼钱，所以把一写钱投资在imooc中，是为了提醒自己不能浪费，这些东西都要学习。还有就是自己买了一个手机嗯，原来的r7也不错，准备回家给妈妈。<br>  <br>嗯，寒假来了，在外面的孩子都可以回家了。这次回家自己不想像以前那样一直玩了，大家都长大了，那些发小很想他们，一年我们没有在一块好好玩了吧，不知道会不会聚齐。</p>
+<p>寒假的任务：<br><br>            !好好陪爸爸妈妈！<br>            1：乔神那个项目<br>            2：网络编程视频imooc<br>            3：动画视频imooc<br>            4：python基础学习<br>            5：java设计模式（android设计模式那本书）<br>            6：至少一遍开发艺术探索<br>            7：自己写一个项目<br><br>虽然理想很美好，但是现实毕竟很残酷。。。。。。。以上至少完成一半（flag：不完成直播吃屎，自己也忘了欠了多少了）<br>   <br>感谢2016遇到的每一个人，同时也感谢那些匆匆教会我东西离去的人，现实教会了我很多，也不再是那个喜欢念旧的人，现在的自己更喜欢未来的自己，爱自己，爱家人。自己还很渺小，有些承诺也只是之后的笑柄，2017我会加倍珍惜自己身边的每个人。<br>    <br>还是有些伤感，一年就这么结束，2017又会有怎样的改变呢？？？？？？？？？？？？？？？？？？？？？？？？？？？</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#随笔" >
+    <span class="tag-code">随笔</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2017/03/11/RxJava 家族/">
+        <span class="nav-arrow">← </span>
+        
+          RxJava 系列成员
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="nav">none</ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://dreamyhd.github.io/2017/01/01/我的2016/';
+    var banner = 'undefined'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
     }
+    $('.header').removeClass('fixed-header')
 
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
       }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
     });
-  </script>
 
+    // gitment
+    var gitmentConfig = "yanm1ng";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "我的2016总结",
+        owner: "yanm1ng",
+        repo: "yanm1ng.github.io",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
 
-
+<script>
+  var disqus_shortname = 'null';
   
-
+  var disqus_url = 'http://dreamyhd.github.io/2017/01/01/我的2016/';
   
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
 
-  
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
 
-  
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
 
-</body>
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
 </html>

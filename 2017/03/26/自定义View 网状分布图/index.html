@@ -1,908 +1,387 @@
-<!doctype html>
-
-
-
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="It&#39;is not a bug,it&#39;s a feature.">
+  <meta name="keyword" content="hexo-theme, vuejs">
   
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <link rel="shortcut icon" href="/css/images/logo.png">
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
+  <title>
     
+      自定义View之网状分布图 | Einsame Blog
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Android,自定义View," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="keywords" content="Android,自定义View">
-<meta property="og:type" content="article">
-<meta property="og:title" content="自定义View之网状分布图">
-<meta property="og:url" content="http://dreamyhd.github.io/2017/03/26/自定义View 网状分布图/index.html">
-<meta property="og:site_name" content="Einsame Blog">
-<meta property="og:image" content="http://onf44qqgp.bkt.clouddn.com/17-3-26/97790552-file_1490525273963_ac3c.png">
-<meta property="og:updated_time" content="2017-04-23T06:27:25.898Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自定义View之网状分布图">
-<meta name="twitter:image" content="http://onf44qqgp.bkt.clouddn.com/17-3-26/97790552-file_1490525273963_ac3c.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://dreamyhd.github.io/2017/03/26/自定义View 网状分布图/"/>
-
-
-
-
-
-  <title>自定义View之网状分布图 | Einsame Blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
   
   
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Einsame Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">我挥舞着键盘和本子，发誓要把世界写的明明白白！</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/03/26/自定义View 网状分布图/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Einsame">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Einsame Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                自定义View之网状分布图
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T18:40:27+08:00">
-                2017-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/03/26/自定义View 网状分布图/" class="leancloud_visitors" data-flag-title="自定义View之网状分布图">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p><img src="http://onf44qqgp.bkt.clouddn.com/17-3-26/97790552-file_1490525273963_ac3c.png" alt=""><br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyViewFive</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MyViewFive"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">6</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> angle = (<span class="keyword">float</span>) (Math.PI * <span class="number">2</span> / count);</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> radius;<span class="comment">//网格最大半径</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> centerX;<span class="comment">//中心x</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> centerY;<span class="comment">//中心y</span></div><div class="line">    <span class="keyword">private</span> String[] titles = &#123;<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span>&#125;;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">double</span>[] data = &#123;<span class="number">100</span>, <span class="number">60</span>, <span class="number">90</span>, <span class="number">30</span>, <span class="number">100</span>, <span class="number">50</span>, <span class="number">10</span>, <span class="number">20</span>&#125;; <span class="comment">//各维度分值</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> maxValue = <span class="number">100</span>;<span class="comment">//数据最大值</span></div><div class="line"></div><div class="line">    <span class="keyword">private</span> Paint mainPaint;<span class="comment">//雷达区画笔</span></div><div class="line">    <span class="keyword">private</span> Paint valuePaint;<span class="comment">//数据区画笔</span></div><div class="line">    <span class="keyword">private</span> Paint textPaint;<span class="comment">//文本画笔</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyViewFive</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyViewFive</span><span class="params">(Context context, @Nullable AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">        radius = Math.min(w, h) / <span class="number">2</span> * <span class="number">0.9f</span>;</div><div class="line">        centerX = w / <span class="number">2</span>;</div><div class="line">        centerY = h / <span class="number">2</span>;</div><div class="line">        postInvalidate();</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">        drawPolygon(canvas);</div><div class="line">        drawLines(canvas);</div><div class="line">        drawText(canvas);</div><div class="line">        drawValue(canvas);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">        mainPaint=<span class="keyword">new</span> Paint();</div><div class="line">        mainPaint.setColor(Color.BLACK);</div><div class="line">        mainPaint.setStyle(Paint.Style.STROKE);</div><div class="line">        mainPaint.setStrokeWidth(<span class="number">3f</span>);</div><div class="line"></div><div class="line">        textPaint=<span class="keyword">new</span> Paint();</div><div class="line">        textPaint.setColor(Color.BLUE);</div><div class="line">        textPaint.setTextSize(<span class="number">50f</span>);</div><div class="line"></div><div class="line">        valuePaint=<span class="keyword">new</span> Paint();</div><div class="line">        valuePaint.setStyle(Paint.Style.FILL_AND_STROKE);</div><div class="line">        valuePaint.setColor(Color.BLUE);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawPolygon</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path = <span class="keyword">new</span> Path();</div><div class="line">        <span class="keyword">float</span> r = radius / (count - <span class="number">1</span>);<span class="comment">//r是蜘蛛丝之间的间距</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; count; i++) &#123;<span class="comment">//中心点不用绘制</span></div><div class="line">            <span class="keyword">float</span> curR = r * i;<span class="comment">//当前半径</span></div><div class="line">            path.reset();</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; count; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (j == <span class="number">0</span>) &#123;</div><div class="line">                    path.moveTo(centerX + curR, centerY);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="comment">//根据半径，计算出蜘蛛丝上每个点的坐标</span></div><div class="line">                    <span class="keyword">float</span> x = (<span class="keyword">float</span>) (centerX + curR * Math.cos(angle * j));</div><div class="line">                    <span class="keyword">float</span> y = (<span class="keyword">float</span>) (centerY + curR * Math.sin(angle * j));</div><div class="line">                    path.lineTo(x, y);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            path.close();<span class="comment">//闭合路径</span></div><div class="line">            canvas.drawPath(path, mainPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawLines</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path=<span class="keyword">new</span> Path();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            path.reset();</div><div class="line">            path.moveTo(centerX,centerY);</div><div class="line">            <span class="keyword">float</span> x= (<span class="keyword">float</span>) (centerX+radius*Math.cos(angle*i));</div><div class="line">            <span class="keyword">float</span> y= (<span class="keyword">float</span>) (centerY+radius*Math.sin(angle*i));</div><div class="line">            path.lineTo(x,y);</div><div class="line">            canvas.drawPath(path,mainPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawText</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();</div><div class="line">        <span class="keyword">float</span> fontHeight = fontMetrics.descent - fontMetrics.ascent;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            <span class="keyword">float</span> x = (<span class="keyword">float</span>) (centerX + (radius + fontHeight / <span class="number">2</span>) * Math.cos(angle * i));</div><div class="line">            <span class="keyword">float</span> y = (<span class="keyword">float</span>) (centerY + (radius + fontHeight / <span class="number">2</span>) * Math.sin(angle * i));</div><div class="line">            canvas.drawText(titles[i], x , y, textPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawValue</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path=<span class="keyword">new</span> Path();</div><div class="line">        valuePaint.setAlpha(<span class="number">245</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            <span class="keyword">double</span> percentage=data[i]/maxValue;</div><div class="line">            <span class="keyword">float</span> x= (<span class="keyword">float</span>) (centerX+radius*Math.cos(angle*i)*percentage);</div><div class="line">            <span class="keyword">float</span> y= (<span class="keyword">float</span>) (centerY+radius*Math.sin(angle*i)*percentage);</div><div class="line">            <span class="keyword">if</span> (i==<span class="number">0</span>)&#123;</div><div class="line">                path.moveTo(x,y);</div><div class="line">            &#125;<span class="keyword">else</span> &#123;</div><div class="line">                path.lineTo(x,y);</div><div class="line">            &#125;</div><div class="line">            canvas.drawCircle(x,y,<span class="number">10</span>,valuePaint);</div><div class="line">        &#125;</div><div class="line">        valuePaint.setStyle(Paint.Style.STROKE);</div><div class="line">        canvas.drawPath(path,valuePaint);</div><div class="line">        valuePaint.setAlpha(<span class="number">170</span>);</div><div class="line">        valuePaint.setStyle(Paint.Style.FILL_AND_STROKE);</div><div class="line">        canvas.drawPath(path,valuePaint);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyViewFive</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MyViewFive"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">6</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> angle = (<span class="keyword">float</span>) (Math.PI * <span class="number">2</span> / count);</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> radius;<span class="comment">//网格最大半径</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> centerX;<span class="comment">//中心x</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> centerY;<span class="comment">//中心y</span></div><div class="line">    <span class="keyword">private</span> String[] titles = &#123;<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span>&#125;;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">double</span>[] data = &#123;<span class="number">100</span>, <span class="number">60</span>, <span class="number">90</span>, <span class="number">30</span>, <span class="number">100</span>, <span class="number">50</span>, <span class="number">10</span>, <span class="number">20</span>&#125;; <span class="comment">//各维度分值</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> maxValue = <span class="number">100</span>;<span class="comment">//数据最大值</span></div><div class="line"></div><div class="line">    <span class="keyword">private</span> Paint mainPaint;<span class="comment">//雷达区画笔</span></div><div class="line">    <span class="keyword">private</span> Paint valuePaint;<span class="comment">//数据区画笔</span></div><div class="line">    <span class="keyword">private</span> Paint textPaint;<span class="comment">//文本画笔</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyViewFive</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyViewFive</span><span class="params">(Context context, @Nullable AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">        radius = Math.min(w, h) / <span class="number">2</span> * <span class="number">0.9f</span>;</div><div class="line">        centerX = w / <span class="number">2</span>;</div><div class="line">        centerY = h / <span class="number">2</span>;</div><div class="line">        postInvalidate();</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">        drawPolygon(canvas);</div><div class="line">        drawLines(canvas);</div><div class="line">        drawText(canvas);</div><div class="line">        drawValue(canvas);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">        mainPaint=<span class="keyword">new</span> Paint();</div><div class="line">        mainPaint.setColor(Color.BLACK);</div><div class="line">        mainPaint.setStyle(Paint.Style.STROKE);</div><div class="line">        mainPaint.setStrokeWidth(<span class="number">3f</span>);</div><div class="line"></div><div class="line">        textPaint=<span class="keyword">new</span> Paint();</div><div class="line">        textPaint.setColor(Color.BLUE);</div><div class="line">        textPaint.setTextSize(<span class="number">50f</span>);</div><div class="line"></div><div class="line">        valuePaint=<span class="keyword">new</span> Paint();</div><div class="line">        valuePaint.setStyle(Paint.Style.FILL_AND_STROKE);</div><div class="line">        valuePaint.setColor(Color.BLUE);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawPolygon</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path = <span class="keyword">new</span> Path();</div><div class="line">        <span class="keyword">float</span> r = radius / (count - <span class="number">1</span>);<span class="comment">//r是蜘蛛丝之间的间距</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; count; i++) &#123;<span class="comment">//中心点不用绘制</span></div><div class="line">            <span class="keyword">float</span> curR = r * i;<span class="comment">//当前半径</span></div><div class="line">            path.reset();</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; count; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (j == <span class="number">0</span>) &#123;</div><div class="line">                    path.moveTo(centerX + curR, centerY);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="comment">//根据半径，计算出蜘蛛丝上每个点的坐标</span></div><div class="line">                    <span class="keyword">float</span> x = (<span class="keyword">float</span>) (centerX + curR * Math.cos(angle * j));</div><div class="line">                    <span class="keyword">float</span> y = (<span class="keyword">float</span>) (centerY + curR * Math.sin(angle * j));</div><div class="line">                    path.lineTo(x, y);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            path.close();<span class="comment">//闭合路径</span></div><div class="line">            canvas.drawPath(path, mainPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawLines</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path=<span class="keyword">new</span> Path();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            path.reset();</div><div class="line">            path.moveTo(centerX,centerY);</div><div class="line">            <span class="keyword">float</span> x= (<span class="keyword">float</span>) (centerX+radius*Math.cos(angle*i));</div><div class="line">            <span class="keyword">float</span> y= (<span class="keyword">float</span>) (centerY+radius*Math.sin(angle*i));</div><div class="line">            path.lineTo(x,y);</div><div class="line">            canvas.drawPath(path,mainPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawText</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();</div><div class="line">        <span class="keyword">float</span> fontHeight = fontMetrics.descent - fontMetrics.ascent;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            <span class="keyword">float</span> x = (<span class="keyword">float</span>) (centerX + (radius + fontHeight / <span class="number">2</span>) * Math.cos(angle * i));</div><div class="line">            <span class="keyword">float</span> y = (<span class="keyword">float</span>) (centerY + (radius + fontHeight / <span class="number">2</span>) * Math.sin(angle * i));</div><div class="line">            canvas.drawText(titles[i], x , y, textPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawValue</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path=<span class="keyword">new</span> Path();</div><div class="line">        valuePaint.setAlpha(<span class="number">245</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            <span class="keyword">double</span> percentage=data[i]/maxValue;</div><div class="line">            <span class="keyword">float</span> x= (<span class="keyword">float</span>) (centerX+radius*Math.cos(angle*i)*percentage);</div><div class="line">            <span class="keyword">float</span> y= (<span class="keyword">float</span>) (centerY+radius*Math.sin(angle*i)*percentage);</div><div class="line">            <span class="keyword">if</span> (i==<span class="number">0</span>)&#123;</div><div class="line">                path.moveTo(x,y);</div><div class="line">            &#125;<span class="keyword">else</span> &#123;</div><div class="line">                path.lineTo(x,y);</div><div class="line">            &#125;</div><div class="line">            canvas.drawCircle(x,y,<span class="number">10</span>,valuePaint);</div><div class="line">        &#125;</div><div class="line">        valuePaint.setStyle(Paint.Style.STROKE);</div><div class="line">        canvas.drawPath(path,valuePaint);</div><div class="line">        valuePaint.setAlpha(<span class="number">170</span>);</div><div class="line">        valuePaint.setStyle(Paint.Style.FILL_AND_STROKE);</div><div class="line">        canvas.drawPath(path,valuePaint);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    <div>
-      
-        
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="/wechat.png" alt="Einsame wechat" style="width: 200px; max-width: 100%;"/>
-    <div>可以的话加我好友一起学习~</div>
-</div>
-
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
-            <a href="/tags/自定义View/" rel="tag"># 自定义View</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/04/03/自定义View之MotionEvent/" rel="next" title="自定义View之MotionEvent">
-                <i class="fa fa-chevron-left"></i> 自定义View之MotionEvent
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/19/RxJava RxJava/" rel="prev" title="RxJava RxJava基础">
-                RxJava RxJava基础 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="uyan_frame"></div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="Einsame" />
-          <p class="site-author-name" itemprop="name">Einsame</p>
-           
-              <p class="site-description motion-element" itemprop="description">It'is not a bug,it's a feature.</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">18</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">10</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/android-nuc" target="_blank" title="AndroidLab">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  AndroidLab
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/DreamYHD" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/u/5686028898?refer_flag=1001030201_" target="_blank" title="Weibo">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  Weibo
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<div class="copyright" >
-  
-  &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Einsame</span>
-</div>
-//pv的方式，单个用户连续点击n篇文章，记录n次访问量
-<span id="busuanzi_container_site_pv">
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
-
-//uv的方式，单个用户连续点击n篇文章，只记录1次访客数
-<span id="busuanzi_container_site_uv">
-  本站总访问量<span id="busuanzi_value_site_uv"></span>次
-</span>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-</span>
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人数
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 访问总量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-    
-
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131806"></script>
-      <!-- UY END -->
-    
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("5EcbaBq9sSEPHouiPc8oaHJU-gzGzoHsz", "pNtWgPPY3l03ih9qCrJr3VSN");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
       });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Einsame Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>自定义View之网状分布图</h2>
+  <p class="post-date">2017-03-26</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="http://onf44qqgp.bkt.clouddn.com/17-3-26/97790552-file_1490525273963_ac3c.png" alt=""><br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyViewFive</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MyViewFive"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">6</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> angle = (<span class="keyword">float</span>) (Math.PI * <span class="number">2</span> / count);</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> radius;<span class="comment">//网格最大半径</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> centerX;<span class="comment">//中心x</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> centerY;<span class="comment">//中心y</span></div><div class="line">    <span class="keyword">private</span> String[] titles = &#123;<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span>&#125;;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">double</span>[] data = &#123;<span class="number">100</span>, <span class="number">60</span>, <span class="number">90</span>, <span class="number">30</span>, <span class="number">100</span>, <span class="number">50</span>, <span class="number">10</span>, <span class="number">20</span>&#125;; <span class="comment">//各维度分值</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> maxValue = <span class="number">100</span>;<span class="comment">//数据最大值</span></div><div class="line"></div><div class="line">    <span class="keyword">private</span> Paint mainPaint;<span class="comment">//雷达区画笔</span></div><div class="line">    <span class="keyword">private</span> Paint valuePaint;<span class="comment">//数据区画笔</span></div><div class="line">    <span class="keyword">private</span> Paint textPaint;<span class="comment">//文本画笔</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyViewFive</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyViewFive</span><span class="params">(Context context, @Nullable AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">        radius = Math.min(w, h) / <span class="number">2</span> * <span class="number">0.9f</span>;</div><div class="line">        centerX = w / <span class="number">2</span>;</div><div class="line">        centerY = h / <span class="number">2</span>;</div><div class="line">        postInvalidate();</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">        drawPolygon(canvas);</div><div class="line">        drawLines(canvas);</div><div class="line">        drawText(canvas);</div><div class="line">        drawValue(canvas);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">        mainPaint=<span class="keyword">new</span> Paint();</div><div class="line">        mainPaint.setColor(Color.BLACK);</div><div class="line">        mainPaint.setStyle(Paint.Style.STROKE);</div><div class="line">        mainPaint.setStrokeWidth(<span class="number">3f</span>);</div><div class="line"></div><div class="line">        textPaint=<span class="keyword">new</span> Paint();</div><div class="line">        textPaint.setColor(Color.BLUE);</div><div class="line">        textPaint.setTextSize(<span class="number">50f</span>);</div><div class="line"></div><div class="line">        valuePaint=<span class="keyword">new</span> Paint();</div><div class="line">        valuePaint.setStyle(Paint.Style.FILL_AND_STROKE);</div><div class="line">        valuePaint.setColor(Color.BLUE);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawPolygon</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path = <span class="keyword">new</span> Path();</div><div class="line">        <span class="keyword">float</span> r = radius / (count - <span class="number">1</span>);<span class="comment">//r是蜘蛛丝之间的间距</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; count; i++) &#123;<span class="comment">//中心点不用绘制</span></div><div class="line">            <span class="keyword">float</span> curR = r * i;<span class="comment">//当前半径</span></div><div class="line">            path.reset();</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; count; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (j == <span class="number">0</span>) &#123;</div><div class="line">                    path.moveTo(centerX + curR, centerY);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="comment">//根据半径，计算出蜘蛛丝上每个点的坐标</span></div><div class="line">                    <span class="keyword">float</span> x = (<span class="keyword">float</span>) (centerX + curR * Math.cos(angle * j));</div><div class="line">                    <span class="keyword">float</span> y = (<span class="keyword">float</span>) (centerY + curR * Math.sin(angle * j));</div><div class="line">                    path.lineTo(x, y);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            path.close();<span class="comment">//闭合路径</span></div><div class="line">            canvas.drawPath(path, mainPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawLines</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path=<span class="keyword">new</span> Path();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            path.reset();</div><div class="line">            path.moveTo(centerX,centerY);</div><div class="line">            <span class="keyword">float</span> x= (<span class="keyword">float</span>) (centerX+radius*Math.cos(angle*i));</div><div class="line">            <span class="keyword">float</span> y= (<span class="keyword">float</span>) (centerY+radius*Math.sin(angle*i));</div><div class="line">            path.lineTo(x,y);</div><div class="line">            canvas.drawPath(path,mainPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawText</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();</div><div class="line">        <span class="keyword">float</span> fontHeight = fontMetrics.descent - fontMetrics.ascent;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            <span class="keyword">float</span> x = (<span class="keyword">float</span>) (centerX + (radius + fontHeight / <span class="number">2</span>) * Math.cos(angle * i));</div><div class="line">            <span class="keyword">float</span> y = (<span class="keyword">float</span>) (centerY + (radius + fontHeight / <span class="number">2</span>) * Math.sin(angle * i));</div><div class="line">            canvas.drawText(titles[i], x , y, textPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawValue</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path=<span class="keyword">new</span> Path();</div><div class="line">        valuePaint.setAlpha(<span class="number">245</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            <span class="keyword">double</span> percentage=data[i]/maxValue;</div><div class="line">            <span class="keyword">float</span> x= (<span class="keyword">float</span>) (centerX+radius*Math.cos(angle*i)*percentage);</div><div class="line">            <span class="keyword">float</span> y= (<span class="keyword">float</span>) (centerY+radius*Math.sin(angle*i)*percentage);</div><div class="line">            <span class="keyword">if</span> (i==<span class="number">0</span>)&#123;</div><div class="line">                path.moveTo(x,y);</div><div class="line">            &#125;<span class="keyword">else</span> &#123;</div><div class="line">                path.lineTo(x,y);</div><div class="line">            &#125;</div><div class="line">            canvas.drawCircle(x,y,<span class="number">10</span>,valuePaint);</div><div class="line">        &#125;</div><div class="line">        valuePaint.setStyle(Paint.Style.STROKE);</div><div class="line">        canvas.drawPath(path,valuePaint);</div><div class="line">        valuePaint.setAlpha(<span class="number">170</span>);</div><div class="line">        valuePaint.setStyle(Paint.Style.FILL_AND_STROKE);</div><div class="line">        canvas.drawPath(path,valuePaint);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyViewFive</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MyViewFive"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">6</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> angle = (<span class="keyword">float</span>) (Math.PI * <span class="number">2</span> / count);</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> radius;<span class="comment">//网格最大半径</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> centerX;<span class="comment">//中心x</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> centerY;<span class="comment">//中心y</span></div><div class="line">    <span class="keyword">private</span> String[] titles = &#123;<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span>&#125;;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">double</span>[] data = &#123;<span class="number">100</span>, <span class="number">60</span>, <span class="number">90</span>, <span class="number">30</span>, <span class="number">100</span>, <span class="number">50</span>, <span class="number">10</span>, <span class="number">20</span>&#125;; <span class="comment">//各维度分值</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> maxValue = <span class="number">100</span>;<span class="comment">//数据最大值</span></div><div class="line"></div><div class="line">    <span class="keyword">private</span> Paint mainPaint;<span class="comment">//雷达区画笔</span></div><div class="line">    <span class="keyword">private</span> Paint valuePaint;<span class="comment">//数据区画笔</span></div><div class="line">    <span class="keyword">private</span> Paint textPaint;<span class="comment">//文本画笔</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyViewFive</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyViewFive</span><span class="params">(Context context, @Nullable AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">        radius = Math.min(w, h) / <span class="number">2</span> * <span class="number">0.9f</span>;</div><div class="line">        centerX = w / <span class="number">2</span>;</div><div class="line">        centerY = h / <span class="number">2</span>;</div><div class="line">        postInvalidate();</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">        drawPolygon(canvas);</div><div class="line">        drawLines(canvas);</div><div class="line">        drawText(canvas);</div><div class="line">        drawValue(canvas);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">        mainPaint=<span class="keyword">new</span> Paint();</div><div class="line">        mainPaint.setColor(Color.BLACK);</div><div class="line">        mainPaint.setStyle(Paint.Style.STROKE);</div><div class="line">        mainPaint.setStrokeWidth(<span class="number">3f</span>);</div><div class="line"></div><div class="line">        textPaint=<span class="keyword">new</span> Paint();</div><div class="line">        textPaint.setColor(Color.BLUE);</div><div class="line">        textPaint.setTextSize(<span class="number">50f</span>);</div><div class="line"></div><div class="line">        valuePaint=<span class="keyword">new</span> Paint();</div><div class="line">        valuePaint.setStyle(Paint.Style.FILL_AND_STROKE);</div><div class="line">        valuePaint.setColor(Color.BLUE);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawPolygon</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path = <span class="keyword">new</span> Path();</div><div class="line">        <span class="keyword">float</span> r = radius / (count - <span class="number">1</span>);<span class="comment">//r是蜘蛛丝之间的间距</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; count; i++) &#123;<span class="comment">//中心点不用绘制</span></div><div class="line">            <span class="keyword">float</span> curR = r * i;<span class="comment">//当前半径</span></div><div class="line">            path.reset();</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; count; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (j == <span class="number">0</span>) &#123;</div><div class="line">                    path.moveTo(centerX + curR, centerY);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="comment">//根据半径，计算出蜘蛛丝上每个点的坐标</span></div><div class="line">                    <span class="keyword">float</span> x = (<span class="keyword">float</span>) (centerX + curR * Math.cos(angle * j));</div><div class="line">                    <span class="keyword">float</span> y = (<span class="keyword">float</span>) (centerY + curR * Math.sin(angle * j));</div><div class="line">                    path.lineTo(x, y);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            path.close();<span class="comment">//闭合路径</span></div><div class="line">            canvas.drawPath(path, mainPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawLines</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path=<span class="keyword">new</span> Path();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            path.reset();</div><div class="line">            path.moveTo(centerX,centerY);</div><div class="line">            <span class="keyword">float</span> x= (<span class="keyword">float</span>) (centerX+radius*Math.cos(angle*i));</div><div class="line">            <span class="keyword">float</span> y= (<span class="keyword">float</span>) (centerY+radius*Math.sin(angle*i));</div><div class="line">            path.lineTo(x,y);</div><div class="line">            canvas.drawPath(path,mainPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawText</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();</div><div class="line">        <span class="keyword">float</span> fontHeight = fontMetrics.descent - fontMetrics.ascent;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            <span class="keyword">float</span> x = (<span class="keyword">float</span>) (centerX + (radius + fontHeight / <span class="number">2</span>) * Math.cos(angle * i));</div><div class="line">            <span class="keyword">float</span> y = (<span class="keyword">float</span>) (centerY + (radius + fontHeight / <span class="number">2</span>) * Math.sin(angle * i));</div><div class="line">            canvas.drawText(titles[i], x , y, textPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawValue</span><span class="params">(Canvas canvas)</span></span>&#123;</div><div class="line">        Path path=<span class="keyword">new</span> Path();</div><div class="line">        valuePaint.setAlpha(<span class="number">245</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            <span class="keyword">double</span> percentage=data[i]/maxValue;</div><div class="line">            <span class="keyword">float</span> x= (<span class="keyword">float</span>) (centerX+radius*Math.cos(angle*i)*percentage);</div><div class="line">            <span class="keyword">float</span> y= (<span class="keyword">float</span>) (centerY+radius*Math.sin(angle*i)*percentage);</div><div class="line">            <span class="keyword">if</span> (i==<span class="number">0</span>)&#123;</div><div class="line">                path.moveTo(x,y);</div><div class="line">            &#125;<span class="keyword">else</span> &#123;</div><div class="line">                path.lineTo(x,y);</div><div class="line">            &#125;</div><div class="line">            canvas.drawCircle(x,y,<span class="number">10</span>,valuePaint);</div><div class="line">        &#125;</div><div class="line">        valuePaint.setStyle(Paint.Style.STROKE);</div><div class="line">        canvas.drawPath(path,valuePaint);</div><div class="line">        valuePaint.setAlpha(<span class="number">170</span>);</div><div class="line">        valuePaint.setStyle(Paint.Style.FILL_AND_STROKE);</div><div class="line">        canvas.drawPath(path,valuePaint);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Android" >
+    <span class="tag-code">Android</span>
+  </a>
+
+  <a href="/tags#自定义View" >
+    <span class="tag-code">自定义View</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2017/04/03/自定义View之MotionEvent/">
+        <span class="nav-arrow">← </span>
+        
+          自定义View之MotionEvent
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2017/03/19/RxJava RxJava/">
+        
+          RxJava RxJava基础
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="nav">none</ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://dreamyhd.github.io/2017/03/26/自定义View 网状分布图/';
+    var banner = 'undefined'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
     }
+    $('.header').removeClass('fixed-header')
 
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
       }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
     });
-  </script>
 
+    // gitment
+    var gitmentConfig = "yanm1ng";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "自定义View之网状分布图",
+        owner: "yanm1ng",
+        repo: "yanm1ng.github.io",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
 
-
+<script>
+  var disqus_shortname = 'null';
   
-
+  var disqus_url = 'http://dreamyhd.github.io/2017/03/26/自定义View 网状分布图/';
   
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
 
-  
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
 
-  
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
 
-</body>
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
 </html>
