@@ -94,7 +94,7 @@
 <meta name="keywords" content="RxJava,Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RxJava 系列成员">
-<meta property="og:url" content="http://lovehaodong.cn/2017/03/11/RxJava 家族/index.html">
+<meta property="og:url" content="http://dreamyhd.github.io/2017/03/11/RxJava 家族/index.html">
 <meta property="og:site_name" content="Einsame Blog">
 <meta property="og:description" content="感谢扔物线大神给 Android 开发者的 RxJava 详解Rx家族RxJava具体介绍点这里 RxAndroidAndroid开发的必须元素，里面知识提供了两个简单的功能，AndroidSchedulers.mainThread()  AndroidSchedulers.handlerThread(handler)，Android开发最核心的功能。 RxBindingRxBinding 是把">
 <meta property="og:updated_time" content="2018-05-30T13:30:03.450Z">
@@ -128,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://lovehaodong.cn/2017/03/11/RxJava 家族/"/>
+  <link rel="canonical" href="http://dreamyhd.github.io/2017/03/11/RxJava 家族/"/>
 
 
 
@@ -273,7 +273,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://lovehaodong.cn/2017/03/11/RxJava 家族/">
+    <link itemprop="mainEntityOfPage" href="http://dreamyhd.github.io/2017/03/11/RxJava 家族/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Einsame">
@@ -382,16 +382,16 @@
       
 
       
-        <h2 id="感谢扔物线大神给-Android-开发者的-RxJava-详解"><a href="#感谢扔物线大神给-Android-开发者的-RxJava-详解" class="headerlink" title="感谢扔物线大神给 Android 开发者的 RxJava 详解"></a>感谢扔物线大神<a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a></h2><h2 id="Rx家族"><a href="#Rx家族" class="headerlink" title="Rx家族"></a>Rx家族</h2><h3 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h3><p><a href="http://lovehaodong.cn/2017/03/19/RxJava%20RxJava/">具体介绍点这里</a></p>
+        <h2 id="感谢扔物线大神给-Android-开发者的-RxJava-详解"><a href="#感谢扔物线大神给-Android-开发者的-RxJava-详解" class="headerlink" title="感谢扔物线大神给 Android 开发者的 RxJava 详解"></a>感谢扔物线大神<a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a></h2><h2 id="Rx家族"><a href="#Rx家族" class="headerlink" title="Rx家族"></a>Rx家族</h2><h3 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h3><p><a href="http://lovehaodong.cn/2017/03/19/RxJava%20RxJava/" target="_blank" rel="external">具体介绍点这里</a></p>
 <h3 id="RxAndroid"><a href="#RxAndroid" class="headerlink" title="RxAndroid"></a>RxAndroid</h3><p>Android开发的必须元素，里面知识提供了两个简单的功能，AndroidSchedulers.mainThread() <br> AndroidSchedulers.handlerThread(handler)，Android开发最核心的功能。</p>
 <h3 id="RxBinding"><a href="#RxBinding" class="headerlink" title="RxBinding"></a>RxBinding</h3><p>RxBinding 是把 Android 中各种 UI 控件的事件转换为 RxJava 中的数据流。这样就可以把 UI 控件的事件当做 RxJava 中的数据流来使用了。 比如 View 的 onClick 事件，使用 RxView.clicks(view) 即可获取到一个 Observable 对象，每当用户点击这个 View 的时候，该 Observable 对象就发射一个事件（onNext 被调用）， Observable 的 Observer 订阅者就可以通过 onNext 回调知道用户点击了 View。</p>
-<p><a href="http://lovehaodong.cn/2017/03/11/RxJava%20RxBinding/">具体介绍点这里</a></p>
+<p><a href="http://lovehaodong.cn/2017/03/11/RxJava%20RxBinding/" target="_blank" rel="external">具体介绍点这里</a></p>
 <h3 id="RxLifecyle"><a href="#RxLifecyle" class="headerlink" title="RxLifecyle"></a>RxLifecyle</h3><p>RxLifecycle 配合 Activity/Fragment 生命周期来管理订阅的。 由于 RxJava Observable 订阅后（调用 subscribe 函数），一般会在后台线程执行一些操作（比如访问网络请求数据），当后台操作返回后，调用 Observer 的 onNext 等函数，然后在 更新 UI 状态。 但是后台线程请求是需要时间的，如果用户点击刷新按钮请求新的微博信息，在刷新还没有完成的时候，用户退出了当前界面返回前面的界面，这个时候刷新的 Observable 如果不取消订阅，则会导致之前的 Activity 无法被 JVM 回收导致内存泄露。 这就是 Android 里面的生命周期管理需要注意的地方，RxLifecycle 就是用来干这事的。比如下面的示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myObservable</div><div class="line">    .compose(RxLifecycle.bindUntilEvent(lifecycle, ActivityEvent.DESTROY))</div><div class="line">    .subscribe();</div></pre></td></tr></table></figure></p>
 <p>这样Activity在destroy的时候就会自动取消这个observer</p>
-<p><a href="http://lovehaodong.cn/2017/03/14/RxJava%20RxLifecycle/">具体介绍点这里</a></p>
-<h3 id="RxBus"><a href="#RxBus" class="headerlink" title="RxBus"></a>RxBus</h3><p>RxBus并不是一个库，而是一种模式。相信大多数开发者都使用过EventBus，作为事件总线通信库，如果你的项目已经加入RxJava和EventBus，不妨用RxBus代替EventBus，以减少库的依赖。<br><br>还是推荐大家使用系统自带的广播吧<br><a href="http://lovehaodong.cn/2017/03/13/RxJava%20RxBus/">具体介绍点这里</a></p>
+<p><a href="http://lovehaodong.cn/2017/03/14/RxJava%20RxLifecycle/" target="_blank" rel="external">具体介绍点这里</a></p>
+<h3 id="RxBus"><a href="#RxBus" class="headerlink" title="RxBus"></a>RxBus</h3><p>RxBus并不是一个库，而是一种模式。相信大多数开发者都使用过EventBus，作为事件总线通信库，如果你的项目已经加入RxJava和EventBus，不妨用RxBus代替EventBus，以减少库的依赖。<br><br>还是推荐大家使用系统自带的广播吧<br><a href="http://lovehaodong.cn/2017/03/13/RxJava%20RxBus/" target="_blank" rel="external">具体介绍点这里</a></p>
 <h3 id="RxPermission"><a href="#RxPermission" class="headerlink" title="RxPermission"></a>RxPermission</h3><p>是基于RxJava开发的用于帮助在Android 6.0中处理运行时权限检测的框架。在Android 6.0中，系统新增了部分权限的运行时动态获取。而不再是在以前的版本中安装的时候授予权限。</p>
-<p><a href="http://lovehaodong.cn/2017/03/16/RxJava%20RxPermissions/">具体介绍点这里</a></p>
+<p><a href="http://lovehaodong.cn/2017/03/16/RxJava%20RxPermissions/" target="_blank" rel="external">具体介绍点这里</a></p>
 
       
     </div>
