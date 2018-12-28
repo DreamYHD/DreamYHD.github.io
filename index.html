@@ -146,19 +146,20 @@
       <p class="article-date">April 12, 2018</p>
       
         
-  <a href="/tags#Android面试" >
-    <span class="tag-code">Android面试</span>
-  </a>
-
   <a href="/tags#Java" >
     <span class="tag-code">Java</span>
+  </a>
+
+  <a href="/tags#Android面试" >
+    <span class="tag-code">Android面试</span>
   </a>
 
       
       <div class="article-summary">
         
-          <h3 id="概念介绍"><a href="#概念介绍" class="headerlink" title="概念介绍"></a>概念介绍</h3><p>对象拷贝就是将一个对象的属性拷贝到另一个具有相同类类型的对象中去。java中有三种常见对象拷贝类型：浅拷贝，深拷贝，延迟拷贝</p>
-<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>浅拷贝是按位拷贝，他会创建一个新对象，这个对象和原始对象有着一样的属性值。如果属性是基本类型，拷贝的就是基本类型的值，如果是内存地址(引用类型)，拷贝的就是内存地址，因此如果其中一个对象改变了这个地址，会影响另外一个对象<br>
+          
+概念介绍对象拷贝就是将一个对象的属性拷贝到另一个具有相同类类型的对象中去。java中有三种常见对象拷贝类型：浅拷贝，深拷贝，延迟拷贝
+浅拷贝概念浅拷贝是按位拷贝，他会创建一个新对象，这个对象和原始对象有着一样的属性值。如果属性是基本类型，拷贝的就是基本类型的值，如果是内存地址(引用类型)， ...
         
       </div>
       <a class="more" href="/2018/04/12/java深拷贝浅拷贝/">Read more</a>
@@ -171,24 +172,21 @@
       <p class="article-date">April 11, 2018</p>
       
         
-  <a href="/tags#Android面试" >
-    <span class="tag-code">Android面试</span>
-  </a>
-
   <a href="/tags#Java" >
     <span class="tag-code">Java</span>
+  </a>
+
+  <a href="/tags#Android面试" >
+    <span class="tag-code">Android面试</span>
   </a>
 
       
       <div class="article-summary">
         
-          <h1 id="异常类"><a href="#异常类" class="headerlink" title="异常类"></a>异常类</h1><h2 id="Java中处理异常的两种方式"><a href="#Java中处理异常的两种方式" class="headerlink" title="Java中处理异常的两种方式"></a>Java中处理异常的两种方式</h2><ul>
-<li>捕获异常：就地解决，并使程序继续执行 <code>//积极的处理方式</code><blockquote>
-<p>当Java运行时系统得到一个异常对象时，他将会沿着方法的<code>调用栈</code>逐层回溯，寻找处理这一异常的代码。找到能够处理这种类型的异常的方法后，运行时系统把当前的异常对象交给这个异常方法后，这一过程称为捕获(catch)异常。如果Java运行时系统找不到可以捕获异常的方法，则运行时系统中将终止，相应的Java程序也将退出。</p>
-</blockquote>
-</li>
-<li>声明抛弃异常：将异常抛出方法之外，由调用该方法的环境去处理 <code>//消极的处理方式</code><blockquote>
-<p>如果在一个方法中生成了一个异常，但是这一方法并不确切地知道该如何对这一异常事件进行处理，这时，一个方法就应该声明抛弃异常，使得异常对象可以从调用栈向后传播，直到有合适的方法捕获它为止。</p>
+          
+异常类Java中处理异常的两种方式
+捕获异常：就地解决，并使程序继续执行 //积极的处理方式
+当Java运行时系统得到一个异常对象时，他将会沿着方法的调用栈逐层回溯，寻找处理这一异常的代码。找到能够处理这种类型的异常的方法后，运行时系统把当前的异常对象交给这个异常方法后，这一过程称为捕获( ...
         
       </div>
       <a class="more" href="/2018/04/11/Java异常/">Read more</a>
@@ -201,12 +199,12 @@
       <p class="article-date">April 10, 2018</p>
       
         
-  <a href="/tags#Android面试" >
-    <span class="tag-code">Android面试</span>
-  </a>
-
   <a href="/tags#Java" >
     <span class="tag-code">Java</span>
+  </a>
+
+  <a href="/tags#Android面试" >
+    <span class="tag-code">Android面试</span>
   </a>
 
   <a href="/tags#源码" >
@@ -216,12 +214,12 @@
       
       <div class="article-summary">
         
-          <h4 id="重要参数"><a href="#重要参数" class="headerlink" title="重要参数"></a>重要参数</h4><ul>
-<li>容量(Capacity) bucket的大小，也就是数组的大小。</li>
-<li>负载因子（Load factor）bucket填满程度的最大比例。</li>
-<li>modCount，修改或者删除的次数总数。</li>
-<li>threshold，临界值，比 capacity * load factor 大的最小二进制值，一般来表示bucket容量；</li>
-<li>当bucket中的entries的数目大于 capacity * load factor 时候，需要调整bucket的大小为当前的2倍。
+          
+重要参数
+容量(Capacity) bucket的大小，也就是数组的大小。
+负载因子（Load factor）bucket填满程度的最大比例。
+modCount，修改或者删除的次数总数。
+threshold，临界值，比 capacity * load factor 大的最小二进制值，一般来 ...
         
       </div>
       <a class="more" href="/2018/04/10/HashMap/">Read more</a>
@@ -241,8 +239,10 @@
       
       <div class="article-summary">
         
-          <h2 id="Java拆箱和装箱"><a href="#Java拆箱和装箱" class="headerlink" title="Java拆箱和装箱"></a>Java拆箱和装箱</h2><h3 id="使用包装器类和装箱"><a href="#使用包装器类和装箱" class="headerlink" title="使用包装器类和装箱"></a>使用包装器类和装箱</h3><h4 id="包装器类的主要用途"><a href="#包装器类的主要用途" class="headerlink" title="包装器类的主要用途"></a>包装器类的主要用途</h4><p>为基本类型提供分类功能，这些功能中的大多数与各种转换相关：如在基本类型之间与String对象进行转换。</p>
-<h4 id="创建包装器对象"><a href="#创建包装器对象" class="headerlink" title="创建包装器对象"></a>创建包装器对象</h4><p>除了Character之外，所有的包装器都提供两个构造函数<br>一个是基本类型，另一个就是字符串，如：<br>
+          
+Java拆箱和装箱使用包装器类和装箱包装器类的主要用途为基本类型提供分类功能，这些功能中的大多数与各种转换相关：如在基本类型之间与String对象进行转换。
+创建包装器对象除了Character之外，所有的包装器都提供两个构造函数一个是基本类型，另一个就是字符串，如：
+1234Intege ...
         
       </div>
       <a class="more" href="/2017/05/04/Java 装箱与拆箱/">Read more</a>
@@ -266,14 +266,12 @@
       
       <div class="article-summary">
         
-          <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。</p>
-<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
-<li>在运行时候判断任意对象所属的类</li>
-<li>在运行时候构造任意一个对象</li>
-<li>在运行时候判断任意 一个类具有的成员变量和方法</li>
-<li>在运行时调用任意一个对象的方法</li>
-<li>生成动态代理</li>
-</ul>
+          
+基本概念JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。
+基本功能
+在运行时候判断任意对象所属的类
+在运行时候构造任意一个对象
+在运行时候 ...
         
       </div>
       <a class="more" href="/2017/04/23/Java 反射/">Read more</a>
@@ -286,22 +284,26 @@
       <p class="article-date">April 22, 2017</p>
       
         
-  <a href="/tags#Java" >
-    <span class="tag-code">Java</span>
-  </a>
-
   <a href="/tags#Annotation" >
     <span class="tag-code">Annotation</span>
+  </a>
+
+  <a href="/tags#Java" >
+    <span class="tag-code">Java</span>
   </a>
 
       
       <div class="article-summary">
         
-          <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>java提供了一种原程序中的元素关联任何信息和任何元数据的途径和方法</p>
-<h3 id="Java中常见的注解"><a href="#Java中常见的注解" class="headerlink" title="Java中常见的注解"></a>Java中常见的注解</h3><h4 id="jdk注解"><a href="#jdk注解" class="headerlink" title="jdk注解"></a>jdk注解</h4><ul>
-<li>@Override覆盖父类的方法</li>
-<li>@Deprecated过时的方法</li>
-<li>@SuppressWarnings(“deprecation”)对过时的方法进行描述
+          
+概念java提供了一种原程序中的元素关联任何信息和任何元数据的途径和方法
+Java中常见的注解jdk注解
+@Override覆盖父类的方法
+@Deprecated过时的方法
+@SuppressWarnings(“deprecation”)对过时的方法进行描述
+
+注解的分类按照运行机制来分
+ ...
         
       </div>
       <a class="more" href="/2017/04/22/Java 注解/">Read more</a>
@@ -321,7 +323,8 @@
       
       <div class="article-summary">
         
-          <h3 id="多线程的安全问题"><a href="#多线程的安全问题" class="headerlink" title="多线程的安全问题"></a>多线程的安全问题</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ticket</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"> <span class="keyword">private</span> <span class="keyword">int</span> ticket =<span class="number">100</span>;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">   <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">     <span class="keyword">if</span>(ticket &gt; <span class="number">0</span>)&#123;</div><div class="line">       System.out.System.out.println(ticket --);</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+多线程的安全问题123456789101112class Ticket implements Runnable&#123; private int ticket =100; public void run()&#123;   while(true)&#123;     if(ticket  ...
         
       </div>
       <a class="more" href="/2017/04/14/Java 并发/">Read more</a>
@@ -349,8 +352,10 @@
       
       <div class="article-summary">
         
-          <p>推荐大家先看下一个学长的<a href="http://songning.me/2016/11/03/google-rxjava-mvp/">google mvp解读</a><br>网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,<a href="https://github.com/DreamYHD/DaggerMvpDemo/tree/master/app/src/main/java/com/androidlab/daggermvpdemo">传送门</a></p>
-<h3 id="看看分包"><a href="#看看分包" class="headerlink" title="看看分包"></a>看看分包</h3><p><img src="http://i1.piimg.com/567571/517bbf6120edbf81.png" alt=""><br>其实是按照功能分包，大家可以按照自己的习惯来<br>
+          
+推荐大家先看下一个学长的google mvp解读网上有很多关于mvp的教程，自己也看了好多，人云亦云。所以自己跟着学长的教程总结了一个最适合自己的,传送门
+看看分包其实是按照功能分包，大家可以按照自己的习惯来
+Base类BaseView1234public interface BaseVi ...
         
       </div>
       <a class="more" href="/2017/04/12/Android 架构/">Read more</a>
@@ -374,12 +379,13 @@
       
       <div class="article-summary">
         
-          <p>感谢<a href="http://www.jianshu.com/p/71ab00a2677b">yokey</a> 本文只是摘要笔记</p>
-<h3 id="在使用之前写的RxBus的时候会出现一些问题"><a href="#在使用之前写的RxBus的时候会出现一些问题" class="headerlink" title="在使用之前写的RxBus的时候会出现一些问题"></a>在使用之前写的RxBus的时候会出现一些问题</h3><ul>
-<li>需要RxBus支持Sticky功能</li>
-<li>在对每个事件的处理时候发生异常，后续的的事件都接受不了</li>
-</ul>
-<h3 id="什么是Sticky事件"><a href="#什么是Sticky事件" class="headerlink" title="什么是Sticky事件"></a>什么是Sticky事件</h3><p>在Android开发中，Sticky事件只指事件消费者在事件发布之后才注册的也能接收到该事件的特殊类型。Android中就有这样的实例，也就是Sticky Broadcast，即粘性广播。正常情况下如果发送者发送了某个广播，而接收者在这个广播发送后才注册自己的Receiver，这时接收者便无法接收到刚才的广播，为此Android引入了StickyBroadcast，在广播发送结束后会保存刚刚发送的广播（Intent），这样当接收者注册完Receiver后就可以接收到刚才已经发布的广播。这就使得我们可以预先处理一些事件，让有消费者时再把这些事件投递给消费者<br>
+          
+感谢yokey 本文只是摘要笔记
+在使用之前写的RxBus的时候会出现一些问题
+需要RxBus支持Sticky功能
+在对每个事件的处理时候发生异常，后续的的事件都接受不了
+
+什么是Sticky事件在Android开发中，Sticky事件只指事件消费者在事件发布之后才注册的也能接收到该事件的 ...
         
       </div>
       <a class="more" href="/2017/04/09/RxJava RxBusTwo/">Read more</a>
@@ -403,13 +409,14 @@
       
       <div class="article-summary">
         
-          <h3 id="单点触控"><a href="#单点触控" class="headerlink" title="单点触控"></a>单点触控</h3><h5 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h5><ul>
-<li>ACTION_DOWN 手指初次触摸到屏幕时候触发</li>
-<li>ACTION_MOVE 手指在屏幕上滑动的时候触发，会多次触发</li>
-<li>ACTIOM_UP 手指离开屏幕的时候触发</li>
-<li>ACTION_CANCEL 事件被上层拦截的时候触发</li>
-<li>ACTION_OUTSIDE手指不再控件区域的时候触发</li>
-</ul>
+          
+单点触控事件
+ACTION_DOWN 手指初次触摸到屏幕时候触发
+ACTION_MOVE 手指在屏幕上滑动的时候触发，会多次触发
+ACTIOM_UP 手指离开屏幕的时候触发
+ACTION_CANCEL 事件被上层拦截的时候触发
+ACTION_OUTSIDE手指不再控件区域的时候触发方法
+g ...
         
       </div>
       <a class="more" href="/2017/04/03/自定义View之MotionEvent/">Read more</a>

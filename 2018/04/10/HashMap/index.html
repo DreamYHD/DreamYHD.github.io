@@ -147,15 +147,16 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h4 id="重要参数"><a href="#重要参数" class="headerlink" title="重要参数"></a>重要参数</h4><ul>
+    <section class="markdown-content"><a id="more"></a>
+<h4 id="重要参数"><a href="#重要参数" class="headerlink" title="重要参数"></a>重要参数</h4><ul>
 <li>容量(Capacity) bucket的大小，也就是数组的大小。</li>
 <li>负载因子（Load factor）bucket填满程度的最大比例。</li>
 <li>modCount，修改或者删除的次数总数。</li>
 <li>threshold，临界值，比 capacity * load factor 大的最小二进制值，一般来表示bucket容量；</li>
-<li>当bucket中的entries的数目大于 capacity * load factor 时候，需要调整bucket的大小为当前的2倍。<a id="more"></a>
-<h4 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h4><img src="http://onf44qqgp.bkt.clouddn.com/18-4-10/41489896.jpg" alt=""><h4 id="put函数的基本实现："><a href="#put函数的基本实现：" class="headerlink" title="put函数的基本实现："></a>put函数的基本实现：</h4></li>
+<li>当bucket中的entries的数目大于 capacity * load factor 时候，需要调整bucket的大小为当前的2倍。</li>
 </ul>
-<ol>
+<h4 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h4><p><img src="http://onf44qqgp.bkt.clouddn.com/18-4-10/41489896.jpg" alt=""></p>
+<h4 id="put函数的基本实现："><a href="#put函数的基本实现：" class="headerlink" title="put函数的基本实现："></a>put函数的基本实现：</h4><ol>
 <li>对key的hashCode()做二次函数(),然后计算index；</li>
 <li>如果没碰撞直接放到y方向数组里面(当前index位置上不存在数据)；</li>
 <li>如果发生了碰撞，以链表的形式存放在以数组上的节点为根节点的x方向链表里面；</li>
@@ -186,12 +187,12 @@
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Android面试" >
-    <span class="tag-code">Android面试</span>
-  </a>
-
   <a href="/tags#Java" >
     <span class="tag-code">Java</span>
+  </a>
+
+  <a href="/tags#Android面试" >
+    <span class="tag-code">Android面试</span>
   </a>
 
   <a href="/tags#源码" >

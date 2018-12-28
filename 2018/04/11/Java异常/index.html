@@ -147,14 +147,14 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h1 id="异常类"><a href="#异常类" class="headerlink" title="异常类"></a>异常类</h1><h2 id="Java中处理异常的两种方式"><a href="#Java中处理异常的两种方式" class="headerlink" title="Java中处理异常的两种方式"></a>Java中处理异常的两种方式</h2><ul>
+    <section class="markdown-content"><a id="more"></a>
+<h1 id="异常类"><a href="#异常类" class="headerlink" title="异常类"></a>异常类</h1><h2 id="Java中处理异常的两种方式"><a href="#Java中处理异常的两种方式" class="headerlink" title="Java中处理异常的两种方式"></a>Java中处理异常的两种方式</h2><ul>
 <li>捕获异常：就地解决，并使程序继续执行 <code>//积极的处理方式</code><blockquote>
 <p>当Java运行时系统得到一个异常对象时，他将会沿着方法的<code>调用栈</code>逐层回溯，寻找处理这一异常的代码。找到能够处理这种类型的异常的方法后，运行时系统把当前的异常对象交给这个异常方法后，这一过程称为捕获(catch)异常。如果Java运行时系统找不到可以捕获异常的方法，则运行时系统中将终止，相应的Java程序也将退出。</p>
 </blockquote>
 </li>
 <li>声明抛弃异常：将异常抛出方法之外，由调用该方法的环境去处理 <code>//消极的处理方式</code><blockquote>
 <p>如果在一个方法中生成了一个异常，但是这一方法并不确切地知道该如何对这一异常事件进行处理，这时，一个方法就应该声明抛弃异常，使得异常对象可以从调用栈向后传播，直到有合适的方法捕获它为止。</p>
-<a id="more"></a>
 <h2 id="Java中预定义的异常类"><a href="#Java中预定义的异常类" class="headerlink" title="Java中预定义的异常类"></a>Java中预定义的异常类</h2><p><img src="http://img.blog.csdn.net/20170323190427885?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSm9raTIzMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="预定义的异常类"></p>
 <h3 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h3><p>Error标识不可能或难以恢复的严重问题，例如内存不足，程序一般不处理这类情况。</p>
 <h3 id="RuntimeException"><a href="#RuntimeException" class="headerlink" title="RuntimeException"></a>RuntimeException</h3><p>RuntimeException指示设计或实现上的问题，如果程序正确运行，这样的情况是不应该出现的。</p>
@@ -194,12 +194,12 @@
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Android面试" >
-    <span class="tag-code">Android面试</span>
-  </a>
-
   <a href="/tags#Java" >
     <span class="tag-code">Java</span>
+  </a>
+
+  <a href="/tags#Android面试" >
+    <span class="tag-code">Android面试</span>
   </a>
 
       </div>
